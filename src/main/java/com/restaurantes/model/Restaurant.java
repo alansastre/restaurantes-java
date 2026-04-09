@@ -3,6 +3,7 @@ package com.restaurantes.model;
 import jakarta.persistence.*;
 
 /*
+localhost:8080/h2-console
 
 SELECT * FROM RESTAURANT;
 
