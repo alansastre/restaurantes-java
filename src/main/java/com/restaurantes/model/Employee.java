@@ -9,13 +9,72 @@ public class Employee {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
-
-
-    private String dni;
-
     private String firstName;
     private String lastName;
-
     private Integer age;
+    private String dni;
 
+    // constructor con parámetros
+    public Employee(String firstName, String lastName, Integer age, String dni) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.age = age;
+        this.dni = dni;
+    }
+
+    // constructor vacío
+    public Employee() {}
+
+    // getter y setter
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
+    }
+
+    public String getDni() {
+        return dni;
+    }
+
+    public void setDni(String dni) {
+        this.dni = dni;
+    }
+
+    // toString
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", age=" + age +
+                ", dni='" + dni + '\'' +
+                '}';
+    }
 }

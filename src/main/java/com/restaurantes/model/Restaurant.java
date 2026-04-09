@@ -31,10 +31,72 @@ public class Restaurant {
     private Double averagePrice;
 
     @Column(columnDefinition = "BOOLEAN DEFAULT true")
-    private Boolean active;
+    private Boolean active = true;
 
     private Integer numberEmployees;
 
+    // metodo constructor para crear Restaurantes con valores
+
+    public Restaurant(String name, Double averagePrice, Integer numberEmployees) {
+        this.name = name;
+        this.averagePrice = averagePrice;
+        this.numberEmployees = numberEmployees;
+    }
+
+    // metodo constructor vacío
+    public Restaurant() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Double getAveragePrice() {
+        return averagePrice;
+    }
+
+    public void setAveragePrice(Double averagePrice) {
+        this.averagePrice = averagePrice;
+    }
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
+    }
+
+    public Integer getNumberEmployees() {
+        return numberEmployees;
+    }
+
+    public void setNumberEmployees(Integer numberEmployees) {
+        this.numberEmployees = numberEmployees;
+    }
+
+    @Override
+    public String toString() {
+        return "Restaurant{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", averagePrice=" + averagePrice +
+                ", active=" + active +
+                ", numberEmployees=" + numberEmployees +
+                '}';
+    }
 
     // Próximas tareas:
     // Enum
