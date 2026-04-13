@@ -9,6 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 // Una clase con @Entity equivale a una tabla de base de datos
 // Un objeto equivale a una fila en una tabla de base de datos
@@ -100,15 +101,56 @@ public class RestaurantesJavaApplication {
         }
 
         // existById devuelve boolean
+        long id = 1;
+        boolean existe = restaurantRepository.existsById(id);
+        if (existe)
+            System.out.println("restaurante 1 sí existe");
+        else
+            System.out.println("restaurante 1 no existe");
+        // restaurantRepository.existsById(2L); // Long ;
+
+
 
         // deleteAll borrar todas las filas de la tabla
+        //restaurantRepository.deleteAll();
+
+
 
         // deleteById borrar una fila indicando su id, 1, 2, 3
-
+        Long idABorrar = 1L;
+        restaurantRepository.deleteById(idABorrar); // hard coded
+        System.out.println("restaurante con id " + idABorrar + " existe : " + restaurantRepository.existsById(idABorrar));
+        // restaurantRepository.deleteById(rest.getId());
         // delete, borra pasando el objeto
+        restaurantRepository.delete(r2); // le pasamos un objeto restaurante
+        // restaurantRepository.deleteByName("R1"); // requiere metodo personalizado en el repositorio
+
+
+
+
 
         // findById traer un restaurante/empleado por su id
+        Long idABuscar = 2L;
+        // Restaurant restaurantFromDatabase = restaurantRepository.findById(idABuscar);
+        Optional<Restaurant> restaurantFromDatabase = restaurantRepository.findById(idABuscar);
+        // var restaurantFromDatabase = restaurantRepository.findById(idABuscar);
+        if (restaurantFromDatabase.isPresent()) {
+            Restaurant restaurante2 = restaurantFromDatabase.get();
+            System.out.println(restaurante2);
+        }
 
+
+        // resumen
+        // findAll
+        // findById
+        // existById
+        // count()
+
+        // save()
+        // saveAll()
+
+        // deleteById
+        // deleteALl
 
 
     }
