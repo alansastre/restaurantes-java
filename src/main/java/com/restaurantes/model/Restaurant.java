@@ -43,6 +43,17 @@ public class Restaurant { // clase
     private LocalDate startDate = LocalDate.now(); //  // valor por defecto a la fecha actual
 
     // tipo de comida
+    @Enumerated(EnumType.STRING)
+    private FoodType foodType;
+
+    public FoodType getFoodType() {
+        return foodType;
+    }
+
+    public void setFoodType(FoodType foodType) {
+        this.foodType = foodType;
+    }
+
 
     // bidireccional
 //    @OneToMany
@@ -115,6 +126,7 @@ public class Restaurant { // clase
                 ", active=" + active +
                 ", numberEmployees=" + numberEmployees +
                 ", startDate=" + startDate +
+                ", foodType=" + foodType +
                 '}';
     }
 
