@@ -1,9 +1,9 @@
 package com.restaurantes.model;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
 
-import java.awt.*;
-import java.util.ArrayList;
+import java.time.LocalDate;
 
 /*
 localhost:8080/h2-console
@@ -37,6 +37,12 @@ public class Restaurant { // clase
     private Boolean active = true;
 
     private Integer numberEmployees;
+
+    // fecha de fundación
+    @CreationTimestamp
+    private LocalDate startDate = LocalDate.now(); //  // valor por defecto a la fecha actual
+
+    // tipo de comida
 
     // bidireccional
 //    @OneToMany
@@ -98,6 +104,8 @@ public class Restaurant { // clase
     }
 
     // Metodo toString para ver los datos de un restaurante al imprimirlo
+
+
     @Override
     public String toString() {
         return "Restaurant{" +
@@ -106,7 +114,16 @@ public class Restaurant { // clase
                 ", averagePrice=" + averagePrice +
                 ", active=" + active +
                 ", numberEmployees=" + numberEmployees +
+                ", startDate=" + startDate +
                 '}';
+    }
+
+    public LocalDate getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
     }
 
     // Próximas tareas:
