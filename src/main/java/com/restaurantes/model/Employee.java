@@ -14,6 +14,10 @@ public class Employee {
     private Integer age;
     private String dni;
 
+    // asociación entre empleado y restaurante
+//     @ManyToOne
+//     private Restaurant restaurant;
+
     // constructor con parámetros
     public Employee(String firstName, String lastName, Integer age, String dni) {
         this.firstName = firstName;

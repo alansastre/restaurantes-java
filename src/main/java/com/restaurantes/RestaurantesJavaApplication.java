@@ -7,6 +7,7 @@ import com.restaurantes.repository.RestaurantRepository;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.util.ArrayList;
 import java.util.List;
 
 // Una clase con @Entity equivale a una tabla de base de datos
@@ -23,7 +24,7 @@ public class RestaurantesJavaApplication {
         RestaurantRepository restaurantRepository = context.getBean(RestaurantRepository.class);
         EmployeeRepository employeeRepository = context.getBean(EmployeeRepository.class);
         // crear un objeto restaurante: new
-        Restaurant nuevoRestaurante = new Restaurant();
+        Restaurant nuevoRestaurante = new Restaurant(); // objeto
         nuevoRestaurante.setName("Paco Bar");
         nuevoRestaurante.setAveragePrice(20.33);
         nuevoRestaurante.setNumberEmployees(5);
@@ -74,12 +75,40 @@ public class RestaurantesJavaApplication {
             System.out.println(empleado);
         }
 
+        // saveAll
+        Restaurant r1 = new Restaurant("R1", 10.0, 3);
+        Restaurant r2 = new Restaurant("R2", 15.0, 4);
 
-        // findById traer un restaurante/empleado
+        // opción clásica para crear lista:
+        List<Restaurant> sitiosParaComer = new ArrayList<>(); // crear una lista vacía
+        sitiosParaComer.add(r1); // añadir un restaurante a la lista
+        sitiosParaComer.add(r2); // añadir un restaurante a la lista
+        List<String> alumnos = new ArrayList<>(); // crear una lista vacía
+        List<Double> precios = new ArrayList<>(); // crear una lista vacía
 
-        // deleteAll
+        // opción moderna para crear lista:
+        List<Restaurant> sitiosGuaposParaComer = List.of(r1, r2);
+        restaurantRepository.saveAll(sitiosGuaposParaComer);
 
-        // deleteById
+
+        // count () para contar cuantas filas hay en la tabla devuelve long
+        long numeroRestaurantes = restaurantRepository.count();
+        if (numeroRestaurantes > 0) {
+            System.out.println("Hay para comer, todos tranquis, hay " + numeroRestaurantes + " restaurantes");
+        } else {
+            System.out.println("nos morimos de hambre");
+        }
+
+        // existById devuelve boolean
+
+        // deleteAll borrar todas las filas de la tabla
+
+        // deleteById borrar una fila indicando su id, 1, 2, 3
+
+        // delete, borra pasando el objeto
+
+        // findById traer un restaurante/empleado por su id
+
 
 
     }

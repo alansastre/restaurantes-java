@@ -2,6 +2,9 @@ package com.restaurantes.model;
 
 import jakarta.persistence.*;
 
+import java.awt.*;
+import java.util.ArrayList;
+
 /*
 localhost:8080/h2-console
 
@@ -19,7 +22,7 @@ DELETE FROM restaurant WHERE id = 1;
  */
 @Entity
 @Table(name = "restaurantes")
-public class Restaurant {
+public class Restaurant { // clase
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,6 +38,10 @@ public class Restaurant {
 
     private Integer numberEmployees;
 
+    // bidireccional
+//    @OneToMany
+//    List<Employee> employees = new ArrayList<Employee>();
+
     // metodo constructor para crear Restaurantes con valores
 
     public Restaurant(String name, Double averagePrice, Integer numberEmployees) {
@@ -47,6 +54,9 @@ public class Restaurant {
     public Restaurant() {
     }
 
+    // Métodos Getter y Setter
+    // Get obtener, permite obtener un atributo
+    // Set cambiar, permite cambiar un valor
     public Long getId() {
         return id;
     }
@@ -87,6 +97,7 @@ public class Restaurant {
         this.numberEmployees = numberEmployees;
     }
 
+    // Metodo toString para ver los datos de un restaurante al imprimirlo
     @Override
     public String toString() {
         return "Restaurant{" +
