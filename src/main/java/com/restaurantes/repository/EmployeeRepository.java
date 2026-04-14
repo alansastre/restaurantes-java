@@ -6,4 +6,19 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface EmployeeRepository extends JpaRepository<Employee, Long> {
+
+
+    // Métodos de consulta derivados (derived queries) basados en el nombre del metodo
+
+    // SPRING DATA JPA -- > HIBERNATE (JPA) --> JDBC --> H2/ MYSQL / POSTGRESQL
+    List<Employee> findByDni(String dni);
+
+    List<Employee> findByAge(Integer age);
+
+    List<Employee> findByRestaurantName(String dominosPizza);
+
+    List<Employee> findByLastName(String lastName);
+
+
+    List<Employee> findByFirstName(String name);
 }

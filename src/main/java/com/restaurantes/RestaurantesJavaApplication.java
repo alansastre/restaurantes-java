@@ -216,6 +216,18 @@ public class RestaurantesJavaApplication {
             }
         }
 
+        // probar a filtrar por nombre de restaurante
+        List<Employee> empleadosDominos = employeeRepository.findByRestaurantName("DominosPizza");
+        System.out.println(empleadosDominos);
+
+        // filtrar por apellido
+        // fitrar por edad
+
+//        for (Employee empleado : employeeRepository.findAll()) {
+//            if (empleado.getAge() == 20) {
+//
+//            }
+//        }
 
         // resumen
         // findAll
