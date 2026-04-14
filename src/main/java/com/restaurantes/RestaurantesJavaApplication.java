@@ -1,6 +1,7 @@
 package com.restaurantes;
 
 import com.restaurantes.model.Employee;
+import com.restaurantes.model.FoodType;
 import com.restaurantes.model.Restaurant;
 import com.restaurantes.repository.EmployeeRepository;
 import com.restaurantes.repository.RestaurantRepository;
@@ -138,6 +139,30 @@ public class RestaurantesJavaApplication {
             Restaurant restaurante2 = restaurantFromDatabase.get();
             System.out.println(restaurante2);
         }
+
+
+        // Crear un restaurante español
+        Restaurant restaurantSpain = new Restaurant();
+        //restaurantSpain.setFoodType("Español");
+        restaurantSpain.setFoodType(FoodType.SPANISH);
+        restaurantRepository.save(restaurantSpain);
+        System.out.println(restaurantSpain);
+
+
+        // crear un restaurante de comida japonesa
+        Restaurant restaurantJapan =  new Restaurant();
+        restaurantJapan.setFoodType(FoodType.JAPANESE);
+        restaurantRepository.save(restaurantJapan);
+        System.out.println(restaurantJapan);
+
+
+        // Probar a intentar otro tipo de comida y ver que no deja
+
+
+
+        // Probar fecha de startDAte del restuarante
+
+
 
 
         // resumen
