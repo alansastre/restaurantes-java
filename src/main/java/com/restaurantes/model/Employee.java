@@ -2,6 +2,11 @@ package com.restaurantes.model;
 
 import jakarta.persistence.*;
 
+/*
+  SELECT e.first_name, r.name
+  FROM employees e
+  JOIN restaurantes r ON e.restaurant_id = r.id;
+ */
 @Entity
 @Table(name = "employees")
 public class Employee {
@@ -90,7 +95,10 @@ public class Employee {
                 ", lastName='" + lastName + '\'' +
                 ", age=" + age +
                 ", dni='" + dni + '\'' +
-                ", restaurant=" + restaurant.getId() +
+
+                // SI EL RESTAURANTE ES NULL ENTONCES HACE NULL.getId() Y DA ERROR NULL POINTER EXCEPTION
+               // ", restaurant=" + restaurant.getId() +
+                    ", restaurant=" + (restaurant != null ? restaurant.getId() : null) +
                 '}';
     }
 }
