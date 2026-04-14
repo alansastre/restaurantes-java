@@ -3,9 +3,13 @@ package com.restaurantes.model;
 import jakarta.persistence.*;
 
 /*
-  SELECT e.first_name, r.name
-  FROM employees e
-  JOIN restaurantes r ON e.restaurant_id = r.id;
+ SELECT
+
+e.id, e.first_name,
+r.id, r.name
+
+FROM employees e
+JOIN restaurantes r ON e.restaurant_id = r.id;
  */
 @Entity
 @Table(name = "employees")

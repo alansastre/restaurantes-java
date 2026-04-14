@@ -191,15 +191,30 @@ public class RestaurantesJavaApplication {
         juanito.setFirstName("Juanito");
         juanito.setRestaurant(dominosPizza);
         employeeRepository.save(juanito);
+        System.out.println(juanito); // imprime el id del restaurante en el toSTring
 
         Employee patricia = new Employee();
         patricia.setFirstName("patricia");
         patricia.setRestaurant(dominosPizza);
         employeeRepository.save(patricia);
+        System.out.println(patricia);
 
 
-        // paso 3. ver en h2-console si los empleados tienen restaurante
+        // Bucle for para iterar sobre todos los empleados imprimiendo el nombre del empleado y el nombre de su restaurante
+        // si lo tiene
+        List<Employee> trabajadores = employeeRepository.findAll();
+        for (Employee trabajador : trabajadores) {
+//            System.out.println(
+//                    trabajador.getFirstName() +
+//                    " trabaja en " +
+//                    (trabajador.getRestaurant() != null ? trabajador.getRestaurant().getName() : "ningún sitio"));
 
+            if (trabajador.getRestaurant() != null)  {
+                System.out.println(trabajador.getFirstName() + " trabaja en " + trabajador.getRestaurant().getName());
+            } else {
+                System.out.println(trabajador.getFirstName() + " trabaja en ningún sitio");
+            }
+        }
 
 
         // resumen
