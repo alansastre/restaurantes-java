@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /*
 localhost:8080/h2-console
@@ -33,14 +34,18 @@ public class Restaurant { // clase
 
     private Double averagePrice;
 
-    @Column(columnDefinition = "BOOLEAN DEFAULT true")
+   @Column(columnDefinition = "BOOLEAN DEFAULT true")
     private Boolean active = true;
 
     private Integer numberEmployees;
 
     // fecha de fundación
-    @CreationTimestamp
+
+     //@CreationTimestamp // esta anotación es para que la base de datos genere la fecha, util para registrar fecha
+    // automaticamente sin preocuparse de tener que cambiarla
     private LocalDate startDate = LocalDate.now(); //  // valor por defecto a la fecha actual
+
+    // private LocalDateTime ultimaReservan = LocalDateTime.now();
 
     // tipo de comida
     @Enumerated(EnumType.STRING)

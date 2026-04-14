@@ -8,6 +8,7 @@ import com.restaurantes.repository.RestaurantRepository;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -157,11 +158,26 @@ public class RestaurantesJavaApplication {
 
 
         // Probar a intentar otro tipo de comida y ver que no deja
-
+        //Restaurant restaurantItalian =  new Restaurant();
+        //restaurantItalian.setFoodType(FoodType.ITALIAN); // da fallo porque no existe el valor ITALIAN en el enum FoodType
 
 
         // Probar fecha de startDAte del restuarante
+        Restaurant smashBurguer = new Restaurant();
+        smashBurguer.setName("Smash Burguer Madrid");
+        smashBurguer.setStartDate(LocalDate.now()); // fecha actual
+        restaurantRepository.save(smashBurguer);
+        System.out.println(smashBurguer);
 
+        // fecha futura
+        Restaurant sidreria = new Restaurant();
+        sidreria.setName("Sidreria");
+        sidreria.setStartDate(LocalDate.of(2026, 6, 25));
+        restaurantRepository.save(sidreria);
+        System.out.println(sidreria);
+        // LocalDate solo da año mes y día
+        // LocalTime solo da hora minuto y segundo
+        // LocalDateTime da año mes día hora minuto segundo
 
 
 
