@@ -18,6 +18,18 @@ public class Employee {
 //     @ManyToOne
 //     private Restaurant restaurant;
 
+
+    @ManyToOne
+    private Restaurant restaurant;
+
+    public Restaurant getRestaurant() {
+        return restaurant;
+    }
+
+    public void setRestaurant(Restaurant restaurant) {
+        this.restaurant = restaurant;
+    }
+
     // constructor con parámetros
     public Employee(String firstName, String lastName, Integer age, String dni) {
         this.firstName = firstName;
@@ -70,7 +82,6 @@ public class Employee {
         this.dni = dni;
     }
 
-    // toString
     @Override
     public String toString() {
         return "Employee{" +
@@ -79,6 +90,7 @@ public class Employee {
                 ", lastName='" + lastName + '\'' +
                 ", age=" + age +
                 ", dni='" + dni + '\'' +
+                ", restaurant=" + restaurant.getId() +
                 '}';
     }
 }

@@ -180,6 +180,27 @@ public class RestaurantesJavaApplication {
         // LocalDateTime da año mes día hora minuto segundo
 
 
+        // MANY TO ONE - ASOCIAR UN RESTAURANTE A DOS EMPLEADOS
+        // Paso 1. crear restaurante y guardarlo
+        Restaurant dominosPizza = new Restaurant();
+        dominosPizza.setName("DominosPizza");
+        restaurantRepository.save(dominosPizza);
+
+        // paso 2. crear empleados, setRestaurant y guardar
+        Employee juanito = new Employee();
+        juanito.setFirstName("Juanito");
+        juanito.setRestaurant(dominosPizza);
+        employeeRepository.save(juanito);
+
+        Employee patricia = new Employee();
+        patricia.setFirstName("patricia");
+        patricia.setRestaurant(dominosPizza);
+        employeeRepository.save(patricia);
+
+
+        // paso 3. ver en h2-console si los empleados tienen restaurante
+
+
 
         // resumen
         // findAll
