@@ -248,14 +248,19 @@ public class RestaurantesJavaApplication {
         Dish plato4 = new Dish(null, "Champán", null, 60.0, DishType.DESSERT, restaurantSpain);
         dishRepository.saveAll(List.of(plato1, plato2, plato3, plato4));
 
-        // filtrar por apellido
-        // fitrar por edad
+        // OPcion  1: crear consultas personalizadas en DishRepository
+        // que traiga los platos con precio menor que 10 euros findAllByPrice...
+        for (var plato: dishRepository.findByPriceLessThanEqual(7.99))
+            System.out.println(plato);
+        // que traiga los platos de un restaurante ordenados por precio ascendente findAllBy
+        // que traiga aquellos platos que no contengan alergenos
 
-//        for (Employee empleado : employeeRepository.findAll()) {
-//            if (empleado.getAge() == 20) {
-//
-//            }
-//        }
+
+        // Opción 2: crear un pedido
+
+
+
+
 
         // resumen
         // findAll
