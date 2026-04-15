@@ -147,6 +147,7 @@ public class RestaurantesJavaApplication {
         // Crear un restaurante español
         Restaurant restaurantSpain = new Restaurant();
         //restaurantSpain.setFoodType("Español");
+        restaurantSpain.setName("La Taberna");
         restaurantSpain.setFoodType(FoodType.SPANISH);
         restaurantRepository.save(restaurantSpain);
         System.out.println(restaurantSpain);
@@ -254,6 +255,13 @@ public class RestaurantesJavaApplication {
             System.out.println(plato);
         // que traiga los platos de un restaurante ordenados por precio ascendente findAllBy
         // que traiga aquellos platos que no contengan alergenos
+
+
+        System.out.println("TRAER PLATOS DE UN RESTAURANTE ORDENADOS POR PRECIO ASCENDENTE:");
+        Long restaurantId = restaurantSpain.getId();
+        for (var plato: dishRepository.findByRestaurantIdOrderByPrice(restaurantId))
+            System.out.println(plato);
+
 
 
         // Opción 2: crear un pedido

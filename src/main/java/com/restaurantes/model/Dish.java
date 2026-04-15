@@ -2,6 +2,21 @@ package com.restaurantes.model;
 
 import jakarta.persistence.*;
 
+/*
+Platos por restaurante:
+select d.name, d.price, r.name from dish d inner join restaurantes r on d.restaurant_id = r.id;
+
+ con filtro:
+ select
+d.id as dish_id,
+d.name as dish_name,
+d.price as dish_price,
+r.id as restaurant_id,
+r.name as restaurant_name
+from dish d
+inner join restaurantes r on d.restaurant_id = r.id
+where r.name = 'La Taberna';
+ */
 @Entity
 public class Dish {
 
