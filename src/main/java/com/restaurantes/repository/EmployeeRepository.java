@@ -1,6 +1,7 @@
 package com.restaurantes.repository;
 
 import com.restaurantes.model.Employee;
+import com.restaurantes.model.FoodType;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
@@ -21,4 +22,12 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
 
 
     List<Employee> findByFirstName(String name);
+
+    List<Employee> findByRestaurant_FoodType(FoodType foodType);
+
+    List<Employee> findByRestaurantAveragePrice(Double averagePrice);
+
+    List<Employee> findByAgeGreaterThanEqual(Integer age);
+
+
 }

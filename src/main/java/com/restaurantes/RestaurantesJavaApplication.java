@@ -184,22 +184,21 @@ public class RestaurantesJavaApplication {
         // Paso 1. crear restaurante y guardarlo
         Restaurant dominosPizza = new Restaurant();
         dominosPizza.setName("DominosPizza");
+        dominosPizza.setFoodType(FoodType.SPANISH); // ponemos SPANISH para la prueba, aunque no lo sea
         restaurantRepository.save(dominosPizza);
-
         // paso 2. crear empleados, setRestaurant y guardar
         Employee juanito = new Employee();
         juanito.setFirstName("Juanito");
         juanito.setRestaurant(dominosPizza);
+        juanito.setAge(18); // NO cumple el filtro de findByAgeGreaterThanEqual
         employeeRepository.save(juanito);
         System.out.println(juanito); // imprime el id del restaurante en el toSTring
-
         Employee patricia = new Employee();
         patricia.setFirstName("patricia");
         patricia.setRestaurant(dominosPizza);
+        patricia.setAge(35); // SÍ cumple el filtro de findByAgeGreaterThanEqual
         employeeRepository.save(patricia);
         System.out.println(patricia);
-
-
         // Bucle for para iterar sobre todos los empleados imprimiendo el nombre del empleado y el nombre de su restaurante
         // si lo tiene
         List<Employee> trabajadores = employeeRepository.findAll();
@@ -215,10 +214,19 @@ public class RestaurantesJavaApplication {
                 System.out.println(trabajador.getFirstName() + " trabaja en ningún sitio");
             }
         }
-
         // probar a filtrar por nombre de restaurante
         List<Employee> empleadosDominos = employeeRepository.findByRestaurantName("DominosPizza");
         System.out.println(empleadosDominos);
+
+        System.out.println("FILTRAR EMPLEADOS POR TIPO DE COMIDA DE RESTAURANTE:");
+        for (var e : employeeRepository.findByRestaurant_FoodType(FoodType.SPANISH))
+            System.out.println(e);
+
+        System.out.println("FILTRAR EMPLEADOS POR EDAD MAYOR O IGUAL QUE");
+        for (var e : employeeRepository.findByAgeGreaterThanEqual(20))
+            System.out.println(e);
+
+
 
         // filtrar por apellido
         // fitrar por edad
