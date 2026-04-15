@@ -226,7 +226,9 @@ public class RestaurantesJavaApplication {
         for (var e : employeeRepository.findByAgeGreaterThanEqual(20))
             System.out.println(e);
 
-
+        System.out.println("TRAER TODOS LOS EMPLEADOS ORDENADOS POR NOMBRE ASCENDENTE A-Z");
+        for (var e : employeeRepository.findByOrderByFirstNameAsc())
+            System.out.println(e);
 
         // filtrar por apellido
         // fitrar por edad
