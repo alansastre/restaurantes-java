@@ -1,6 +1,6 @@
 
 
-* Restaurant
+* Restaurant [OK]
   * Long id 
   * String name
   * Double averagePrice
@@ -9,20 +9,33 @@
   * LocalDate startDate
   * Integer numberEmployees
 
-* Employee
+* Employee [OK]
   * Long id
   * String firstName
   * String lastName
   * String dni
   * Integer age
-  * Restaurant restaurant (ManyToOne) (NUEVO)
+  * Restaurant restaurant (ManyToOne) (NUEVO) [OK]
 
-* FoodType (enum)
+* FoodType (enum) [OK]
   * SPANISH
   * JAPANESE
 
-Próximamente:
-* Dish ( plato, bebida, vino, postre, etc)
+
+* Dish (Plato)[OK]
+  * Long id
+  * String name
+  * String description (longitud 500 en base de datos)
+  * Double price
+  * DishType type (enum: STARTER, MAIN_COURSE, DESSERT)
+  * Asociación:
+    * Restaurant restaurant (ManyToOne)
+
+* Paso 1: crear class Dish y enum DishType
+* Paso 2: crear asociación ManyToOne con Restaurant
+* Paso 3: crear repositorio DishRepository con métodos CRUD
+* Paso 4: crear algunos platos asociados a restaurantes existentes y guardarlos en la base de datos
+
 
 * Order (pedido)
   * fecha

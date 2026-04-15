@@ -1,8 +1,7 @@
 package com.restaurantes;
 
-import com.restaurantes.model.Employee;
-import com.restaurantes.model.FoodType;
-import com.restaurantes.model.Restaurant;
+import com.restaurantes.model.*;
+import com.restaurantes.repository.DishRepository;
 import com.restaurantes.repository.EmployeeRepository;
 import com.restaurantes.repository.RestaurantRepository;
 import org.springframework.boot.SpringApplication;
@@ -24,8 +23,11 @@ public class RestaurantesJavaApplication {
         var context = SpringApplication.run(RestaurantesJavaApplication.class, args);
 
         // obtener los repositorios para poder hacer operaciones de base de datos con ellos
+        // Los repositorios nos dan las operaciones CRUD (findAll, findById, save, delete)
         RestaurantRepository restaurantRepository = context.getBean(RestaurantRepository.class);
         EmployeeRepository employeeRepository = context.getBean(EmployeeRepository.class);
+        DishRepository dishRepository = context.getBean(DishRepository.class);
+
         // crear un objeto restaurante: new
         Restaurant nuevoRestaurante = new Restaurant(); // objeto
         nuevoRestaurante.setName("Paco Bar");
@@ -229,6 +231,22 @@ public class RestaurantesJavaApplication {
         System.out.println("TRAER TODOS LOS EMPLEADOS ORDENADOS POR NOMBRE ASCENDENTE A-Z");
         for (var e : employeeRepository.findByOrderByFirstNameAsc())
             System.out.println(e);
+
+        String nombre = "Alan"; // string normal
+        // Text block, string con triple comilla para tener varias líneas, ideal para queries largas en repositorios
+        String descripcionLarga = """
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                """;
+
+        // CREAR PLATOS Y GUARDARLOS
+        Dish plato1 = new Dish(null, "Ensalada", "de puñetazos", 5.0, DishType.STARTER, restaurantSpain);
+        Dish plato2 = new Dish(null, "Lentejas", "con chorizo", 8.0, DishType.MAIN, restaurantSpain);
+        Dish plato3 = new Dish(null, "Tarta de queso", null, 7.50, DishType.DESSERT, restaurantSpain);
+        Dish plato4 = new Dish(null, "Champán", null, 60.0, DishType.DESSERT, restaurantSpain);
+        dishRepository.saveAll(List.of(plato1, plato2, plato3, plato4));
 
         // filtrar por apellido
         // fitrar por edad
