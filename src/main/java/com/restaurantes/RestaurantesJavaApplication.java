@@ -1,15 +1,13 @@
 package com.restaurantes;
 
 import com.restaurantes.model.*;
-import com.restaurantes.repository.DishRepository;
-import com.restaurantes.repository.EmployeeRepository;
-import com.restaurantes.repository.OrderRepository;
-import com.restaurantes.repository.RestaurantRepository;
+import com.restaurantes.model.enums.DishType;
+import com.restaurantes.model.enums.FoodType;
+import com.restaurantes.repository.*;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -30,6 +28,7 @@ public class RestaurantesJavaApplication {
         EmployeeRepository employeeRepository = context.getBean(EmployeeRepository.class);
         DishRepository dishRepository = context.getBean(DishRepository.class);
         OrderRepository orderRepository = context.getBean(OrderRepository.class);
+        OrderLineRepository orderLineRepository = context.getBean(OrderLineRepository.class);
 
         // crear un objeto restaurante: new
         Restaurant nuevoRestaurante = new Restaurant(); // objeto
@@ -280,9 +279,8 @@ public class RestaurantesJavaApplication {
         Order pedido2 = new Order(4.23, 2, 4, restaurantSpain);
         orderRepository.save(pedido2);
 
-
-
-        // Opción 2: crear un pedido
+        // crear 6 lineas de pedido, una para cada Order.
+        // OrderLine ....
 
 
 

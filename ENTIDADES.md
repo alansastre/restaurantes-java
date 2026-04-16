@@ -37,7 +37,7 @@
 * Paso 4: crear algunos platos asociados a restaurantes existentes y guardarlos en la base de datos
 
 
-* Order (pedido) [NUEVA] + OrderRepository 
+* Order (pedido) [OK] + OrderRepository 
   * Long id
   * LocalDateTime date
   * Double totalPrice
@@ -53,7 +53,7 @@
   * Setter
   * ToSTring
 
-* OrderLine
+* OrderLine [OK] + OrderLineRepository
   * Long id 
   * Integer quantity
   * Asociaciones:
