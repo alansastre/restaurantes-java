@@ -1,7 +1,7 @@
 package com.restaurantes.repository;
 
 import com.restaurantes.model.Employee;
-import com.restaurantes.model.FoodType;
+import com.restaurantes.model.enums.FoodType;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 

@@ -1,10 +1,9 @@
 package com.restaurantes.model;
 
+import com.restaurantes.model.enums.FoodType;
 import jakarta.persistence.*;
-import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 /*
 localhost:8080/h2-console
