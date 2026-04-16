@@ -281,6 +281,15 @@ public class RestaurantesJavaApplication {
 
         // crear 6 lineas de pedido, una para cada Order.
         // OrderLine ....
+        OrderLine unaEnsalada = new OrderLine(1, pedido1, plato1); // una ensalada
+        OrderLine dosLentejas = new OrderLine(2, pedido1, plato2); // dos platos de lentejas
+        OrderLine dosTartas = new OrderLine(2, pedido1, plato3); // dos tartas de queso
+
+        orderLineRepository.saveAll(List.of(unaEnsalada, dosLentejas, dosTartas));
+
+        // calcular precio total en java:
+
+        // calcular precio total directamente en base de datos con una query
 
 
 
