@@ -37,15 +37,21 @@
 * Paso 4: crear algunos platos asociados a restaurantes existentes y guardarlos en la base de datos
 
 
-* Order (pedido) [NUEVA] + OrderRepository
+* Order (pedido) [NUEVA] + OrderRepository 
   * Long id
   * LocalDateTime date
+  * Double totalPrice
+  * Double tip
   * Integer tableNumber
   * Integer numPeople
-  * Double tip
-  * OrderStatus status (enum: PENDING, IN_PROGRESS, COMPLETED, CANCELLED)
+  * OrderStatus status (enum: PENDING, IN_PROGRESS, COMPLETED)
   * asociaciones:
     * restaurant (ManyToOne)
+  * Constructor vacío
+  * Constructor con todos los parámetros excepto id
+  * Getter
+  * Setter
+  * ToSTring
 
 * OrderLine
   * Long id 
