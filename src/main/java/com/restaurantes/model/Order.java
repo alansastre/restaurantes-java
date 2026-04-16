@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
+// CUIDADO: order es una palabra reservada en db
+// Por eso le cambiamos el nombre a la tabla
 @Table(name = "pedidos")
 public class Order {
 

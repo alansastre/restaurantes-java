@@ -3,11 +3,13 @@ package com.restaurantes;
 import com.restaurantes.model.*;
 import com.restaurantes.repository.DishRepository;
 import com.restaurantes.repository.EmployeeRepository;
+import com.restaurantes.repository.OrderRepository;
 import com.restaurantes.repository.RestaurantRepository;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -27,6 +29,7 @@ public class RestaurantesJavaApplication {
         RestaurantRepository restaurantRepository = context.getBean(RestaurantRepository.class);
         EmployeeRepository employeeRepository = context.getBean(EmployeeRepository.class);
         DishRepository dishRepository = context.getBean(DishRepository.class);
+        OrderRepository orderRepository = context.getBean(OrderRepository.class);
 
         // crear un objeto restaurante: new
         Restaurant nuevoRestaurante = new Restaurant(); // objeto
@@ -261,6 +264,21 @@ public class RestaurantesJavaApplication {
         Long restaurantId = restaurantSpain.getId();
         for (var plato: dishRepository.findByRestaurantIdOrderByPrice(restaurantId))
             System.out.println(plato);
+
+
+        // Crear pedido
+
+        Order pedido1 = new Order();
+        pedido1.setNumPeople(2);
+        pedido1.setTableNumber(1);
+        pedido1.setRestaurant(restaurantSpain);
+        pedido1.setTip(2.33);
+        //pedido1.setDate(LocalDateTime.now());
+        orderRepository.save(pedido1);
+
+
+        Order pedido2 = new Order(4.23, 2, 4, restaurantSpain);
+        orderRepository.save(pedido2);
 
 
 
