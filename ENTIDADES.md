@@ -37,17 +37,25 @@
 * Paso 4: crear algunos platos asociados a restaurantes existentes y guardarlos en la base de datos
 
 
-* Order (pedido)
-  * fecha
-  * precioTotal
-  * numeroComensales
-  * tip propina
-  * estado (enum: PENDING, IN_PROGRESS, COMPLETED, CANCELLED)
-  * type: enum: DINE_IN, TAKEAWAY, DELIVERY
+* Order (pedido) [NUEVA] + OrderRepository
+  * Long id
+  * LocalDateTime date
+  * Integer tableNumber
+  * Integer numPeople
+  * Double tip
+  * OrderStatus status (enum: PENDING, IN_PROGRESS, COMPLETED, CANCELLED)
   * asociaciones:
-    * user (ManyToOne)
     * restaurant (ManyToOne)
-    * List<Dish> dishes (ManyToMany)
+
+* OrderLine
+  * Long id 
+  * Integer quantity
+  * Asociaciones:
+    * Dish dish (ManyToOne)
+    * Order order (ManyToOne)
+
+
+
 * Review
   * Long id
   * String comment
