@@ -285,9 +285,21 @@ public class RestaurantesJavaApplication {
         OrderLine dosLentejas = new OrderLine(2, pedido1, plato2); // dos platos de lentejas
         OrderLine dosTartas = new OrderLine(2, pedido1, plato3); // dos tartas de queso
 
-        orderLineRepository.saveAll(List.of(unaEnsalada, dosLentejas, dosTartas));
+        List<OrderLine> lineasPedido = orderLineRepository.saveAll(List.of(unaEnsalada, dosLentejas, dosTartas));
 
         // calcular precio total en java:
+        double totalPrice = 0.0;
+        for (OrderLine lineaPedido : lineasPedido) {
+            // sacar el precio del plato
+            double precioLinea = lineaPedido.getDish().getPrice() * lineaPedido.getQuantity();
+            totalPrice += precioLinea;
+        }
+
+        // guardar el totalPrice en base de datos:
+        pedido1.setTotalPrice(totalPrice);
+        orderRepository.save(pedido1); // actualizar el totalPrice del pedido para saber cuanto dinerito hemos ganado
+
+
 
         // calcular precio total directamente en base de datos con una query
 
