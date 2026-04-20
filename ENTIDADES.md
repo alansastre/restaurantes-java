@@ -73,17 +73,19 @@ Pasos para empezar a crear Controllers:
   * [ok] Dentro del método, guardar un mensaje en el Model con model.addAttribute("message", "¡Hola, mundo!")
   * [ok] Devolver el nombre del template HTML que vamos a crear: "hello"
 
-* [] Crear una clase java nueva llamada RestaurantController
-  * Anotar la clase con @Controller
-  * Crear un constructor que reciba RestaurantRepository y lo guarde en un atributo privado final
-  * Crear un método público llamado findAll que reciba un Model y devuelva String
-  * Anotar el método con @GetMapping("/restaurants")
-  * Dentro del método, usar restaurantRepository.findAll() para obtener la lista de restaurantes y guardarla en el Model con model.addAttribute("restaurants", restaurantRepository.findAll())
-  * Devolver el nombre del template HTML que vamos a crear: "restaurant-list"
+* [ok] (opcional) Añadir xmlns:th="http://www.thymeleaf.org" en el HTML para usar Thymeleaf
 
-* Crear un template HTML nuevo llamado restaurant-list.html en src/main/resources/templates
-  * Escribir el código HTML básico con una tabla para mostrar los restaurantes
-  * Usar Thymeleaf para iterar sobre la lista de restaurantes y mostrar sus datos en la tabla
+* [] Crear una clase java nueva llamada RestaurantController
+  * [ok] Anotar la clase con @Controller
+  * [ok] Crear un constructor que reciba RestaurantRepository y lo guarde en un atributo privado final
+  * [ok] Crear un método público llamado findAll que reciba un Model y devuelva String
+  * [ok] Anotar el método con @GetMapping("/restaurants")
+  * [ok] Dentro del método, usar restaurantRepository.findAll() para obtener la lista de restaurantes y guardarla en el Model con model.addAttribute("restaurants", restaurantRepository.findAll())
+  * [ok] Devolver el nombre del template HTML que vamos a crear: "restaurant-list"
+
+* [ok] Crear un template HTML nuevo llamado restaurant-list.html en src/main/resources/templates
+  * [ok] Escribir el código HTML básico con una tabla para mostrar los restaurantes
+  * [ok] Usar Thymeleaf para iterar sobre la lista de restaurantes y mostrar sus datos en la tabla
 
 
 
