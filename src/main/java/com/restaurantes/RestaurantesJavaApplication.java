@@ -3,6 +3,7 @@ package com.restaurantes;
 import com.restaurantes.model.*;
 import com.restaurantes.model.enums.DishType;
 import com.restaurantes.model.enums.FoodType;
+import com.restaurantes.model.enums.OrderStatus;
 import com.restaurantes.repository.*;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -266,7 +267,6 @@ public class RestaurantesJavaApplication {
 
 
         // Crear pedido
-
         Order pedido1 = new Order();
         pedido1.setNumPeople(2);
         pedido1.setTableNumber(1);
@@ -274,13 +274,11 @@ public class RestaurantesJavaApplication {
         pedido1.setTip(2.33);
         //pedido1.setDate(LocalDateTime.now());
         orderRepository.save(pedido1);
-
-
-        Order pedido2 = new Order(4.23, 2, 4, restaurantSpain);
-        orderRepository.save(pedido2);
+//        Order pedido2 = new Order(4.23, 2, 4, restaurantSpain);
+//        orderRepository.save(pedido2);
 
         // crear 6 lineas de pedido, una para cada Order.
-        // OrderLine ....
+        // OrderLine .... (cantidad, pedido, plato)
         OrderLine unaEnsalada = new OrderLine(1, pedido1, plato1); // una ensalada
         OrderLine dosLentejas = new OrderLine(2, pedido1, plato2); // dos platos de lentejas
         OrderLine dosTartas = new OrderLine(2, pedido1, plato3); // dos tartas de queso
@@ -297,11 +295,18 @@ public class RestaurantesJavaApplication {
 
         // guardar el totalPrice en base de datos:
         pedido1.setTotalPrice(totalPrice);
+        pedido1.setStatus(OrderStatus.FINISHED); // marcamos el pedido como completado
         orderRepository.save(pedido1); // actualizar el totalPrice del pedido para saber cuanto dinerito hemos ganado
 
-
-
         // calcular precio total directamente en base de datos con una query
+        Double totalPrice2 = orderLineRepository.calculateTotalPrice(pedido1.getId()); // JPQL
+        /*
+        Ambos precios son el mismo
+        El primero totalPrice, se calcula desde java con un bucle for
+        El segundo totalPrice2, se calcula directamente en base de datos por lo que sería más óptimo
+         */
+        System.out.println("Precio totalPrice: " + totalPrice);
+        System.out.println("Precio totalPrice2: " + totalPrice2);
 
 
 

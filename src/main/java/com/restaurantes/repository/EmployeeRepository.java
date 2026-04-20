@@ -36,4 +36,9 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
     // OTRAS FORMAS DE ORDENAR TÍPICAS SERÍAN ORDENAR POR PRECIO ASC EN PRODUCTOS
 
 
+    /*
+    Si tuviera fecha de inicio en la que empezó a trabajar podemos calcular su antiguedad
+        @Query(value = "select (current_date - e.startDate) from Employee e where e.nif = ?1")
+    Duration findWorkDaysByNif(String nif);
+     */
 }
