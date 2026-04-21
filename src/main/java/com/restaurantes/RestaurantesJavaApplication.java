@@ -46,6 +46,7 @@ public class RestaurantesJavaApplication {
 
         // Opción 2: crear un objeto con datos:
         Restaurant rest2 = new Restaurant("100 montaditos", 22.22, 5);
+        rest2.setActive(false);
         restaurantRepository.save(rest2);
 
         // Opción 3: crearlo vacío y actualizarlo con métodos set

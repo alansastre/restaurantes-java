@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es-ES" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalle Restaurante</title>
+</head>
+<body>
+
+<h1 th:text="${restaurant.name}"></h1>
+
+<p th:text="${restaurant.averagePrice != null ? restaurant.averagePrice + ' € (EUR)' : 'Sin precio'}"></p>
+
+
+<p th:if="${restaurant.numberEmployees != null}" th:text="${restaurant.numberEmployees + ' empleados'}"></p>
+<p th:unless="${restaurant.numberEmployees != null}">Sin empleados</p>
+
+<p th:if="${restaurant.active}" style="color:green;">Abierto</p>
+<p th:unless="${restaurant.active}" style="color:red;">Cerrado</p>
+
+<!-- resto de atributos del restaurant -->
+
+<!-- listado de platos -->
+
+
+
+
+
+
+
+
+
+</body>
+</html>

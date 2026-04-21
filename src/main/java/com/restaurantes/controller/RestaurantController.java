@@ -5,8 +5,11 @@ import com.restaurantes.repository.RestaurantRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class RestaurantController {
@@ -45,5 +48,24 @@ public class RestaurantController {
         return "restaurants/restaurant-list"; // vista
     }
 
-    //
+    // nuevo metodo para traer un solo restaurante por su id
+    @GetMapping("restaurants/{id}")
+    public String restaurantDetail(@PathVariable Long id, Model model) {
+
+        // buscar restaurante por su id: findById
+        Optional<Restaurant> restaurantOptional = restaurantRepository.findById(id);
+        if (restaurantOptional.isPresent()) {
+
+            // El restaurante sí existe
+            Restaurant restaurant = restaurantOptional.get();
+            model.addAttribute("restaurant", restaurant);
+            return "restaurants/restaurant-detail";
+
+        }
+
+        // El restaurante NO existe
+        // CUIDADO no apunta a HTML
+        // APUNTA al Controller
+        return "redirect:/restaurants";
+    }
 }
