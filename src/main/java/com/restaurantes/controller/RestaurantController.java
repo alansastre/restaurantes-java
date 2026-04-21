@@ -18,6 +18,21 @@ public class RestaurantController {
         this.restaurantRepository = restaurantRepository;
     }
 
+    /*
+    Resumen de métodos típicos en una clase controller:
+    @GetMapping("restaurants") findAll [OK]
+    @GetMapping("restaurants/{id}") findById []
+    @GetMapping("restaurants/delete/{id}") delete []
+
+
+
+    @GetMapping("restaurants/create") createForm
+    @PostMapping("restaurants/create") create
+
+    @GetMapping("restaurants/{id}/edit") editForm
+    @PostMapping("restaurants/{id}/edit") edit
+     */
+
     // get all restaurants
     // http://localhost:8080/restaurants
     @GetMapping("restaurants") // controlador
@@ -29,4 +44,6 @@ public class RestaurantController {
         model.addAttribute("title", "Lista de restaurantes");
         return "restaurants/restaurant-list"; // vista
     }
+
+    //
 }

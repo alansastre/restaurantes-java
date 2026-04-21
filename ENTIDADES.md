@@ -106,7 +106,7 @@ Pasos para empezar a crear Controllers:
 * [ ]
 
 
-
+https://www.thymeleaf.org/doc/tutorials/3.1/usingthymeleaf.html#standard-expression-syntax
 
 * Review
   * Long id

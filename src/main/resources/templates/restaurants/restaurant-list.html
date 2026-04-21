@@ -20,12 +20,19 @@
     <li th:each="restaurant : ${restaurants}">
         <span th:text="${restaurant.name}"></span>
         <span th:text="${restaurant.averagePrice}"></span>
-        <!-- Agregar enlace que apunte al restaurante -->
-
+        <!-- Agregar enlace que apunte al restaurant id dinámicamente -->
+<!--        <a href="/restaurants/2">Ver restaurante</a>-->
+        <a th:href="@{/restaurants/{id}(id=${restaurant.id})}">Ver restaurante</a>
 
     </li>
 
 </ul>
+
+<a th:href="@{/restaurants/create}">Crear Restaurante</a>
+
+
+
+
 
 </body>
 </html>
