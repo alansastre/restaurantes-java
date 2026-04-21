@@ -8,17 +8,21 @@
 </head>
 <body>
 
-<h1>Restaurantes Listado</h1>
+<h1 th:text="${title}">Restaurantes Listado</h1>
 
 <!-- Imprimir número de restaurantes -->
-
+<p th:text="|${#lists.size(restaurants)} resultados|"></p>
+<p th:text="|${restaurants.size()} resultados|"></p>
+<p th:text="|${numRestaurants} resultados|"></p>
 
 <!-- Imprimir list con restaurantes -->
 <ul>
     <li th:each="restaurant : ${restaurants}">
         <span th:text="${restaurant.name}"></span>
-
         <span th:text="${restaurant.averagePrice}"></span>
+        <!-- Agregar enlace que apunte al restaurante -->
+
+
     </li>
 
 </ul>
