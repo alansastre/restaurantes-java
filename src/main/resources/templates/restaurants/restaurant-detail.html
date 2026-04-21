@@ -20,8 +20,33 @@
 <!-- resto de atributos del restaurant -->
 
 <!-- listado de platos -->
+<h2>Carta de platos</h2>
 <p th:text="${dishes.size()} + ' platos'"></p>
 
+<table>
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nombre</th>
+            <th>Descripción</th>
+            <th>Precio (€ EUR)</th>
+            <th>Tipo</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="dish : ${dishes}">
+            <td th:text="${dish.id}"></td>
+            <td th:text="${dish.name}"></td>
+            <td th:text="${dish.description}"></td>
+            <td th:text="${dish.price}"></td>
+            <td th:text="${dish.dishType}"></td>
+            <td>
+                <!-- Botones con acciones: Ver, Agregar a pedido, Editar, Desactivar, Borrar -->
+            </td>
+        </tr>
+    </tbody>
+</table>
 <!-- para el admin: -->
     <!-- listado de empleados -->
     <!-- listado de pedidos -->
