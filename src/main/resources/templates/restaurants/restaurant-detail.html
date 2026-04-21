@@ -23,6 +23,7 @@
 <h2>Carta de platos</h2>
 <p th:text="${dishes.size()} + ' platos'"></p>
 
+<!-- SEría interesante agrupar los platos por Tipo de Plato: entrante, principal, postre -->
 <table>
     <thead>
         <tr>
@@ -40,7 +41,7 @@
             <td th:text="${dish.name}"></td>
             <td th:text="${dish.description}"></td>
             <td th:text="${dish.price}"></td>
-            <td th:text="${dish.dishType}"></td>
+            <td th:text="${dish.dishType.label}"></td>
             <td>
                 <!-- Botones con acciones: Ver, Agregar a pedido, Editar, Desactivar, Borrar -->
             </td>
