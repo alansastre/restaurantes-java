@@ -75,7 +75,7 @@ Pasos para empezar a crear Controllers:
 
 * [ok] (opcional) Añadir xmlns:th="http://www.thymeleaf.org" en el HTML para usar Thymeleaf
 
-* [] Crear una clase java nueva llamada RestaurantController
+* [ok] Crear una clase java nueva llamada RestaurantController
   * [ok] Anotar la clase con @Controller
   * [ok] Crear un constructor que reciba RestaurantRepository y lo guarde en un atributo privado final
   * [ok] Crear un método público llamado findAll que reciba un Model y devuelva String
@@ -89,6 +89,21 @@ Pasos para empezar a crear Controllers:
 
 
 
+* [ ] Imprimir número de restaurantes encima de la lista restaurant-list.html
+
+* [ ] Crear método en RestaurantController para mostrar un restaurante por id
+  * [ ] Anotar el método con @GetMapping("/restaurants/{id}")
+  * [ ] Usar restaurantRepository.findById(id) para obtener el restaurante y guardarlo en el Model
+  * [ ] Devolver un nuevo template HTML llamado "restaurant-detail"
+
+
+* [ ] Crear una clase DishController
+* [ ] Anotar la clase con @Controller
+* [ ] Crear un constructor que reciba DishRepository y lo guarde en un atributo privado final
+* [ ] Crear un método público llamado findAll que reciba un Model y devuelva String
+* [ ] Anotar el método con @GetMapping("/dishes")
+* [ ] Dentro del método, usar dishRepository.findAll() para obtener la lista de platos y guardarla en el Model con model.addAttribute("dishes", dishRepository.findAll())
+* [ ]
 
 
 
