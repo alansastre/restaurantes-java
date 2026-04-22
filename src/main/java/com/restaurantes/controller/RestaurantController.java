@@ -65,9 +65,7 @@ public class RestaurantController {
             model.addAttribute("restaurant", restaurant);
             // opcional:
             // cargar los platos (Dish) de este restaurant en el model
-            List<Dish> platos = dishRepository.
-                    findByRestaurantIdOrderByPrice(
-                            restaurant.getId());
+            List<Dish> platos = dishRepository.findByRestaurantIdOrderByPrice(restaurant.getId());
             model.addAttribute("dishes", platos);
 
             return "restaurants/restaurant-detail";

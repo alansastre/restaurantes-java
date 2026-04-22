@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es-ES" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalle Plato</title>
+</head>
+<body>
+
+<h1 th:text="'Plato ' + ${dish.id}"></h1>
+
+<p th:text="'Nombre: ' + ${dish.name}"></p>
+
+<p th:text="'Precio: ' + ${dish.price != null ? dish.price + ' € (EUR)' : 'Sin precio'}"></p>
+
+<p th:text="'Descripción: ' + ${dish.description != null ? dish.description : 'Sin descripción'}"></p>
+
+<!-- switch sobre enum tipo de plato DishType -->
+<p th:switch="${dish.dishType}">
+    <span th:case="${T(com.restaurantes.model.enums.DishType).STARTER}">🥬 Entrantes de la tierrina</span>
+    <span th:case="${T(com.restaurantes.model.enums.DishType).MAIN}">🐟 Principales</span>
+    <span th:case="${T(com.restaurantes.model.enums.DishType).DESSERT}">🍦Postres</span>
+    <span th:case="*">No definido.</span>
+</p>
+
+
+<p th:if="${dish.restaurant != null}">
+    Este plato pertenece al restaurante
+    <a th:href="@{/restaurants/{id}(id=${dish.restaurant.id})}" th:text="${dish.restaurant.name}"></a>
+</p>
+
+
+</body>
+</html>

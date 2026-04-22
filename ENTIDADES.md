@@ -89,12 +89,30 @@ Pasos para empezar a crear Controllers:
 
 
 
-* [ ] Imprimir número de restaurantes encima de la lista restaurant-list.html
+* [ok] Imprimir número de restaurantes encima de la lista restaurant-list.html
 
-* [ ] Crear método en RestaurantController para mostrar un restaurante por id
-  * [ ] Anotar el método con @GetMapping("/restaurants/{id}")
-  * [ ] Usar restaurantRepository.findById(id) para obtener el restaurante y guardarlo en el Model
-  * [ ] Devolver un nuevo template HTML llamado "restaurant-detail"
+* [ok] Crear método en RestaurantController para mostrar un restaurante por id
+  * [ok] Anotar el método con @GetMapping("/restaurants/{id}")
+  * [ok] Usar restaurantRepository.findById(id) para obtener el restaurante y guardarlo en el Model
+  * [ok] Devolver un nuevo template HTML llamado "restaurant-detail"
+  * [ok] Crear un enlace en restaurant-list.html para cada restaurante que apunte a /restaurants/{id}
+
+* [ok] Añadido platos de restaurante en restaurant detail usando el dishRepository.findByRestaurantIdOrderByPrice(id) (método personalizado en DishRepository)
+* [ok] Añadido label en enum DishType para mostrar "Entrantes" en vez de "STARTER" en el HTML
+
+* [] En restaurant-detail, hacer que un plato sea clicable y lleve a su detalle (similar a lo que hicimos con el restaurante)
+
+
+
+
+
+* [] Crear repositorios GitHub de equipos
+* [] Comentar temáticas
+* [] Crear diagrama de entidades con asociaciones
+
+
+
+
 
 
 * [ ] Crear una clase DishController

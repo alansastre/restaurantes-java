@@ -44,6 +44,9 @@
             <td th:text="${dish.dishType.label}"></td>
             <td>
                 <!-- Botones con acciones: Ver, Agregar a pedido, Editar, Desactivar, Borrar -->
+                <!-- Ver plato <a th:href="@{}"> </a> >-->
+                <a th:href="@{/dishes/{id}(id=${dish.id})}">Ver plato</a>
+
             </td>
         </tr>
     </tbody>
