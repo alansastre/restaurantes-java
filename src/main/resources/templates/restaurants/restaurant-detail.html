@@ -55,11 +55,20 @@
     <!-- listado de empleados -->
     <!-- listado de pedidos -->
 
+<h2>Opiniones de nuestros clientes</h2>
 
+<p th:if="${reviews.isEmpty()}">Nadie ha comentado todavía, sé el primero en escribir una opinión.</p>
 
+<ul th:unless="${reviews.isEmpty()}">
+    <li th:each="review : ${reviews}">
 
+        <p th:text="${review.title}"></p>
+        <p th:text="${review.description}"></p>
+        <p th:text="${'Valoración: ' + review.rating + ' /5 estrellas'}"></p>
+        <p th:text="${'Fecha: ' + review.creationDate}"></p>
 
-
+    </li>
+</ul>
 
 </body>
 </html>

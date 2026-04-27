@@ -2,8 +2,11 @@ package com.restaurantes.controller;
 
 import com.restaurantes.model.Dish;
 import com.restaurantes.model.Restaurant;
+import com.restaurantes.model.Review;
 import com.restaurantes.repository.DishRepository;
 import com.restaurantes.repository.RestaurantRepository;
+import com.restaurantes.repository.ReviewRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,17 +16,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.List;
 import java.util.Optional;
 
+// PRoductController
 @Controller
+@AllArgsConstructor // lombok
 public class RestaurantController {
 
     // inyectar el restaurant repository
     private final RestaurantRepository restaurantRepository;
     private final DishRepository dishRepository;
+    private final ReviewRepository reviewRepository;
 
-    public RestaurantController(RestaurantRepository restaurantRepository, DishRepository dishRepository) {
-        this.restaurantRepository = restaurantRepository;
-        this.dishRepository = dishRepository;
-    }
+//    public RestaurantController(RestaurantRepository restaurantRepository, DishRepository dishRepository) {
+//        this.restaurantRepository = restaurantRepository;
+//        this.dishRepository = dishRepository;
+//    }
 
     /*
     Resumen de métodos típicos en una clase controller:
@@ -67,6 +73,11 @@ public class RestaurantController {
             // cargar los platos (Dish) de este restaurant en el model
             List<Dish> platos = dishRepository.findByRestaurantIdOrderByPrice(restaurant.getId());
             model.addAttribute("dishes", platos);
+
+            // reviews
+            //List<Review> reviews = reviewRepository.findAll();
+            List<Review> reviews = reviewRepository.findByRestaurant_IdOrderByCreationDateDesc(restaurant.getId());
+            model.addAttribute("reviews", reviews); // accesibles desde HTML
 
             return "restaurants/restaurant-detail";
 
