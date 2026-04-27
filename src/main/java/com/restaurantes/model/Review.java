@@ -33,6 +33,7 @@ public class Review {
     @Builder.Default // para que el builder no ponga este campo a null
     private LocalDateTime creationDate = LocalDateTime.now();
 
+    @ToString.Exclude
     @ManyToOne
     private Restaurant restaurant;
 
