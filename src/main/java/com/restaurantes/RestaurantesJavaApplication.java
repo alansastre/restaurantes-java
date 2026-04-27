@@ -30,6 +30,7 @@ public class RestaurantesJavaApplication {
         DishRepository dishRepository = context.getBean(DishRepository.class);
         OrderRepository orderRepository = context.getBean(OrderRepository.class);
         OrderLineRepository orderLineRepository = context.getBean(OrderLineRepository.class);
+        ReviewRepository reviewRepository = context.getBean(ReviewRepository.class);
 
         // crear un objeto restaurante: new
         Restaurant nuevoRestaurante = new Restaurant(); // objeto
@@ -311,8 +312,29 @@ public class RestaurantesJavaApplication {
 
 
 
+        // crear cuatro reviews de un restaurante usando Builder de lombok
+        Review review1 = Review.builder()
+                .description("Te atienden bien")
+                .restaurant(restaurantSpain)
+                .title("Restaurante espectacular")
+                .rating(5)
+                .build();
 
+        Review review2 = Review.builder()
+                .description("Nefasto")
+                .restaurant(restaurantSpain)
+                .title("Me sirvieron la sopa sin mosca")
+                .rating(1)
+                .build();
 
+        Review review3 = Review.builder()
+                .description("Ni fu ni fa")
+                .restaurant(restaurantSpain)
+                .title("Comí y no me morí")
+                .rating(3)
+                .build();
+
+        reviewRepository.saveAll(List.of(review1, review2, review3));
         // resumen
         // findAll
         // findById
