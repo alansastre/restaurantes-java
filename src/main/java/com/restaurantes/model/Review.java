@@ -28,6 +28,8 @@ public class Review {
     @Column(length = 1000)
     private String description;
 
+    private Integer rating;
+
     @Builder.Default // para que el builder no ponga este campo a null
     private LocalDateTime creationDate = LocalDateTime.now();
 
