@@ -5,8 +5,8 @@
     <div class="container">
         <a class="navbar-brand d-flex align-items-center" th:href="@{/}">
             <img th:src="@{/images/logo.png}" alt="Restaurantes"
-                 height="32" class="me-2">
-            <span>Restaurantes</span>
+                 height="32" class="me-2 rounded-3">
+<!--            <span>Restaurantes</span>-->
         </a>
         <button class="navbar-toggler" type="button"
                 data-bs-toggle="collapse" data-bs-target="#mainNav"
@@ -23,6 +23,16 @@
                 <li class="nav-item">
                     <a class="nav-link" th:href="@{/reviews}">
                         <i class="fa-regular fa-comments me-1"></i> Reseñas
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/dishes}">
+                        <i class="fa-regular fa-comments me-1"></i> Platos
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/orders}">
+                        <i class="fa-regular fa-comments me-1"></i> Pedidos
                     </a>
                 </li>
             </ul>
