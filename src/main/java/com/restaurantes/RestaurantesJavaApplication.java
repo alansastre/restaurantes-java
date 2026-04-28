@@ -334,7 +334,22 @@ public class RestaurantesJavaApplication {
                 .rating(3)
                 .build();
 
-        reviewRepository.saveAll(List.of(review1, review2, review3));
+
+        Review review4 = Review.builder()
+                .description("Ni fu ni fa")
+                .dish(plato1)
+                .title("Me pusieron de menos")
+                .rating(2)
+                .build();
+
+        Review review5 = Review.builder()
+                .description("Excelente")
+                .dish(plato1)
+                .title("Guay")
+                .rating(5)
+                .build();
+
+        reviewRepository.saveAll(List.of(review1, review2, review3, review4,  review5));
         // resumen
         // findAll
         // findById

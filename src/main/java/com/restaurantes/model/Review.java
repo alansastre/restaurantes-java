@@ -6,15 +6,12 @@ import lombok.*;
 
 import java.time.LocalDateTime;
 
-// lombok
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
 @Builder
-
-// anotaciones de JPA
 @Entity
 @Table(name = "reviews")
 public class Review {
@@ -37,6 +34,13 @@ public class Review {
     @ManyToOne
     private Restaurant restaurant;
 
+    @ToString.Exclude
+    @ManyToOne
+    private Dish dish;
+
+    // @ToString.Exclude
 //    @ManyToOne
 //    private User user;
+
+
 }
