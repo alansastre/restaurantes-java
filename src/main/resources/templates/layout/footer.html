@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<footer th:fragment="footer" class="bg-white border-top mt-5 py-4">
+    <div class="container text-center small text-muted">
+        <p class="mb-1">
+            <i class="fa-regular fa-copyright"></i> 2026 Restaurantes — Adecco
+        </p>
+        <p class="mb-0">
+            <a class="text-decoration-none me-3" href="#"><i class="fa-brands fa-github"></i> GitHub</a>
+            <a class="text-decoration-none me-3" href="#"><i class="fa-brands fa-x-twitter"></i> Twitter</a>
+            <a class="text-decoration-none" href="#"><i class="fa-regular fa-envelope"></i> Contacto</a>
+        </p>
+    </div>
+</footer>
+
+<script th:fragment="scripts" th:src="@{/webjars/bootstrap/5.3.8/dist/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>

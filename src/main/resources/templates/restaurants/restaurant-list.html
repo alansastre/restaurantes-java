@@ -1,38 +1,50 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Restaurantes Listado</title>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout/head :: head('Restaurantes')}"></head>
+<body class="d-flex flex-column min-vh-100">
 
+<nav th:replace="~{layout/navbar :: navbar}"></nav>
 
-</head>
-<body>
+<main class="container flex-grow-1">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="mb-0" th:text="${title}">Restaurantes</h1>
+        <span class="badge bg-secondary fs-6" th:text="|${numRestaurants} resultados|">0 resultados</span>
+    </div>
 
-<h1 th:text="${title}">Restaurantes Listado</h1>
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3">
+        <div class="col" th:each="restaurant : ${restaurants}">
+            <div class="card card-restaurant h-100 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <i class="fa-solid fa-store text-primary me-2"></i>
+                        <span th:text="${restaurant.name}">Nombre</span>
+                    </h5>
+                    <p class="card-text">
+                        <span class="badge bg-success">
+                            <i class="fa-solid fa-euro-sign me-1"></i>
+                            <span th:text="${restaurant.averagePrice}">0</span>
+                        </span>
+                    </p>
+                </div>
+                <div class="card-footer bg-transparent border-0 pt-0">
+                    <a th:href="@{/restaurants/{id}(id=${restaurant.id})}"
+                       class="btn btn-outline-primary btn-sm w-100">
+                        <i class="fa-regular fa-eye me-1"></i> Ver restaurante
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 
-<!-- Imprimir número de restaurantes -->
-<p th:text="|${#lists.size(restaurants)} resultados|"></p>
-<p th:text="|${restaurants.size()} resultados|"></p>
-<p th:text="|${numRestaurants} resultados|"></p>
+    <div class="mt-4">
+        <a th:href="@{/restaurants/create}" class="btn btn-success">
+            <i class="fa-solid fa-plus me-1"></i> Crear restaurante
+        </a>
+    </div>
+</main>
 
-<!-- Imprimir list con restaurantes -->
-<ul>
-    <li th:each="restaurant : ${restaurants}">
-        <span th:text="${restaurant.name}"></span>
-        <span th:text="${restaurant.averagePrice}"></span>
-        <!-- Agregar enlace que apunte al restaurant id dinámicamente -->
-<!--        <a href="/restaurants/2">Ver restaurante</a>-->
-        <a th:href="@{/restaurants/{id}(id=${restaurant.id})}">Ver restaurante</a>
-
-    </li>
-
-</ul>
-
-<a th:href="@{/restaurants/create}">Crear Restaurante</a>
-
-
-
-
+<footer th:replace="~{layout/footer :: footer}"></footer>
+<script th:replace="~{layout/footer :: scripts}"></script>
 
 </body>
 </html>

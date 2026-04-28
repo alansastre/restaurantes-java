@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<nav th:fragment="navbar" class="navbar navbar-expand-lg navbar-dark bg-dark mb-4 shadow-sm">
+    <div class="container">
+        <a class="navbar-brand d-flex align-items-center" th:href="@{/}">
+            <img th:src="@{/images/logo.png}" alt="Restaurantes"
+                 height="32" class="me-2">
+            <span>Restaurantes</span>
+        </a>
+        <button class="navbar-toggler" type="button"
+                data-bs-toggle="collapse" data-bs-target="#mainNav"
+                aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="mainNav">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/restaurants}">
+                        <i class="fa-solid fa-store me-1"></i> Restaurantes
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/reviews}">
+                        <i class="fa-regular fa-comments me-1"></i> Reseñas
+                    </a>
+                </li>
+            </ul>
+            <a class="btn btn-outline-light btn-sm" th:href="@{/restaurants/create}">
+                <i class="fa-solid fa-plus"></i> Nuevo restaurante
+            </a>
+        </div>
+    </div>
+</nav>
+</body>
+</html>
