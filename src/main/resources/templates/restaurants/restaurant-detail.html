@@ -1,110 +1,112 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{layout/head :: head('Detalle Restaurante')}"></head>
-<body class="d-flex flex-column min-vh-100">
 
-<nav th:replace="~{layout/navbar :: navbar}"></nav>
+    <head th:replace="~{layout/head :: head('Detalle Restaurante')}"></head>
 
-<main class="container flex-grow-1">
+    <body class="d-flex flex-column min-vh-100">
 
-    <!-- Cabecera del restaurante -->
-    <div class="d-flex justify-content-between align-items-start mb-3">
-        <div>
-            <h1 class="mb-2" th:text="${restaurant.name}">Nombre</h1>
-            <span class="badge bg-success me-1">
-                <i class="fa-solid fa-euro-sign me-1"></i>
-                <span th:text="${restaurant.averagePrice != null ? restaurant.averagePrice + ' €' : 'Sin precio'}"></span>
-            </span>
-            <span class="badge bg-info text-dark me-1"
-                  th:if="${restaurant.numberEmployees != null}"
-                  th:text="${restaurant.numberEmployees + ' empleados'}"></span>
-            <span class="badge bg-secondary me-1"
-                  th:unless="${restaurant.numberEmployees != null}">Sin empleados</span>
-        </div>
+        <nav th:replace="~{layout/navbar :: navbar}"></nav>
 
-        <span th:if="${restaurant.active}" class="badge bg-success fs-6">
-            <i class="fa-solid fa-door-open me-1"></i> Abierto
-        </span>
-        <span th:unless="${restaurant.active}" class="badge bg-danger fs-6">
-            <i class="fa-solid fa-door-closed me-1"></i> Cerrado
-        </span>
-    </div>
+        <main class="container flex-grow-1">
 
-    <hr>
-
-    <!-- Carta de platos -->
-    <h2 class="mt-4">
-        <i class="fa-solid fa-utensils text-primary me-2"></i> Carta de platos
-    </h2>
-    <p class="text-muted" th:text="${dishes.size()} + ' platos'"></p>
-
-    <div class="table-responsive">
-        <table class="table table-hover align-middle">
-            <thead class="table-dark">
-                <tr>
-                    <th>Id</th>
-                    <th>Nombre</th>
-                    <th>Descripción</th>
-                    <th>Precio</th>
-                    <th>Tipo</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr th:each="dish : ${dishes}">
-                    <td th:text="${dish.id}"></td>
-                    <td class="fw-semibold" th:text="${dish.name}"></td>
-                    <td class="text-muted small" th:text="${dish.description}"></td>
-                    <td>
-                        <span class="badge bg-success" th:text="${dish.price} + ' €'"></span>
-                    </td>
-                    <td>
-                        <span class="badge bg-light text-dark border" th:text="${dish.dishType.label}"></span>
-                    </td>
-                    <td>
-                        <a th:href="@{/dishes/{id}(id=${dish.id})}"
-                           class="btn btn-sm btn-outline-primary">
-                            <i class="fa-regular fa-eye me-1"></i> Ver
-                        </a>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-
-    <!-- Opiniones -->
-    <h2 class="mt-5">
-        <i class="fa-regular fa-comments text-primary me-2"></i> Opiniones de nuestros clientes
-    </h2>
-
-    <div th:if="${reviews.isEmpty()}" class="alert alert-light border">
-        <i class="fa-regular fa-face-smile me-1"></i>
-        Nadie ha comentado todavía, sé el primero en escribir una opinión.
-    </div>
-
-    <div class="row row-cols-1 row-cols-md-2 g-3" th:unless="${reviews.isEmpty()}">
-        <div class="col" th:each="review : ${reviews}">
-            <div class="card h-100 shadow-sm">
-                <div class="card-body">
-                    <h5 class="card-title" th:text="${review.title}">Título</h5>
-                    <p class="card-text" th:text="${review.description}">Descripción</p>
-                    <span class="badge bg-warning text-dark">
-                        <i class="fa-solid fa-star me-1"></i>
-                        <span th:text="${review.rating + ' / 5'}"></span>
+            <!-- Cabecera del restaurante -->
+            <div class="d-flex justify-content-between align-items-start mb-3">
+                <div>
+                    <h1 class="mb-2" th:text="${restaurant.name}">Nombre</h1>
+                    <span class="badge bg-success me-1">
+                        <i class="fa-solid fa-euro-sign me-1"></i>
+                        <span th:text="${restaurant.averagePrice != null ? restaurant.averagePrice + ' €' : 'Sin precio'}"></span>
                     </span>
+                    <span class="badge bg-info text-dark me-1"
+                          th:if="${restaurant.numberEmployees != null}"
+                          th:text="${restaurant.numberEmployees + ' empleados'}"></span>
+                    <span class="badge bg-secondary me-1"
+                          th:unless="${restaurant.numberEmployees != null}">Sin empleados</span>
                 </div>
-                <div class="card-footer text-muted small bg-transparent">
-                    <i class="fa-regular fa-calendar me-1"></i>
-                    <span th:text="${review.creationDate}"></span>
+
+                <span th:if="${restaurant.active}" class="badge bg-success fs-6">
+                    <i class="fa-solid fa-door-open me-1"></i> Abierto
+                </span>
+                <span th:unless="${restaurant.active}" class="badge bg-danger fs-6">
+                    <i class="fa-solid fa-door-closed me-1"></i> Cerrado
+                </span>
+            </div>
+
+            <hr>
+
+            <!-- Carta de platos -->
+            <h2 class="mt-4">
+                <i class="fa-solid fa-utensils text-primary me-2"></i> Carta de platos
+            </h2>
+            <p class="text-muted" th:text="${dishes.size()} + ' platos'"></p>
+
+            <div class="table-responsive">
+                <table class="table table-hover align-middle">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Id</th>
+                            <th>Nombre</th>
+                            <th>Descripción</th>
+                            <th>Precio</th>
+                            <th>Tipo</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="dish : ${dishes}">
+                            <td th:text="${dish.id}"></td>
+                            <td class="fw-semibold" th:text="${dish.name}"></td>
+                            <td class="text-muted small" th:text="${dish.description}"></td>
+                            <td>
+                                <span class="badge bg-success" th:text="${dish.price} + ' €'"></span>
+                            </td>
+                            <td>
+                                <span class="badge bg-light text-dark border" th:text="${dish.dishType.label}"></span>
+                            </td>
+                            <td>
+                                <a th:href="@{/dishes/{id}(id=${dish.id})}"
+                                   class="btn btn-sm btn-outline-primary">
+                                    <i class="fa-regular fa-eye me-1"></i> Ver
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Opiniones -->
+            <h2 class="mt-5">
+                <i class="fa-regular fa-comments text-primary me-2"></i> Opiniones de nuestros clientes
+            </h2>
+
+            <div th:if="${reviews.isEmpty()}" class="alert alert-light border">
+                <i class="fa-regular fa-face-smile me-1"></i>
+                Nadie ha comentado todavía, sé el primero en escribir una opinión.
+            </div>
+
+            <div class="row row-cols-1 row-cols-md-2 g-3" th:unless="${reviews.isEmpty()}">
+                <div class="col" th:each="review : ${reviews}">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title" th:text="${review.title}">Título</h5>
+                            <p class="card-text" th:text="${review.description}">Descripción</p>
+                            <span class="badge bg-warning text-dark">
+                                <i class="fa-solid fa-star me-1"></i>
+                                <span th:text="${review.rating + ' / 5'}"></span>
+                            </span>
+                        </div>
+                        <div class="card-footer text-muted small bg-transparent">
+                            <i class="fa-regular fa-calendar me-1"></i>
+                            <span th:text="${review.creationDate}"></span>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
 
-</main>
+        </main>
 
-<footer th:replace="~{layout/footer :: footer}"></footer>
-<script th:replace="~{layout/footer :: scripts}"></script>
+        <footer th:replace="~{layout/footer :: footer}"></footer>
+        <script th:replace="~{layout/footer :: scripts}"></script>
 
 </body>
 </html>

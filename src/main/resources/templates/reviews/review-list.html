@@ -1,36 +1,63 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Reviews Listado</title>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout/head :: head('Reseñas')}"></head>
+<body class="d-flex flex-column min-vh-100">
 
+<nav th:replace="~{layout/navbar :: navbar}"></nav>
 
-</head>
-<body>
+<main class="container flex-grow-1">
 
-<h1>Opiniones de clientes</h1>
+    <h1 class="mb-4">
+        <i class="fa-regular fa-comments text-primary me-2"></i> Opiniones de clientes
+    </h1>
 
-<ul>
-    <li th:each="review : ${reviews}">
-        <p th:text="${review.title}"></p>
-        <p th:text="${review.description}"></p>
-        <p th:text="${'Valoración: ' + review.rating + ' /5 estrellas'}"></p>
-        <p th:text="${'Fecha: ' + review.creationDate}"></p>
+    <div th:if="${reviews.isEmpty()}" class="alert alert-light border">
+        Aún no hay reseñas.
+    </div>
 
-        <p th:if="${review.restaurant != null}"
-           th:text="${review.restaurant.name}"></p>
+    <div class="row row-cols-1 row-cols-md-2 g-3">
+        <div class="col" th:each="review : ${reviews}">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start mb-2">
+                        <h5 class="card-title mb-0" th:text="${review.title}">Título</h5>
+                        <span class="badge bg-warning text-dark">
+                            <i class="fa-solid fa-star me-1"></i>
+                            <span th:text="${review.rating + ' / 5'}"></span>
+                        </span>
+                    </div>
+                    <p class="card-text" th:text="${review.description}">Descripción</p>
+                    <p class="text-muted small mb-0">
+                        <i class="fa-regular fa-calendar me-1"></i>
+                        <span th:text="${review.creationDate}"></span>
+                    </p>
+                </div>
+                <div class="card-footer bg-transparent small">
+                    <div th:if="${review.restaurant != null}">
+                        <i class="fa-solid fa-store text-primary me-1"></i>
+                        <a th:href="@{/restaurants/{id}(id=${review.restaurant.id})}"
+                           th:text="${review.restaurant.name}">Restaurante</a>
+                    </div>
+                    <div th:if="${review.dish != null}">
+                        <i class="fa-solid fa-utensils text-primary me-1"></i>
+                        <a th:href="@{/dishes/{id}(id=${review.dish.id})}"
+                           th:text="${review.dish.name}">Plato</a>
+                        <span th:if="${review.dish.restaurant != null}"
+                              class="text-muted">
+                            — en
+                            <a th:href="@{/restaurants/{id}(id=${review.dish.restaurant.id})}"
+                               th:text="${review.dish.restaurant.name}">Restaurante</a>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-        <p th:if="${review.dish != null}"
-           th:text="${review.dish.name}"></p>
+</main>
 
-        <p th:if="${review.dish != null && review.dish.restaurant != null}"
-           th:text="${review.dish.restaurant.name}"></p>
-
-
-        <a th:if="${review.restaurant != null}"
-           th:href="@{/restaurants/{id}(id=${review.restaurant.id})}">Ver restaurante</a>
-    </li>
-</ul>
+<footer th:replace="~{layout/footer :: footer}"></footer>
+<script th:replace="~{layout/footer :: scripts}"></script>
 
 </body>
 </html>
