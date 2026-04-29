@@ -36,8 +36,9 @@
                     <tbody>
                     <tr th:each="order : ${orders}">
                         <td th:text="${order.id}"></td>
-                        <td class="fw-semibold" th:text="${order.date}"></td>
-                        <td class="text-muted small" th:text="${order.totalPrice}"></td>
+<!--                        <td class="fw-semibold" th:text="${#temporals.format(order.date)}"></td>-->
+                        <td class="fw-semibold" th:text="${#temporals.format(order.date, 'dd/MM/yy HH:mm')}"></td>
+                        <td class="text-muted small" th:text="${#numbers.formatDecimal(order.totalPrice, 1, 2)}"></td>
                         <td>
                             <span class="badge bg-success" th:text="${order.tip}"></span>
                         </td>
