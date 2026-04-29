@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+    <head th:replace="~{layout/head :: head('Listado Pedidos')}"></head>
+
+    <body class="d-flex flex-column min-vh-100">
+
+        <nav th:replace="~{layout/navbar :: navbar}"></nav>
+
+        <main class="container flex-grow-1">
+
+
+            <h1 class="mb-3">Listado de pedidos</h1>
+
+            <div class="table-responsive">
+                <table class="table table-hover align-middle table-bordered border-success">
+                    <thead class="table-dark">
+                    <tr>
+                        <th>Id</th>
+                        <th>
+                            <i class="fa-solid fa-calendar"></i>
+                            Fecha
+                        </th>
+                        <th>
+                            <i class="fa-solid fa-euro"></i>
+                            Precio
+                        </th>
+                        <th>Propina</th>
+                        <th>Mesa</th>
+                        <th>Comensales</th>
+                        <th>Estado</th>
+                        <th>Restaurante</th>
+                        <th>Acciones</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="order : ${orders}">
+                        <td th:text="${order.id}"></td>
+                        <td class="fw-semibold" th:text="${order.date}"></td>
+                        <td class="text-muted small" th:text="${order.totalPrice}"></td>
+                        <td>
+                            <span class="badge bg-success" th:text="${order.tip}"></span>
+                        </td>
+                        <td>
+                            <span class="badge bg-light text-dark border"
+                                  th:text="${order.tableNumber}"></span>
+                        </td>
+                        <td th:text="${order.numPeople}"></td>
+                        <td th:text="${order.status}"></td>
+                        <td th:text="${order.restaurant.name}"></td>
+                        <td>
+                            <a th:href="@{/orders/{id}(id=${order.id})}"
+                               class="btn btn-sm btn-outline-primary">
+                                <i class="fa-regular fa-eye me-1"></i> Ver pedido
+                            </a>
+<!--                            <a>Finalizar pedido</a>-->
+<!--                            <a>Editar pedido</a>-->
+<!--                            <a>Borrar pedido</a>-->
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+
+        </main>
+
+        <footer th:replace="~{layout/footer :: footer}"></footer>
+        <script th:replace="~{layout/footer :: scripts}"></script>
+
+    </body>
+</html>
