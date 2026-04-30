@@ -14,6 +14,12 @@
     <div th:if="${reviews.isEmpty()}" class="alert alert-light border">
         Aún no hay reseñas.
     </div>
+    <div th:if="${message}" class="alert alert-success fade show alert-dismissible" role="alert">
+        <i class="fa-solid fa-check-circle"></i>
+        <span th:text="${message}"></span>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+
+    </div>
 
     <div class="row row-cols-1 row-cols-md-2 g-3">
         <div class="col" th:each="review : ${reviews}">
@@ -59,7 +65,8 @@
                             <i class="fa-solid fa-pencil mr-2"></i> Editar
                         </a>
 
-                        <a class="btn btn-danger" th:href="@{/reviews/delete/{id}(id=${review.id})}">
+                        <a class="btn btn-danger" th:href="@{/reviews/delete/{id}(id=${review.id})}"
+                            onclick="return confirm('Esta acción borra, ¿quiere borrar esta reseña?')">
                             <i class="fa-solid fa-trash mr-2"></i> Borrar
                         </a>
 
