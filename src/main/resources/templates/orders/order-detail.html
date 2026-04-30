@@ -9,6 +9,72 @@
 
         <main class="container flex-grow-1">
             <h1 class="my-2">Detalle pedido</h1>
+
+
+            <!-- Info básica:
+             id
+             date
+             totalPrice
+             tip
+             tableNumber
+             numPeople
+             status
+             -->
+            <div>
+                <div class="my-3">
+                    <span class="badge bg-success me-1">
+                            <i class="fa-solid fa-calendar me-1"></i>
+                            <span th:text="${order.date}"></span>
+                    </span>
+                </div>
+                <div class="row text-center">
+                    <div class="col">
+                        <h3>Información del pedido</h3>
+
+                        <dl class="row">
+                            <dt class="col-sm-6"> <i class="fa-solid fa-id-card"></i> Id</dt>
+                            <dd class="col-sm-6" th:text="${order.id}"></dd>
+                        </dl>
+
+                        <dl class="row">
+                            <dt class="col-sm-6"> <i class="fa-solid fa-people-group"></i> Comensales</dt>
+                            <dd class="col-sm-6" th:text="${order.numPeople}"></dd>
+                        </dl>
+
+                        <dl class="row">
+                            <dt class="col-sm-6"> <i class="fa-solid fa-utensils"></i> Mesa</dt>
+                            <dd class="col-sm-6" th:text="${order.tableNumber}"></dd>
+                        </dl>
+
+                        <dl class="row">
+                            <dt class="col-sm-6"> <i class="fa-solid fa-euro"></i> Precio total</dt>
+                            <dd class="col-sm-6" th:text="${order.totalPrice}"></dd>
+                        </dl>
+
+                        <dl class="row">
+                            <dt class="col-sm-6"> <i class="fa-solid fa-spinner text-danger"></i>Estado</dt>
+                            <dd class="col-sm-6" th:text="${order.status}"></dd>
+                        </dl>
+
+                    </div>
+                    <div class="col">
+                        <h3>Información del restaurante</h3>
+                    </div>
+                    <div class="col">
+                        <h3>Información del usuario</h3>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+            <!-- ASociación Restaurante -->
+
+            <!-- Asociacion usuario -->
+
+
+
         </main>
 
         <footer th:replace="~{layout/footer :: footer}"></footer>
