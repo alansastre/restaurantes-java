@@ -17,7 +17,9 @@ public class Order {
 
     private LocalDateTime date =  LocalDateTime.now();
 
+    // Campos que se calculan en base a OrderLines de este Order
     private Double totalPrice;
+    private Integer numProducts;
 
     private Double tip;
 
@@ -30,6 +32,9 @@ public class Order {
 
     @ManyToOne
     private Restaurant restaurant;
+
+//    @ManyToOne
+//    private User user;
 
     public Order() {
     }
