@@ -20,6 +20,12 @@ public class DishController {
     private final DishRepository dishRepository;
     private final ReviewRepository reviewRepository;
 
+    @GetMapping("dishes")
+    public String listDishes(Model model) {
+        List<Dish> dishes = dishRepository.findAll();
+        model.addAttribute("dishes", dishes);
+        return "dishes/dish-list";
+    }
 
     @GetMapping("dishes/{id}")
     public String dishDetail(@PathVariable Long id, Model model) {
