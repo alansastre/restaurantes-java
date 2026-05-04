@@ -10,6 +10,15 @@
         <h1 class="mb-0" th:text="${title}">Restaurantes</h1>
         <span class="badge bg-secondary fs-6" th:text="|${numRestaurants} resultados|">0 resultados</span>
     </div>
+    <!-- Opcional: agregar filtros -->
+
+    <!-- Filtro por tipo comida
+    /restaurants?foodType=SPANISH
+    /restaurants?foodType=JAPANESE
+    -->
+    <a th:href="@{/restaurants(foodType='SPANISH')}" class="btn btn-sm btn-secondary">Comida española</a>
+    <a th:href="@{/restaurants(foodType='JAPANESE')}" class="btn btn-sm btn-secondary">Comida japonesa</a>
+
 
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3">
         <div class="col" th:each="restaurant : ${restaurants}">

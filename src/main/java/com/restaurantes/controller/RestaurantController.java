@@ -3,6 +3,7 @@ package com.restaurantes.controller;
 import com.restaurantes.model.Dish;
 import com.restaurantes.model.Restaurant;
 import com.restaurantes.model.Review;
+import com.restaurantes.model.enums.FoodType;
 import com.restaurantes.repository.DishRepository;
 import com.restaurantes.repository.RestaurantRepository;
 import com.restaurantes.repository.ReviewRepository;
@@ -12,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 import java.util.Optional;
@@ -26,12 +28,24 @@ public class RestaurantController {
     private final DishRepository dishRepository;
     private final ReviewRepository reviewRepository;
 
-    // http://localhost:8080/restaurants
+//    // http://localhost:8080/restaurants
+//    @GetMapping("restaurants") // controlador
+//    public String restaurantList(Model model) {
+//        // cargar datos en el modelo
+////        List<Restaurant> restaurants = restaurantRepository.findAll();
+//        List<Restaurant> restaurants = restaurantRepository.findByActiveTrue();
+//        model.addAttribute("restaurants", restaurants);
+//        model.addAttribute("numRestaurants", restaurants.size());
+//        model.addAttribute("title", "Lista de restaurantes");
+//        return "restaurants/restaurant-list"; // vista
+//    }
+    // http://localhost:8080/restaurants?foodType=SPANISH
     @GetMapping("restaurants") // controlador
-    public String restaurantList(Model model) {
-        // cargar datos en el modelo
-//        List<Restaurant> restaurants = restaurantRepository.findAll();
-        List<Restaurant> restaurants = restaurantRepository.findByActiveTrue();
+    public String restaurantList(
+            Model model,
+            @RequestParam(required = false) FoodType foodType
+    ) {
+        List<Restaurant> restaurants = restaurantRepository.findActiveFiltering(foodType);
         model.addAttribute("restaurants", restaurants);
         model.addAttribute("numRestaurants", restaurants.size());
         model.addAttribute("title", "Lista de restaurantes");
