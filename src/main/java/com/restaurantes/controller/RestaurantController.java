@@ -26,32 +26,12 @@ public class RestaurantController {
     private final DishRepository dishRepository;
     private final ReviewRepository reviewRepository;
 
-//    public RestaurantController(RestaurantRepository restaurantRepository, DishRepository dishRepository) {
-//        this.restaurantRepository = restaurantRepository;
-//        this.dishRepository = dishRepository;
-//    }
-
-    /*
-    Resumen de métodos típicos en una clase controller:
-    @GetMapping("restaurants") findAll [OK]
-    @GetMapping("restaurants/{id}") findById []
-    @GetMapping("restaurants/delete/{id}") delete []
-
-
-
-    @GetMapping("restaurants/create") createForm
-    @PostMapping("restaurants/create") create
-
-    @GetMapping("restaurants/{id}/edit") editForm
-    @PostMapping("restaurants/{id}/edit") edit
-     */
-
-    // get all restaurants
     // http://localhost:8080/restaurants
     @GetMapping("restaurants") // controlador
     public String restaurantList(Model model) {
         // cargar datos en el modelo
-        List<Restaurant> restaurants = restaurantRepository.findAll();
+//        List<Restaurant> restaurants = restaurantRepository.findAll();
+        List<Restaurant> restaurants = restaurantRepository.findByActiveTrue();
         model.addAttribute("restaurants", restaurants);
         model.addAttribute("numRestaurants", restaurants.size());
         model.addAttribute("title", "Lista de restaurantes");
@@ -62,9 +42,12 @@ public class RestaurantController {
     @GetMapping("restaurants/{id}")
     public String restaurantDetail(@PathVariable Long id, Model model) {
 
+
         // buscar restaurante por su id: findById
-        Optional<Restaurant> restaurantOptional = restaurantRepository.findById(id);
+//        Optional<Restaurant> restaurantOptional = restaurantRepository.findById(id);
+        Optional<Restaurant> restaurantOptional = restaurantRepository.findByIdAndActiveTrue(id);
         if (restaurantOptional.isPresent()) {
+
 
             // El restaurante sí existe
             Restaurant restaurant = restaurantOptional.get();
@@ -86,6 +69,19 @@ public class RestaurantController {
         // El restaurante NO existe
         // CUIDADO no apunta a HTML
         // APUNTA al Controller
+        return "redirect:/restaurants";
+    }
+
+    @GetMapping("restaurants/deactivate/{id}")
+    public String restaurantDeactivate(@PathVariable Long id, Model model) {
+        Optional<Restaurant> restaurantOptional = restaurantRepository.findById(id);
+
+        if(restaurantOptional.isPresent()) {
+            Restaurant restaurant = restaurantOptional.get();
+            restaurant.setActive(false);
+            restaurantRepository.save(restaurant);
+        }
+
         return "redirect:/restaurants";
     }
 }
