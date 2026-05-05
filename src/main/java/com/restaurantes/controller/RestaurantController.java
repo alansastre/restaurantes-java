@@ -102,4 +102,10 @@ public class RestaurantController {
 
         return "redirect:/restaurants";
     }
+
+    // ruta para entrar al formulario de restaurante
+    @GetMapping("restaurants/new")
+    public String newRestaurants(Model model) {
+        return "restaurants/restaurant-form";
+    }
 }
