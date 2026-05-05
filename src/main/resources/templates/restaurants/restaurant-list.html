@@ -16,8 +16,15 @@
     /restaurants?foodType=SPANISH
     /restaurants?foodType=JAPANESE
     -->
-    <a th:href="@{/restaurants(foodType='SPANISH')}" class="btn btn-sm btn-secondary">Comida española</a>
-    <a th:href="@{/restaurants(foodType='JAPANESE')}" class="btn btn-sm btn-secondary">Comida japonesa</a>
+    <div class="mb-3">
+        <h5>Filtros rápidos</h5>
+        <a th:href="@{/restaurants}" class="btn btn-sm btn-primary">Todos</a>
+        <a th:href="@{/restaurants(foodType='SPANISH')}" class="btn btn-sm btn-secondary">Comida española</a>
+        <a th:href="@{/restaurants(foodType='JAPANESE')}" class="btn btn-sm btn-secondary">Comida japonesa</a>
+        <a th:href="@{/restaurants(price=15)}" class="btn btn-sm btn-success">Hasta 15 €</a>
+        <a th:href="@{/restaurants(price=30)}" class="btn btn-sm btn-success">Hasta 30 €</a>
+    </div>
+
 
 
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3">

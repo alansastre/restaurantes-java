@@ -154,6 +154,7 @@ public class RestaurantesJavaApplication {
         //restaurantSpain.setFoodType("Español");
         restaurantSpain.setName("La Taberna");
         restaurantSpain.setFoodType(FoodType.SPANISH);
+        restaurantSpain.setAveragePrice(4d);
         restaurantRepository.save(restaurantSpain);
         System.out.println(restaurantSpain);
 
@@ -161,6 +162,7 @@ public class RestaurantesJavaApplication {
         // crear un restaurante de comida japonesa
         Restaurant restaurantJapan =  new Restaurant();
         restaurantJapan.setFoodType(FoodType.JAPANESE);
+        restaurantJapan.setAveragePrice(16d);
         restaurantRepository.save(restaurantJapan);
         System.out.println(restaurantJapan);
 
@@ -174,6 +176,7 @@ public class RestaurantesJavaApplication {
         Restaurant smashBurguer = new Restaurant();
         smashBurguer.setName("Smash Burguer Madrid");
         smashBurguer.setStartDate(LocalDate.now()); // fecha actual
+        smashBurguer.setAveragePrice(18d);
         restaurantRepository.save(smashBurguer);
         System.out.println(smashBurguer);
 
@@ -181,6 +184,7 @@ public class RestaurantesJavaApplication {
         Restaurant sidreria = new Restaurant();
         sidreria.setName("Sidreria");
         sidreria.setStartDate(LocalDate.of(2026, 6, 25));
+        sidreria.setAveragePrice(9d);
         restaurantRepository.save(sidreria);
         System.out.println(sidreria);
         // LocalDate solo da año mes y día
