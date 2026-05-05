@@ -41,13 +41,15 @@ public class RestaurantController {
 //    }
     // http://localhost:8080/restaurants?foodType=SPANISH
     // http://localhost:8080/restaurants?price=15
+    // http://localhost:8080/restaurants?title=burguer
     @GetMapping("restaurants") // controlador
     public String restaurantList(
             Model model,
             @RequestParam(required = false) FoodType foodType,
-            @RequestParam(required = false) Double price
+            @RequestParam(required = false) Double price,
+            @RequestParam(required = false) String title
     ) {
-        List<Restaurant> restaurants = restaurantRepository.findActiveFiltering(foodType, price);
+        List<Restaurant> restaurants = restaurantRepository.findActiveFiltering(foodType, price, title);
         model.addAttribute("restaurants", restaurants);
         model.addAttribute("numRestaurants", restaurants.size());
         model.addAttribute("title", "Lista de restaurantes");
