@@ -41,10 +41,18 @@
             <!-- Filtro por precio -->
             <div class="col-auto">
                 <label class="form-label form-label-sm">Precio máx.</label>
-                <input type="number" min="10" step="1" name="price"
+                <input type="number" min="10" step="5" name="price"
                   class="form-control form-control-sm" th:value="${param.price}">
             </div>
             <!-- Filtro por foodType con selector -->
+            <div class="col-auto">
+                <label class="form-label form-label-sm">Tipo comida</label>
+                <select name="foodType" class="form-select form-select-sm">
+                    <option value="" th:selected="${param.foodType == null}">Todas</option>
+                    <option value="SPANISH" th:selected="${param.foodType != null and param.foodType[0] == 'SPANISH'}">Española</option>
+                    <option value="JAPANESE" th:selected="${param.foodType != null and param.foodType[0] == 'JAPANESE'}">Japonesa</option>
+                </select>
+            </div>
 
             <div class="col-auto">
                 <button type="submit" class="btn btn-primary btn-sm">
