@@ -28,7 +28,24 @@
         <a th:href="@{/restaurants(title='paella')}" class="btn btn-sm btn-warning">Paella</a>
     </div>
 
+    <div class="mb-3">
+        <h5>Búsqueda avanzada</h5>
+        <form th:action="@{/restaurants}" method="get" class="row align-items-end">
 
+            <div class="col-auto">
+                <label class="form-label form-label-sm">Título</label>
+                <input type="text" name="title" class="form-control form-control-sm"
+                       placeholder="Busca por título..." th:value="${param.title}">
+            </div>
+
+            <div class="col-auto">
+                <button type="submit" class="btn btn-primary btn-sm"><i class="fa-solid fa-magnifying-glass"></i>Buscar</button>
+                <a th:href="@{/restaurants}" class="btn btn-info btn-sm">Limpiar filtros</a>
+            </div>
+
+        </form>
+
+    </div>
 
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3">
         <div class="col" th:each="restaurant : ${restaurants}">
