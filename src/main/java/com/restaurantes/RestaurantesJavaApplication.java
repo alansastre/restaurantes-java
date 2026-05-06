@@ -163,6 +163,7 @@ public class RestaurantesJavaApplication {
         Restaurant restaurantJapan =  new Restaurant();
         restaurantJapan.setFoodType(FoodType.JAPANESE);
         restaurantJapan.setAveragePrice(16d);
+        restaurantJapan.setName("Restaurante Japonés Osaka");
         restaurantRepository.save(restaurantJapan);
         System.out.println(restaurantJapan);
 

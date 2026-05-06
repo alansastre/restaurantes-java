@@ -14,6 +14,24 @@
             </h1>
 
             <!-- TODO formulario para crear o editar un restaurante -->
+            <form th:action="@{/restaurants}" method="post" th:object="${restaurant}">
+
+                <input type="hidden" th:field="*{id}">
+
+                <div class="mb-3">
+                    <label for="name" class="form-label">Nombre</label>
+                    <input type="text" class="form-control" id="name" th:field="*{name}" placeholder="100 Montaditos">
+<!--                    <small>Nombre comercial del restaurante, no la razón social.</small>-->
+                </div>
+
+                <button type="submit" class="btn btn-success">
+                    <i class="fa-solid fa-floppy-disk"></i> Guardar
+                </button>
+
+                <a th:href="@{/restaurants}" class="btn btn-secondary">Cancelar</a>
+
+
+            </form>
 
         </main>
 

@@ -106,6 +106,12 @@ public class RestaurantController {
     // ruta para entrar al formulario de restaurante
     @GetMapping("restaurants/new")
     public String newRestaurants(Model model) {
+        // añadir objeto Restaurant vacío para rellenarlo desde el formulario
+        model.addAttribute("restaurant", new Restaurant());
+
+        // datos para el formulario:
+        // .... food types
+        // .... categorias
         return "restaurants/restaurant-form";
     }
 }
