@@ -105,10 +105,7 @@ public class RestaurantController {
     public String newRestaurants(Model model) {
         // añadir objeto Restaurant vacío para rellenarlo desde el formulario
         model.addAttribute("restaurant", new Restaurant());
-
-        // datos para el formulario:
-        // .... food types
-        // .... categorias
+        model.addAttribute("foodTypes", FoodType.values());
         return "restaurants/restaurant-form";
     }
 

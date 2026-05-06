@@ -31,6 +31,33 @@
                            th:field="*{averagePrice}" step="1" min="0">
                 </div>
 
+                <!-- numberEmployees -->
+                <div class="mb-3">
+                    <label for="numberEmployees" class="form-label">Número empleados</label>
+                    <input type="number" class="form-control" id="numberEmployees"
+                           th:field="*{numberEmployees}" step="1" min="1">
+                </div>
+
+                <!-- startDate -->
+                <div class="mb-3">
+                    <label class="form-label" for="startDate">Fecha apertura</label>
+                    <input type="date" class="form-control" id="startDate" th:field="*{startDate}">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="foodType">Tipo de comida</label>
+                    <select class="form-select" id="foodType" th:field="*{foodType}">
+                        <option value=""></option>
+
+                        <option
+                                th:each="foodType : ${foodTypes}"
+                                th:value="${foodType}"
+                                th:text="${foodType.label}">
+                        </option>
+
+                    </select>
+                </div>
+
                 <!-- si se desactiva no sale por la UI en list y detail-->
                 <div class="mb-3 form-check form-switch">
                     <input type="checkbox" class="form-check-input" id="active"
