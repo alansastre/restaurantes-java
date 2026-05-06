@@ -21,6 +21,11 @@
                         <i class="fa-solid fa-ban me-1"></i> Desactivar
                     </a>
 
+                    <a th:href="@{/restaurants/edit/{id}(id=${restaurant.id})}"
+                       class="btn btn-success btn-sm mt-2">
+                        <i class="fa-solid fa-pencil me-1"></i> Editar
+                    </a>
+
                     <span class="badge bg-success me-1">
                         <i class="fa-solid fa-euro-sign me-1"></i>
                         <span th:text="${restaurant.averagePrice != null ? restaurant.averagePrice + ' €' : 'Sin precio'}"></span>

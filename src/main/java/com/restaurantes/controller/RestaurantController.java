@@ -100,7 +100,7 @@ public class RestaurantController {
         return "redirect:/restaurants";
     }
 
-    // ruta para entrar al formulario de restaurante
+    // CREAR UN NUEVO RESTAURANTE DESDE CERO
     @GetMapping("restaurants/new")
     public String newRestaurants(Model model) {
         // añadir objeto Restaurant vacío para rellenarlo desde el formulario
@@ -109,6 +109,15 @@ public class RestaurantController {
         return "restaurants/restaurant-form";
     }
 
+    // EDITAR UN RESTAURANTE EXISTENTE
+    @GetMapping("restaurants/edit/{id}")
+    public String editRestaurant(@PathVariable Long id, Model model) {
+        model.addAttribute("restaurant", restaurantRepository.findById(id).orElseThrow());
+        model.addAttribute("foodTypes", FoodType.values());
+        return "restaurants/restaurant-form";
+    }
+
+
     @PostMapping("restaurants")
     public String createRestaurant(@ModelAttribute Restaurant restaurant) {
 
@@ -116,4 +125,6 @@ public class RestaurantController {
         restaurantRepository.save(restaurant);
         return "redirect:/restaurants/" + restaurant.getId();
     }
+
+
 }
