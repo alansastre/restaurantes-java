@@ -20,8 +20,22 @@
 
                 <div class="mb-3">
                     <label for="name" class="form-label">Nombre</label>
-                    <input type="text" class="form-control" id="name" th:field="*{name}" placeholder="100 Montaditos">
+                    <input type="text" class="form-control" id="name"
+                           th:field="*{name}" placeholder="100 Montaditos" required>
 <!--                    <small>Nombre comercial del restaurante, no la razón social.</small>-->
+                </div>
+
+                <div class="mb-3">
+                    <label for="averagePrice" class="form-label">Precio medio €</label>
+                    <input type="number" class="form-control" id="averagePrice"
+                           th:field="*{averagePrice}" step="1" min="0">
+                </div>
+
+                <!-- si se desactiva no sale por la UI en list y detail-->
+                <div class="mb-3 form-check form-switch">
+                    <input type="checkbox" class="form-check-input" id="active"
+                               role="switch" th:field="*{active}">
+                    <label class="form-check-label" for="active">Restaurante activo</label>
                 </div>
 
                 <button type="submit" class="btn btn-success">
