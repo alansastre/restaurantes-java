@@ -58,6 +58,13 @@ public class DishController {
         return "dishes/dish-form";
     }
     // GET editDish
+    @GetMapping("dishes/edit/{id}")
+    public String editDish(@PathVariable Long id, Model model) {
+        model.addAttribute("dish", dishRepository.findById(id).orElseThrow());
+        model.addAttribute("dishTypes", DishType.values());
+        model.addAttribute("restaurants", restaurantRepository.findAll());
+        return "dishes/dish-form";
+    }
 
     // POST saveDish
     @PostMapping("dishes")
