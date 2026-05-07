@@ -2,6 +2,7 @@ package com.restaurantes.model;
 
 import com.restaurantes.model.enums.FoodType;
 import jakarta.persistence.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 
@@ -42,6 +43,7 @@ public class Restaurant { // clase
 
      //@CreationTimestamp // esta anotación es para que la base de datos genere la fecha, util para registrar fecha
     // automaticamente sin preocuparse de tener que cambiarla
+     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate startDate = LocalDate.now(); //  // valor por defecto a la fecha actual
 
     // private LocalDateTime ultimaReservan = LocalDateTime.now();

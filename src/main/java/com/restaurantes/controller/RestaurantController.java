@@ -102,7 +102,7 @@ public class RestaurantController {
 
     // CREAR UN NUEVO RESTAURANTE DESDE CERO
     @GetMapping("restaurants/new")
-    public String newRestaurants(Model model) {
+    public String newRestaurant(Model model) {
         // añadir objeto Restaurant vacío para rellenarlo desde el formulario
         model.addAttribute("restaurant", new Restaurant());
         model.addAttribute("foodTypes", FoodType.values());

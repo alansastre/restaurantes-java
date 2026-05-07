@@ -2,7 +2,9 @@ package com.restaurantes.controller;
 
 import com.restaurantes.model.Dish;
 import com.restaurantes.model.Review;
+import com.restaurantes.model.enums.DishType;
 import com.restaurantes.repository.DishRepository;
+import com.restaurantes.repository.RestaurantRepository;
 import com.restaurantes.repository.ReviewRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -19,6 +21,7 @@ public class DishController {
 
     private final DishRepository dishRepository;
     private final ReviewRepository reviewRepository;
+    private final RestaurantRepository restaurantRepository;
 
     @GetMapping("dishes")
     public String listDishes(Model model) {
@@ -43,4 +46,16 @@ public class DishController {
 
         return "redirect:/restaurants";
     }
+
+    // GET newDish
+    @GetMapping("dishes/new")
+    public String newDish(Model model) {
+        model.addAttribute("dish", new Dish());
+        model.addAttribute("dishTypes", DishType.values());
+        model.addAttribute("restaurants", restaurantRepository.findAll());
+        return "dishes/dish-form";
+    }
+    // GET editDish
+
+    // POST saveDish
 }

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="~{layout/head :: head('Formulario Restaurante')}"></head>
+    <body class="d-flex flex-column min-vh-100 bg-light">
+        <nav th:replace="~{layout/navbar :: navbar}"></nav>
+        <main class="container flex-grow-1 my-4">
+            <h1 class="mb-0">
+                <i class="fa-solid fa-utensils text-primary me-2"></i>Formulario restaurante
+            </h1>
+            <form th:action="@{/restaurants}" method="post" th:object="${restaurant}">
+                <input type="hidden" th:field="*{id}">
+                <button type="submit" class="btn btn-success">
+                    <i class="fa-solid fa-floppy-disk"></i> Guardar
+                </button>
+                <a th:href="@{/restaurants}" class="btn btn-secondary">Cancelar</a>
+            </form>
+        </main>
+        <footer th:replace="~{layout/footer :: footer}"></footer>
+        <script th:replace="~{layout/footer :: scripts}"></script>
+    </body>
+</html>
