@@ -17,6 +17,11 @@
                       th:text="|${#lists.size(dishes)} platos|">0 platos</span>
             </div>
 
+            <a th:href="@{/dishes/new}" class="btn btn-primary btn-sm mb-2">
+                <i class="fa-solid fa-plus"></i>
+                Crear plato
+            </a>
+
             <!-- Estado vacío -->
             <div th:if="${#lists.isEmpty(dishes)}" class="alert alert-light border text-center py-5">
                 <i class="fa-regular fa-folder-open fa-2x mb-2 d-block text-muted"></i>

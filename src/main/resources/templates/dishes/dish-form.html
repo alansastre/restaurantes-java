@@ -1,18 +1,61 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
-    <head th:replace="~{layout/head :: head('Formulario Restaurante')}"></head>
+    <head th:replace="~{layout/head :: head('Formulario Plato')}"></head>
     <body class="d-flex flex-column min-vh-100 bg-light">
         <nav th:replace="~{layout/navbar :: navbar}"></nav>
         <main class="container flex-grow-1 my-4">
             <h1 class="mb-0">
-                <i class="fa-solid fa-utensils text-primary me-2"></i>Formulario restaurante
+                <i class="fa-solid fa-utensils text-primary me-2"></i>Formulario plato
             </h1>
-            <form th:action="@{/restaurants}" method="post" th:object="${restaurant}">
+            <form th:action="@{/dishes}" method="post" th:object="${dish}">
                 <input type="hidden" th:field="*{id}">
+
+                <!-- campos de Dish -->
+               <div class="mb-3">
+                   <label for="name" class="form-label">Nombre</label>
+                   <input type="text" class="form-control" id="name"
+                   th:field="*{name}" placeholder="Tortilla patata" required>
+               </div>
+                <div class="mb-3">
+                    <label for="description" class="form-label">Descripción</label>
+                    <textarea class="form-control" id="description" th:field="*{description}"
+                        rows="3" maxlength="500" placeholder="Tortilla de patata elaborada al momento..." required
+                    ></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="price" class="form-label">Precio en euros</label>
+                    <input type="number" class="form-control" id="price"
+                        th:field="*{price}" step="0.01" min="0" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="dishType" class="form-label">Tipo de plato</label>
+                    <select class="form-select" id="dishType" th:field="*{dishType}" required>
+                        <option value=""></option>
+                        <option
+                                th:each="dishType : ${dishTypes}"
+                                th:value="${dishType}"
+                                th:text="${dishType.label}">
+                        </option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label for="restaurant" class="form-label">Restaurante</label>
+                    <select class="form-select" id="restaurant" th:field="*{restaurant}" required>
+                        <option value=""></option>
+                        <option
+                                th:each="restaurant : ${restaurants}"
+                                th:value="${restaurant.id}"
+                                th:text="${restaurant.id + ' - ' + restaurant.name}">
+                        </option>
+                    </select>
+                </div>
+
                 <button type="submit" class="btn btn-success">
                     <i class="fa-solid fa-floppy-disk"></i> Guardar
                 </button>
-                <a th:href="@{/restaurants}" class="btn btn-secondary">Cancelar</a>
+                <a th:href="@{/dishes}" class="btn btn-secondary">Cancelar</a>
             </form>
         </main>
         <footer th:replace="~{layout/footer :: footer}"></footer>
