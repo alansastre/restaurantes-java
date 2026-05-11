@@ -17,9 +17,18 @@
                 <input type="hidden" th:field="*{id}">
                 <input type="hidden" th:field="*{restaurant}">
                 <input type="hidden" th:field="*{dish}">
+                <input type="hidden" th:field="*{creationDate}">
 
-                <div th:if="${review.restaurant != null}">
-                    <span th:text="${review.restaurant.name}"></span>
+                <div class="alert alert-info my-3" th:if="${review.restaurant != null}">
+                    <i class="fa-solid fa-store"></i>
+                    Reseña sobre el restaurante:
+                    <strong th:text="${review.restaurant.name}"></strong>
+                </div>
+
+                <div class="alert alert-info my-3" th:if="${review.dish != null}">
+                    <i class="fa-solid fa-utensils"></i>
+                    Reseña sobre el plato:
+                    <strong th:text="${review.dish.name}"></strong>
                 </div>
 
                 <div class="mb-3">

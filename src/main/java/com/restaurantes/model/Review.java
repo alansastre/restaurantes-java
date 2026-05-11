@@ -2,6 +2,7 @@ package com.restaurantes.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 
 import java.time.LocalDateTime;
@@ -27,6 +28,7 @@ public class Review {
 
     private Integer rating;
 
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     @Builder.Default // para que el builder no ponga este campo a null
     private LocalDateTime creationDate = LocalDateTime.now();
 

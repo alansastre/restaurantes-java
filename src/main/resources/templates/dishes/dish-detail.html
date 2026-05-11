@@ -48,6 +48,11 @@
         <i class="fa-regular fa-comments text-primary me-2"></i> Opiniones sobre este plato
     </h2>
 
+    <a class="btn btn-success my-3"
+       th:href="@{/reviews/new(dishId=${dish.id})}">
+        <i class="fa-solid fa-plus"></i> Escribir reseña
+    </a>
+
     <div th:if="${reviews.isEmpty()}" class="alert alert-light border">
         <i class="fa-regular fa-face-smile me-1"></i>
         Nadie ha comentado todavía, sé el primero en escribir una opinión.

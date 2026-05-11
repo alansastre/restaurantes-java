@@ -8,9 +8,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.Optional;
@@ -77,10 +75,27 @@ public class ReviewController {
     }
 
 
-    // @PostMapping reviews
-    // save
-    // redirect
+    // Get Mapping reviews / edit / {id}
+    @GetMapping("reviews/edit/{id}")
+    public String editReview(Model model, @PathVariable Long id) {
+        model.addAttribute("review", reviewRepository.findById(id).orElseThrow());
+        return "reviews/review-form";
+    }
 
+
+    // @PostMapping reviews
+    @PostMapping("reviews")
+    public String saveReview(@ModelAttribute Review review) {
+        reviewRepository.save(review);
+
+        if (review.getRestaurant() != null)
+            return "redirect:/restaurants/" + review.getRestaurant().getId();
+
+        if (review.getDish() != null)
+            return "redirect:/dishes/" + review.getDish().getId();
+
+        return "redirect:/reviews";
+    }
 
 
 
