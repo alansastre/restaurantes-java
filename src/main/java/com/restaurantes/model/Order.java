@@ -10,26 +10,19 @@ import java.time.LocalDateTime;
 // Por eso le cambiamos el nombre a la tabla
 @Table(name = "pedidos")
 public class Order {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    private LocalDateTime date =  LocalDateTime.now();
-
-    // Campos que se calculan en base a OrderLines de este Order
+    private LocalDateTime date = LocalDateTime.now();
     private Double totalPrice;
     private Integer numProducts;
-
     private Double tip;
-
     private Integer tableNumber;
-
+    @Column(length = 500)
+    private String userSuggestions;
     private Integer numPeople;
-
     @Enumerated(EnumType.STRING)
     private OrderStatus status = OrderStatus.PENDING;
-
     @ManyToOne
     private Restaurant restaurant;
 
@@ -108,6 +101,22 @@ public class Order {
 
     public void setRestaurant(Restaurant restaurant) {
         this.restaurant = restaurant;
+    }
+
+    public Integer getNumProducts() {
+        return numProducts;
+    }
+
+    public void setNumProducts(Integer numProducts) {
+        this.numProducts = numProducts;
+    }
+
+    public String getUserSuggestions() {
+        return userSuggestions;
+    }
+
+    public void setUserSuggestions(String userSuggestions) {
+        this.userSuggestions = userSuggestions;
     }
 
     @Override

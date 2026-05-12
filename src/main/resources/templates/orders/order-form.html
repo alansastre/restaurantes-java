@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+    <html lang="es" xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="~{layout/head :: head('Formulario Pedido')}"></head>
+    <body class="d-flex flex-column min-vh-100 bg-light">
+        <nav th:replace="~{layout/navbar :: navbar}"></nav>
+        <main class="container flex-grow-1 my-4">
+            <h1 class="mb-0">
+                <i class="fa-solid fa-utensils text-primary me-2"></i>Formulario pedido
+            </h1>
+            <form th:action="@{/orders}" method="post" th:object="${order}">
+                <input type="hidden" th:field="*{id}">
+                <input type="hidden" th:field="*{restaurant}">
+                <div class="mb-3">
+                    <label class="form-label" for="tableNumber">Mesa</label>
+                    <input type="number" id="tableNumber" th:field="*{tableNumber}"
+                                min="1" max="20" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="numPeople">Número comensales</label>
+                    <input type="number" id="numPeople" th:field="*{numPeople}"
+                            min="1" max="30" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="userSuggestions">Observaciones/Alergias/Comentarios</label>
+                    <textarea id="userSuggestions" th:field="*{userSuggestions}"
+                              rows="3" maxlength="500"></textarea>
+                </div>
+                <button type="submit" class="btn btn-success">
+                    <i class="fa-solid fa-floppy-disk"></i> Guardar
+                </button>
+                <a th:href="@{/restaurants}" class="btn btn-secondary">Cancelar</a>
+            </form>
+        </main>
+        <footer th:replace="~{layout/footer :: footer}"></footer>
+        <script th:replace="~{layout/footer :: scripts}"></script>
+    </body>
+</html>
