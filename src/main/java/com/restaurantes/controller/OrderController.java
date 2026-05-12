@@ -89,13 +89,12 @@ public class OrderController {
         }
         orderLineRepository.save(orderLine);
         // opción alternativa estilo funcional
-        OrderLine line = orderLineRepository
-                .findByOrder_IdAndDish_Id(id, dishId)
-                .orElseGet(() -> new OrderLine(0, order, dish));
+//        OrderLine line = orderLineRepository
+//                .findByOrder_IdAndDish_Id(id, dishId)
+//                .orElseGet(() -> new OrderLine(0, order, dish));
 //
 //        line.setQuantity(line.getQuantity() + 1);
 //        orderLineRepository.save(line);
-
 
         if (order.getStatus() == OrderStatus.PENDING)
             order.setStatus(OrderStatus.IN_PROGRESS);
@@ -107,6 +106,17 @@ public class OrderController {
 
         return "redirect:/orders/" + order.getId();
     }
+
+    @GetMapping("orders/{id}/finish")
+    public String finish(@PathVariable Long id) {
+        Order order =  orderRepository.findById(id).orElseThrow();
+        order.setStatus(OrderStatus.FINISHED);
+        order.setTotalPrice(orderLineRepository.calculateTotalPrice(order.getId()));
+        // tip, iva, service charge, terrace
+        orderRepository.save(order);
+        return "redirect:/orders/" + id;
+    }
+
 
 
 }
