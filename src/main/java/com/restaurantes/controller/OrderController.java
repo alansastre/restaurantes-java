@@ -2,6 +2,7 @@ package com.restaurantes.controller;
 
 import com.restaurantes.model.Dish;
 import com.restaurantes.model.Order;
+import com.restaurantes.model.OrderLine;
 import com.restaurantes.model.Restaurant;
 import com.restaurantes.model.enums.OrderStatus;
 import com.restaurantes.repository.DishRepository;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @AllArgsConstructor
@@ -65,7 +67,46 @@ public class OrderController {
         return "redirect:/orders/" + order.getId();
     }
 
-    // TODO @PostMapping("orders/{id}/lines")    dishId=1
+    @PostMapping("orders/{id}/lines")
+    public String addLineDish(
+            @PathVariable Long id, @RequestParam Long dishId) {
+
+        Order order = orderRepository.findById(id).orElseThrow();
+        Dish dish = dishRepository.findById(dishId).orElseThrow();
+
+        Optional<OrderLine> lineOptional =  orderLineRepository.findByOrder_IdAndDish_Id(id, dishId);
+
+        // opción imperativa clásica tradicional
+        OrderLine orderLine;
+        if (lineOptional.isPresent()) {
+            orderLine = lineOptional.get();
+            orderLine.setQuantity(orderLine.getQuantity() + 1);
+        } else {
+            orderLine = new OrderLine();
+            orderLine.setDish(dish);
+            orderLine.setOrder(order);
+            orderLine.setQuantity(1);
+        }
+        orderLineRepository.save(orderLine);
+        // opción alternativa estilo funcional
+        OrderLine line = orderLineRepository
+                .findByOrder_IdAndDish_Id(id, dishId)
+                .orElseGet(() -> new OrderLine(0, order, dish));
+//
+//        line.setQuantity(line.getQuantity() + 1);
+//        orderLineRepository.save(line);
+
+
+        if (order.getStatus() == OrderStatus.PENDING)
+            order.setStatus(OrderStatus.IN_PROGRESS);
+
+        Double totalPrice = orderLineRepository.calculateTotalPrice(order.getId());
+        order.setTotalPrice(totalPrice);
+
+        orderRepository.save(order);
+
+        return "redirect:/orders/" + order.getId();
+    }
 
 
 }
