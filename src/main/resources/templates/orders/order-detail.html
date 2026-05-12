@@ -252,6 +252,33 @@
                 </div>
             </div>
 
+            <!-- TODO Mostrar los platos a elegir para el pedido en progreso-->
+            <div th:if="${order.status.name() != 'FINISHED'}">
+                <h2 class="mt-4">Selecciona los platos deseados</h2>
+
+                <div class="row row-cols-1 row-cols-md-3 g-4">
+                    <div class="col" th:each="dish : ${dishes}">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title" th:text="${dish.name}"></h5>
+                                <p class="text-muted small" th:text="${dish.description}"></p>
+                                <strong th:text="|${#numbers.formatDecimal(dish.price, 1, 2)} €|"></strong>
+                            </div>
+                            <div class="card-footer">
+
+                                <form th:action="@{/orders/{id}/lines(id=${order.id})}" method="post">
+                                    <input type="hidden" name="dishId" th:value="${dish.id}">
+                                    <button class="btn btn-sm btn-success">
+                                        <i class="fa-solid fa-plus"></i>
+                                        Añadir
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </main>
 
         <footer th:replace="~{layout/footer :: footer}"></footer>
