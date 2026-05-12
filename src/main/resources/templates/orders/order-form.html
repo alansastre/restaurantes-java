@@ -12,17 +12,17 @@
                 <input type="hidden" th:field="*{restaurant}">
                 <div class="mb-3">
                     <label class="form-label" for="tableNumber">Mesa</label>
-                    <input type="number" id="tableNumber" th:field="*{tableNumber}"
+                    <input type="number" id="tableNumber" th:field="*{tableNumber}" class="form-control"
                                 min="1" max="20" required>
                 </div>
                 <div class="mb-3">
                     <label class="form-label" for="numPeople">Número comensales</label>
-                    <input type="number" id="numPeople" th:field="*{numPeople}"
+                    <input type="number" id="numPeople" th:field="*{numPeople}" class="form-control"
                             min="1" max="30" required>
                 </div>
                 <div class="mb-3">
                     <label class="form-label" for="userSuggestions">Observaciones/Alergias/Comentarios</label>
-                    <textarea id="userSuggestions" th:field="*{userSuggestions}"
+                    <textarea id="userSuggestions" class="form-control" th:field="*{userSuggestions}"
                               rows="3" maxlength="500"></textarea>
                 </div>
                 <button type="submit" class="btn btn-success">

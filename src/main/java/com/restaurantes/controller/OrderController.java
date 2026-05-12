@@ -2,15 +2,17 @@ package com.restaurantes.controller;
 
 import com.restaurantes.model.Order;
 import com.restaurantes.model.Restaurant;
+import com.restaurantes.model.enums.OrderStatus;
 import com.restaurantes.repository.OrderLineRepository;
 import com.restaurantes.repository.OrderRepository;
 import com.restaurantes.repository.RestaurantRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDateTime;
 
 @Controller
 @AllArgsConstructor
@@ -45,7 +47,15 @@ public class OrderController {
         return "orders/order-form";
     }
 
-    // TODO @PostMapping /orders
 
-    // TODO ....
+    @PostMapping("orders")
+    public String save(@ModelAttribute Order order) {
+        order.setStatus(OrderStatus.PENDING);
+        order.setDate(LocalDateTime.now());
+        order.setTotalPrice(0d);
+        orderRepository.save(order);
+        return "redirect:/orders/" + order.getId();
+    }
+
+
 }
