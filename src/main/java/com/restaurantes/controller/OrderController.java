@@ -106,12 +106,19 @@ public class OrderController {
         return "redirect:/orders/" + order.getId();
     }
 
+    // Si en la finalización se envían datos sensibles de pago mejor que sea PostMapping
     @GetMapping("orders/{id}/finish")
-    public String finish(@PathVariable Long id) {
+    public String finish(@PathVariable Long id, @RequestParam(required = false) Double tip) {
         Order order =  orderRepository.findById(id).orElseThrow();
         order.setStatus(OrderStatus.FINISHED);
         order.setTotalPrice(orderLineRepository.calculateTotalPrice(order.getId()));
-        // tip, iva, service charge, terrace
+        // iva, service charge, terrace
+        if (tip != null && tip > 0) {
+            order.setTip(tip);
+        } else {
+            order.setTip(0d);
+        }
+
         orderRepository.save(order);
         return "redirect:/orders/" + id;
     }
