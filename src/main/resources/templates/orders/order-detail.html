@@ -200,9 +200,9 @@
                                 <th class="text-center">Cantidad</th>
                                 <th class="text-end">Precio</th>
                                 <th class="text-end">Subtotal</th>
-                                <th class="text-end pe-3">Ver</th> <!-- Ver -->
-                                <th class="text-end pe-3" th:if="${order.status.name() != 'FINISHED'}">Modificar</th> <!-- modificar cantidad -->
-                                <th class="text-end pe-3" th:if="${order.status.name() != 'FINISHED'}">Eliminar</th> <!-- eliminar linea pedido -->
+                                <th class="text-center pe-3">Ver</th> <!-- Ver -->
+                                <th class="text-center pe-3" th:if="${order.status.name() != 'FINISHED'}">Modificar</th> <!-- modificar cantidad -->
+                                <th class="text-center pe-3" th:if="${order.status.name() != 'FINISHED'}">Eliminar</th> <!-- eliminar linea pedido -->
                             </tr>
                         </thead>
                         <tbody>
@@ -230,17 +230,26 @@
                                 </td>
                                 <td class="text-end fw-semibold"
                                     th:text="|${#numbers.formatDecimal(line.quantity * line.dish.price, 1, 2)} €|"></td>
-                                <td class="text-end pe-3">
+                                <td class="text-center">
                                     <a th:href="@{/dishes/{id}(id=${line.dish.id})}"
                                        class="btn btn-sm btn-outline-primary"
                                        title="Ver plato">
                                         <i class="fa-regular fa-eye"></i>
                                     </a>
                                 </td>
-                                <td th:if="${order.status.name() != 'FINISHED'}">
-                                    <!-- <form> -->
+                                <td th:if="${order.status.name() != 'FINISHED'}" class="text-center">
+
+                                    <form th:action="@{/orders/{orderId}/lines/{lineId}(orderId=${order.id},lineId=${line.id})}"
+                                            method="post" class="d-flex align-items-center justify-content-center gap-1">
+                                        <input name="quantity" type="number" min="1" style="max-width: 90px;"
+                                               th:value="${line.quantity}" class="form-control form-control-sm">
+                                        <button class="btn btn-sm btn-success">
+                                            <i class="fa-solid fa-floppy-disk"></i>
+                                        </button>
+                                    </form>
+
                                 </td>
-                                <td th:if="${order.status.name() != 'FINISHED'}">
+                                <td th:if="${order.status.name() != 'FINISHED'}" class="text-center">
                                     <a class="btn btn-sm btn-danger"
                                     th:href="@{/orders/{orderId}/lines/{lineId}/delete(orderId=${order.id},lineId=${line.id})}">
                                         <i class="fa-solid fa-trash"></i>

@@ -125,4 +125,25 @@ public class OrderController {
         return "redirect:/orders/" + orderId;
     }
 
+    // @PostMapping
+    // /orders/{orderId}/lines/{lineId}?quantity=5
+    // RquestParam quantity
+    @PostMapping("orders/{orderId}/lines/{lineId}")
+    public String updateLineQuantity(
+            @PathVariable Long orderId,
+            @PathVariable Long lineId,
+            @RequestParam Integer quantity) {
+
+        if (quantity >= 1) {
+            OrderLine orderLine = orderLineRepository.findById(lineId).orElseThrow();
+            orderLine.setQuantity(quantity);
+            orderLineRepository.save(orderLine);
+
+            Order order =  orderRepository.findById(orderId).orElseThrow();
+            order.setTotalPrice(orderLineRepository.calculateTotalPrice(order.getId()));
+            orderRepository.save(order);
+        }
+
+        return "redirect:/orders/" + orderId;
+    }
 }
