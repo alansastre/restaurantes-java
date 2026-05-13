@@ -200,7 +200,9 @@
                                 <th class="text-center">Cantidad</th>
                                 <th class="text-end">Precio</th>
                                 <th class="text-end">Subtotal</th>
-                                <th class="text-end pe-3"></th>
+                                <th class="text-end pe-3">Ver</th> <!-- Ver -->
+                                <th class="text-end pe-3" th:if="${order.status.name() != 'FINISHED'}">Modificar</th> <!-- modificar cantidad -->
+                                <th class="text-end pe-3" th:if="${order.status.name() != 'FINISHED'}">Eliminar</th> <!-- eliminar linea pedido -->
                             </tr>
                         </thead>
                         <tbody>
@@ -233,6 +235,15 @@
                                        class="btn btn-sm btn-outline-primary"
                                        title="Ver plato">
                                         <i class="fa-regular fa-eye"></i>
+                                    </a>
+                                </td>
+                                <td th:if="${order.status.name() != 'FINISHED'}">
+                                    <!-- <form> -->
+                                </td>
+                                <td th:if="${order.status.name() != 'FINISHED'}">
+                                    <a class="btn btn-sm btn-danger"
+                                    th:href="@{/orders/{orderId}/lines/{lineId}/delete(orderId=${order.id},lineId=${line.id})}">
+                                        <i class="fa-solid fa-trash"></i>
                                     </a>
                                 </td>
                             </tr>

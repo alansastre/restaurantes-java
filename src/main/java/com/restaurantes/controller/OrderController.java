@@ -10,7 +10,6 @@ import com.restaurantes.repository.OrderLineRepository;
 import com.restaurantes.repository.OrderRepository;
 import com.restaurantes.repository.RestaurantRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -117,6 +116,13 @@ public class OrderController {
         return "redirect:/orders/" + id;
     }
 
-
+    @GetMapping("orders/{orderId}/lines/{lineId}/delete")
+    public String deleteLine(@PathVariable Long orderId, @PathVariable Long lineId) {
+        orderLineRepository.deleteById(lineId);
+        Order order =  orderRepository.findById(orderId).orElseThrow();
+        order.setTotalPrice(orderLineRepository.calculateTotalPrice(order.getId()));
+        orderRepository.save(order);
+        return "redirect:/orders/" + orderId;
+    }
 
 }
