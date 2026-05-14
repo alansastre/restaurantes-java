@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{layout/head :: head('Listado Platos')}"></head>
+
+<body class="d-flex flex-column min-vh-100 bg-light">
+
+<nav th:replace="~{layout/navbar :: navbar}"></nav>
+
+<main class="container flex-grow-1 my-4">
+
+    <div class="d-flex flex-wrap justify-content-between align-items-center mb-4 gap-2">
+        <h1 class="mb-0">
+            <i class="fa-solid fa-utensils text-primary me-2"></i>No se ha encontrado
+        </h1>
+
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <a href="/restaurants" class="btn btn-success">Volver a Restaurantes</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <a href="/dishes" class="btn btn-warning">Volver a Platos</a>
+            </div>
+        </div>
+    </div>
+
+</main>
+
+<footer th:replace="~{layout/footer :: footer}"></footer>
+<script th:replace="~{layout/footer :: scripts}"></script>
+
+</body>
+</html>
