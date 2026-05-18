@@ -8,6 +8,7 @@ In progress:
 
 Pendiente:
 
+* equals y hashcode en entidades para comparar objeto
 * config/DataInitializer.java datos demo y dejar main limpio
 * Input tipo file en formularios para subir imagen
 * OrderService para lógica de pedidos

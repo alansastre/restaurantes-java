@@ -27,14 +27,14 @@ Para esto vamos a usar Spring Security, que es un framework de seguridad para ap
 * model/User.java: id, username, password, role
    * implements UserDetails de Spring Security
 
-## Paso 3: crear repositorio UserRepository
+## Paso 3: crear repositorio UserRepository (OK)
 
 * repository/UserRepository.java:
   * findByUsername(String username)
   * boolean existsByUsername(String username)
   * boolean existsByEmail(String email)
 
-## Paso 4: crear servicio UserService
+## Paso 4: crear servicio UserService (OK)
 
 * service/UserService.java
     * implements UserDetailsService de Spring Security
