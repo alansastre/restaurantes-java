@@ -14,14 +14,14 @@ Queremos que haya usuario admin con rol ROLE_ADMIN que pueda gestionar los resta
 
 Para esto vamos a usar Spring Security, que es un framework de seguridad para aplicaciones web en Java.
 
-## Paso 1: dependencias en pom.xml
+## Paso 1: dependencias en pom.xml (OK)
 
 * spring-boot-starter-security
 * thymeleaf-extras-springsecurity6
 * spring-security-test
 * Opcional: spring-boot-starter-validation
 
-## Paso 2: crear entidad User y enum Role
+## Paso 2: crear entidad User y enum Role (OK)
 
 * enums/Role.java: ROLE_USER, ROLE_ADMIN
 * model/User.java: id, username, password, role

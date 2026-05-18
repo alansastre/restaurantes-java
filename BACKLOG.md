@@ -9,6 +9,7 @@ In progress:
 Pendiente:
 
 * config/DataInitializer.java datos demo y dejar main limpio
+* Input tipo file en formularios para subir imagen
 * OrderService para lógica de pedidos
 * spring validation para formularios para validar datos de entrada
 * Controlador API REST @RestController y probarlo con OpenAPI Swagger / Postman
