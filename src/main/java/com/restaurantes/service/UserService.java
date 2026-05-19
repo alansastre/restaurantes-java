@@ -1,5 +1,6 @@
 package com.restaurantes.service;
 
+import com.restaurantes.dto.RegisterForm;
 import com.restaurantes.model.User;
 import com.restaurantes.repository.UserRepository;
 import lombok.AllArgsConstructor;
@@ -38,4 +39,7 @@ public class UserService implements UserDetailsService {
     }
 
 
+    public void register(RegisterForm form) {
+        // TODO
+    }
 }
