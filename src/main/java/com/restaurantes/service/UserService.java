@@ -2,6 +2,7 @@ package com.restaurantes.service;
 
 import com.restaurantes.dto.RegisterForm;
 import com.restaurantes.model.User;
+import com.restaurantes.model.enums.Role;
 import com.restaurantes.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.jspecify.annotations.NonNull;
@@ -39,7 +40,24 @@ public class UserService implements UserDetailsService {
     }
 
 
-    public void register(RegisterForm form) {
-        // TODO
+    public User register(RegisterForm form) {
+
+        if (userRepository.existsByUsername(form.getUsername()))
+            throw new IllegalArgumentException("El nombre de usuario ya existe");
+
+        if (userRepository.existsByEmail(form.getEmail()))
+            throw new IllegalArgumentException("El correo electrónico ya existe");
+
+        if (! form.getPassword().equals(form.getPasswordConfirm()))
+            throw new IllegalArgumentException("Las contraseñas no coinciden");
+
+
+        User user = new User();
+        user.setUsername(form.getUsername());
+        user.setEmail(form.getEmail());
+        // user.setPassword(form.getPassword()); // texto plano sin cifrar
+        user.setPassword(passwordEncoder.encode(form.getPassword())); // password cifrada con bcrypt
+        user.setRole(Role.ROLE_USER);
+        return userRepository.save(user);
     }
 }
