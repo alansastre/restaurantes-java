@@ -80,3 +80,6 @@ Objetivo: `th:if="${isAuthenticated}` o `th:if=${isAdmin}`.
 En controller OrderController, al crear una orden, asignar el usuario autenticado a la orden.
 
 En controller ReviewController, al crear una review, asignar el usuario autenticado a la review.
+
+
+## Paso 10: crear usuarios demo en Main o DataInitializer
