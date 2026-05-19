@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="~{layout/head :: head('Crear cuenta')}"></head>
+    <body class="d-flex align-items-center py-4 bg-light min-vh-100">
+
+        <main class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-6 col-lg-5">
+                    <form th:action="@{/register}" method="post" class="card shadow-sm p-4" th:object="${user}">
+
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="username"
+                                   placeholder="pepe666" required th:field="*{username}" min="3" maxlength="100">
+                            <label for="username">Username</label>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input type="email" class="form-control" id="email"
+                                   placeholder="pepe@gmail.com" required th:field="*{email}">
+                            <label for="email">Email</label>
+                        </div>
+
+                        <button type="submit" class="btn btn-success">Crear cuenta</button>
+
+                    </form>
+                </div>
+            </div>
+        </main>
+
+        <script th:replace="~{layout/footer :: scripts}"></script>
+    </body>
+</html>
