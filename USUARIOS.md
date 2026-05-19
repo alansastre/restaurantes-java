@@ -40,7 +40,7 @@ Para esto vamos a usar Spring Security, que es un framework de seguridad para ap
     * implements UserDetailsService de Spring Security
     * loadUserByUsername(String username)  sirve para que spring security pueda cargar el usuario a partir del username y comparar la contraseña al hacer login y demás
 
-## Paso 5: crear SecurityConfig (1/2)
+## Paso 5: crear SecurityConfig (OK)
 
 * config/SecurityConfig.java 
   * Creamos dos @Bean para que Spring Security sepa cómo proteger las rutas y cómo cifrar/comprobar passwords:
@@ -48,7 +48,7 @@ Para esto vamos a usar Spring Security, que es un framework de seguridad para ap
       * passwordEncoder() para cifrar las contraseñas
   
 
-## Paso 6: controlador AuthController
+## Paso 6: controlador AuthController ()
 
 * controller/AuthController.java
     * GET /login → muestra el formulario de login
