@@ -16,12 +16,12 @@
                         Nombre
                     </h1>
 
-                    <a th:href="@{/restaurants/deactivate/{id}(id=${restaurant.id})}"
+                    <a sec:authorize="hasRole('ADMIN')" th:href="@{/restaurants/deactivate/{id}(id=${restaurant.id})}"
                        class="btn btn-warning btn-sm mt-2">
                         <i class="fa-solid fa-ban me-1"></i> Desactivar
                     </a>
 
-                    <a th:href="@{/restaurants/edit/{id}(id=${restaurant.id})}"
+                    <a sec:authorize="hasRole('ADMIN')" th:href="@{/restaurants/edit/{id}(id=${restaurant.id})}"
                        class="btn btn-success btn-sm mt-2">
                         <i class="fa-solid fa-pencil me-1"></i> Editar
                     </a>
@@ -96,7 +96,7 @@
                 <i class="fa-regular fa-comments text-primary me-2"></i> Opiniones de nuestros clientes
             </h2>
 
-            <a class="btn btn-success" th:href="@{/reviews/new(restaurantId=${restaurant.id})}">
+            <a sec:authorize="isAuthenticated()" class="btn btn-success" th:href="@{/reviews/new(restaurantId=${restaurant.id})}">
                 <i class="fa-solid fa-plus"></i> Escribir reseña
             </a>
 
