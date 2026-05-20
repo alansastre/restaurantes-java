@@ -91,8 +91,17 @@ Más adelante usar esta clase para introducir datos de otras entidades y limpiar
 * Restaurantes, Platos, Reviews, Pedidos
 
 
+## PASO 9: pantallas de error (OK)
 
-## Paso 9: integración de User con Order y Review
+probar a entrar en urls protegidas por SecurityConfig:
+
+* usuario sin autenticar accede a pantallas que requieren autenticación --> /login
+
+* usuario autenticado ROLE_USER accede a pantallas de ADMIN --> /403
+
+Crear el 403.html
+
+## Paso 10: integración de User con Order y Review
 
 * Order.java: añadir campo User user con @ManyToOne
 * Review.java: añadir campo User user con @ManyToOne

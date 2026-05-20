@@ -28,40 +28,33 @@ public class SecurityConfig {
 
         http.authorizeHttpRequests(
                 auth -> auth
-                        // rutas publicas tanto GET como POST
-                        .requestMatchers("/hola", "/adios", "/login",
-                                "/register", "/css/**", "/images/**", "/webjars/**").permitAll()
+                // ORDEN IMPORTANTE
+                .requestMatchers("/h2-console/**").permitAll()
+                .requestMatchers("/hola", "/adios", "/login", "/register", "/css/**", "/images/**", "/webjars/**").permitAll()
 
-                // de golpe:
-//                .requestMatchers(HttpMethod.GET, "/restaurants", "/restaurants/*", "/dishes", "/dishes/*").permitAll()
-
-                // separado de una en una
                 .requestMatchers(HttpMethod.GET, "/restaurants").permitAll()
-                .requestMatchers(HttpMethod.GET, "/restaurants/*").permitAll()
                 .requestMatchers(HttpMethod.POST, "/restaurants").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.GET, "/restaurants/deactivate/*").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.GET, "/restaurants/new").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.GET, "/restaurants/edit/*").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.GET, "/restaurants/*").permitAll()
 
                 .requestMatchers(HttpMethod.GET, "/dishes").permitAll()
-                .requestMatchers(HttpMethod.GET, "/dishes/*").permitAll()
                 .requestMatchers(HttpMethod.POST, "/dishes").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.GET, "/dishes/new").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.GET, "/dishes/edit/*").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.GET, "/dishes/*").permitAll()
 
                 .requestMatchers(HttpMethod.GET, "/reviews").permitAll()
-                .requestMatchers(HttpMethod.GET, "/reviews/*").permitAll()
-                .requestMatchers(HttpMethod.POST, "/reviews").hasRole("USER")
-                .requestMatchers(HttpMethod.GET, "/reviews/new").hasRole("USER")
-                .requestMatchers(HttpMethod.GET, "/reviews/edit/*").hasRole("USER")
+                .requestMatchers(HttpMethod.POST, "/reviews").authenticated()
+                .requestMatchers(HttpMethod.GET, "/reviews/new").authenticated()
+                .requestMatchers(HttpMethod.GET, "/reviews/edit/*").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.GET, "/reviews/disable/*").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.GET, "/reviews/delete/*").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.GET, "/reviews/*").permitAll()
 
                 .requestMatchers("/orders", "/orders/**").authenticated()
-
-                        // lo demás autenticado si o si
-                    .anyRequest().authenticated()
-//                        .anyRequest().permitAll()
+                .anyRequest().authenticated()
         );
 
         http.formLogin(form ->
@@ -69,10 +62,6 @@ public class SecurityConfig {
                 .defaultSuccessUrl("/restaurants", true)
                 .permitAll()
         );
-
-        // TODO h2
-
-        // TODO logout
 
         return http.build();
     }
