@@ -56,22 +56,41 @@ Para esto vamos a usar Spring Security, que es un framework de seguridad para ap
     * GET /register → muestra el formulario de registro
     * POST /register → procesa el formulario de registro, crea el usuario con rol ROLE_USER
 
-## Paso 7: vistas Thymeleaf HTML
+## Paso 7: vistas Thymeleaf HTML (OK)
 
 * templates/auth/register.html (OK)
+
 * templates/auth/login.html (OK)
+
 * templates/fragments/navbar.html → mostrar enlaces de login/register o logout dependiendo de si el usuario está autenticado o no, usando thymeleaf-extras-springsecurity6 (OK)
 
-## Paso 8: opcional ViewSecurityAdvice.java
+* restaurant-detail --> sec:authorize="isAuthenticated()" en el botón de Hacer pedido (OK)
 
-Esta clase proporciona métodos que se pueden usar en las vistas Thymeleaf para mostrar/ocultar partes de la vista dependiendo de si el usuario está autenticado o no, o si tiene un rol concreto.
+* restaurant-detail --> sec:authorize="hasRole('ADMIN')" en el botón de Desactivar y Editar
 
-Objetivo: `th:if="${isAuthenticated}` o `th:if=${isAdmin}`.
+* restaurant-detail --> sec:authorize="isAuthenticated()" en el botón de Escribir reseña
 
-* config/ViewSecurityAdvice.java
-    * isAuthenticated() para usar en Thymeleaf y mostrar/ocultar partes de la vista dependiendo de si el usuario está autenticado o no
-    * isAdmin()
-    * currentUserName()
+* restaurant-list --> sec:authorize="hasRole('ADMIN')" en el botón de Crear restaurante, Editar y Desactivar
+
+* dish-list --> sec:authorize="hasRole('ADMIN')" en el botón de Crear plato, Editar
+
+* dish-detail --> sec:authorize="isAuthenticated()" en el botón de Escribir reseña
+
+* review-list --> sec:authorize="hasRole('ADMIN')" en el botón de Editar y Borrar
+
+* review-detail --> sec:authorize="hasRole('ADMIN')" en el botón de Editar y Borrar
+
+
+
+## Paso 8: crear dos usuarios demo (OK)
+
+DataInitializer, clase en paquete config, que cree y guarde dos usuarios en base de datos.
+
+Más adelante usar esta clase para introducir datos de otras entidades y limpiar el Main
+
+* Restaurantes, Platos, Reviews, Pedidos
+
+
 
 ## Paso 9: integración de User con Order y Review
 
@@ -83,4 +102,15 @@ En controller OrderController, al crear una orden, asignar el usuario autenticad
 En controller ReviewController, al crear una review, asignar el usuario autenticado a la review.
 
 
-## Paso 10: crear usuarios demo en Main o DataInitializer
+
+
+## Paso 8: opcional ViewSecurityAdvice.java
+
+Esta clase proporciona métodos que se pueden usar en las vistas Thymeleaf para mostrar/ocultar partes de la vista dependiendo de si el usuario está autenticado o no, o si tiene un rol concreto.
+
+Objetivo: `th:if="${isAuthenticated}` o `th:if=${isAdmin}`.
+
+* config/ViewSecurityAdvice.java
+  * isAuthenticated() para usar en Thymeleaf y mostrar/ocultar partes de la vista dependiendo de si el usuario está autenticado o no
+  * isAdmin()
+  * currentUserName()
