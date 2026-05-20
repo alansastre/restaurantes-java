@@ -61,6 +61,7 @@ public class OrderController {
     public String save(@ModelAttribute Order order) {
         order.setStatus(OrderStatus.PENDING);
         order.setDate(LocalDateTime.now());
+        // TODO order.setUser(currentUser);
         order.setTotalPrice(0d);
         orderRepository.save(order);
         return "redirect:/orders/" + order.getId();

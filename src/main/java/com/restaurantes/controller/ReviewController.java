@@ -90,6 +90,7 @@ public class ReviewController {
     // @PostMapping reviews
     @PostMapping("reviews")
     public String saveReview(@ModelAttribute Review review) {
+        // TODO review.setUser(currentUser);
         reviewRepository.save(review);
 
         if (review.getRestaurant() != null)

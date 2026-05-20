@@ -40,9 +40,9 @@ public class Review {
     @ManyToOne
     private Dish dish;
 
-    // @ToString.Exclude
-//    @ManyToOne
-//    private User user;
+    @ToString.Exclude
+    @ManyToOne
+    private User user;
 
 
 }

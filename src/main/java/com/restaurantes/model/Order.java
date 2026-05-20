@@ -26,8 +26,8 @@ public class Order {
     @ManyToOne
     private Restaurant restaurant;
 
-//    @ManyToOne
-//    private User user;
+    @ManyToOne
+    private User user;
 
     public Order() {
     }
