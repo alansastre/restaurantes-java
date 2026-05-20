@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<html lang="es" xmlns:th="http://www.thymeleaf.org"  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="~{layout/head :: head('Restaurantes')}"></head>
 <body class="d-flex flex-column min-vh-100">
 
@@ -10,13 +10,7 @@
         <h1 class="mb-0" th:text="${title}">Restaurantes</h1>
         <span class="badge bg-secondary fs-6" th:text="|${numRestaurants} resultados|">0 resultados</span>
     </div>
-    <!-- Opcional: agregar filtros -->
-
-    <!-- Filtro por tipo comida
-    /restaurants?foodType=SPANISH
-    /restaurants?foodType=JAPANESE
-    -->
-    <a th:href="@{/restaurants/new}" class="btn btn-primary btn-sm mb-2">
+    <a sec:authorize="hasRole('ADMIN')" th:href="@{/restaurants/new}" class="btn btn-primary btn-sm mb-2">
         <i class="fa-solid fa-plus"></i>
         Crear restaurante
     </a>
@@ -96,12 +90,12 @@
                         <i class="fa-regular fa-eye me-1"></i> Ver
                     </a>
                     <!-- Botón Desactivar restaurante que cambia Active a false y hace redirect a list -->
-                    <a th:href="@{/restaurants/deactivate/{id}(id=${restaurant.id})}"
+                    <a sec:authorize="hasRole('ADMIN')" th:href="@{/restaurants/deactivate/{id}(id=${restaurant.id})}"
                        class="btn btn-warning btn-sm w-100 mt-2">
                         <i class="fa-solid fa-ban me-1"></i> Desactivar
                     </a>
 
-                    <a th:href="@{/restaurants/edit/{id}(id=${restaurant.id})}"
+                    <a sec:authorize="hasRole('ADMIN')" th:href="@{/restaurants/edit/{id}(id=${restaurant.id})}"
                        class="btn btn-success btn-sm w-100 mt-2">
                         <i class="fa-solid fa-pencil me-1"></i> Editar
                     </a>

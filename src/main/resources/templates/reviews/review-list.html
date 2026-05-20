@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<html lang="es" xmlns:th="http://www.thymeleaf.org"  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="~{layout/head :: head('Reseñas')}"></head>
 <body class="d-flex flex-column min-vh-100">
 
@@ -61,11 +61,11 @@
                             <i class="fa-solid fa-eye mr-2"></i> Ver
                         </a>
 
-                        <a class="btn btn-success" th:href="@{/reviews/edit/{id}(id=${review.id})}">
+                        <a sec:authorize="hasRole('ADMIN')" class="btn btn-success" th:href="@{/reviews/edit/{id}(id=${review.id})}">
                             <i class="fa-solid fa-pencil mr-2"></i> Editar
                         </a>
 
-                        <a class="btn btn-danger" th:href="@{/reviews/delete/{id}(id=${review.id})}"
+                        <a sec:authorize="hasRole('ADMIN')" class="btn btn-danger" th:href="@{/reviews/delete/{id}(id=${review.id})}"
                             onclick="return confirm('Esta acción borra, ¿quiere borrar esta reseña?')">
                             <i class="fa-solid fa-trash mr-2"></i> Borrar
                         </a>

@@ -66,19 +66,19 @@ Para esto vamos a usar Spring Security, que es un framework de seguridad para ap
 
 * restaurant-detail --> sec:authorize="isAuthenticated()" en el botón de Hacer pedido (OK)
 
-* restaurant-detail --> sec:authorize="hasRole('ADMIN')" en el botón de Desactivar y Editar
+* restaurant-detail --> sec:authorize="hasRole('ADMIN')" en el botón de Desactivar y Editar (OK)
 
-* restaurant-detail --> sec:authorize="isAuthenticated()" en el botón de Escribir reseña
+* restaurant-detail --> sec:authorize="isAuthenticated()" en el botón de Escribir reseña (OK)
 
-* restaurant-list --> sec:authorize="hasRole('ADMIN')" en el botón de Crear restaurante, Editar y Desactivar
+* restaurant-list --> sec:authorize="hasRole('ADMIN')" en el botón de Crear restaurante, Editar y Desactivar (OK)
 
-* dish-list --> sec:authorize="hasRole('ADMIN')" en el botón de Crear plato, Editar
+* dish-list --> sec:authorize="hasRole('ADMIN')" en el botón de Crear plato, Editar (OK) 
 
-* dish-detail --> sec:authorize="isAuthenticated()" en el botón de Escribir reseña
+* dish-detail --> sec:authorize="isAuthenticated()" en el botón de Escribir reseña (OK)
 
-* review-list --> sec:authorize="hasRole('ADMIN')" en el botón de Editar y Borrar
+* review-list --> sec:authorize="hasRole('ADMIN')" en el botón de Editar y Borrar (OK)
 
-* review-detail --> sec:authorize="hasRole('ADMIN')" en el botón de Editar y Borrar
+* review-detail --> sec:authorize="hasRole('ADMIN')" en el botón de Editar y Borrar (OK)
 
 
 

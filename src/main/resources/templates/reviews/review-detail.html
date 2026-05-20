@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<html lang="es" xmlns:th="http://www.thymeleaf.org"  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
 
     <head th:replace="~{layout/head :: head('Detalle Reseña')}"></head>
 
@@ -89,10 +90,10 @@
                 <a th:href="@{/reviews}" class="btn btn-outline-secondary">
                     <i class="fa-solid fa-arrow-left me-1"></i> Volver al listado
                 </a>
-                <a th:href="@{/reviews/edit/{id}(id=${review.id})}" class="btn btn-success">
+                <a sec:authorize="hasRole('ADMIN')" th:href="@{/reviews/edit/{id}(id=${review.id})}" class="btn btn-success">
                     <i class="fa-solid fa-pencil me-1"></i> Editar
                 </a>
-                <a th:href="@{/reviews/delete/{id}(id=${review.id})}"
+                <a sec:authorize="hasRole('ADMIN')" th:href="@{/reviews/delete/{id}(id=${review.id})}"
                    class="btn btn-danger"
                    onclick="return confirm('¿Seguro que quieres borrar esta reseña?');">
                     <i class="fa-solid fa-trash me-1"></i> Borrar
