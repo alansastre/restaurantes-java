@@ -12,7 +12,12 @@
                     <img th:src="@{/images/logo.png}" alt="Logo" class="mb-2 rounded-3" style="width:150px;">
                     <h1 class="h3 mt-3 fw-normal">Entra con tu cuenta</h1>
                 </div>
-<!--                <div th:if="${error}" class="alert alert-danger" th:text="${error}"></div>-->
+
+                <div th:if="${param.error}" class="alert alert-danger">Credenciales incorrectas.</div>
+                <div th:if="${param.logout}" class="alert alert-success">Sesión cerrada correctamente, hasta pronto.</div>
+                <div th:if="${message}" class="alert alert-success" th:text="${message}"></div>
+
+
                 <div class="form-floating mb-3">
                     <input type="text" class="form-control" id="username" name="username"
                            placeholder="pepe666" required autofocus min="3" maxlength="100">

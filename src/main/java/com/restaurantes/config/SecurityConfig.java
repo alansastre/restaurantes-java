@@ -22,6 +22,9 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
+        http.csrf(csrf -> csrf.ignoringRequestMatchers("/h2-console/**"));
+
+        http.headers(headers -> headers.frameOptions(frame -> frame.sameOrigin())); // h2 usa iframes
 
         http.authorizeHttpRequests(
                 auth -> auth
@@ -54,15 +57,11 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.GET, "/reviews/disable/*").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.GET, "/reviews/delete/*").hasRole("ADMIN")
 
-                        // solo user normal, no admin
-//                .requestMatchers(HttpMethod.GET, "/orders").hasRole("USER")
-//                .requestMatchers(HttpMethod.GET, "/orders/new").hasRole("USER")
-//                .requestMatchers(HttpMethod.POST, "/orders/**").hasRole("USER")
-                        // todos los roles
-                    .requestMatchers("/orders", "/orders/**").authenticated()
+                .requestMatchers("/orders", "/orders/**").authenticated()
 
                         // lo demás autenticado si o si
                     .anyRequest().authenticated()
+//                        .anyRequest().permitAll()
         );
 
         http.formLogin(form ->
