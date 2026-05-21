@@ -104,7 +104,7 @@ probar a entrar en urls protegidas por SecurityConfig:
 
 Crear el 403.html
 
-## Paso 10: integración de User con Order y Review
+## Paso 10: integración de User con Order y Review (OK)
 
 * Order.java: añadir campo User user con @ManyToOne
 * Review.java: añadir campo User user con @ManyToOne
@@ -114,6 +114,19 @@ En controller OrderController, al crear una orden, asignar el usuario autenticad
 En controller ReviewController, al crear una review, asignar el usuario autenticado a la review. (OK)
 
 
+## Paso 11: Adaptar listado de pedidos order list (OK)
+
+order-list.html hay que ajustarlo para que:
+
+* si soy ADMIN que muestre todos los pedidos Order  (findAll)
+* si soy USER que muestre solo mis pedidos Order   (findByUserId)
+
+
+## Paso 12: Mostrar usuario en details
+
+Mostrar el nombre de los usuarios en las Review
+
+Mostrar el nombre del usuario en order-detail
 
 
 ## Paso 8: opcional ViewSecurityAdvice.java

@@ -1,10 +1,14 @@
 package com.restaurantes.repository;
 
 import com.restaurantes.model.Order;
+import org.jspecify.annotations.Nullable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface OrderRepository extends JpaRepository<Order, Long> {
+import java.util.List;
 
-    // traer todos los pedidos de un restaurante
-    // findByRestaurantId
+public interface OrderRepository extends JpaRepository<Order, Long> {
+    List<Order> findByUser_IdOrderByDateDesc(Long id);
+
+
+//    List<Order> findByUser_IdOrderByDateDesc(Long id);
 }
