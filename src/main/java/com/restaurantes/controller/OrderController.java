@@ -44,6 +44,8 @@ public class OrderController {
         Order order = orderRepository.findById(id).orElseThrow();
         model.addAttribute("order", order);
         model.addAttribute("orderLines", orderLineRepository.findByOrder_Id(id));
+        model.addAttribute("countUserOrders", orderRepository.countByUser_Id(order.getUser().getId()));
+        model.addAttribute("totalMoneyUserSpent", orderRepository.calculateTotalMoneySpentByUserId(order.getUser().getId()));
         // cargar platos para que el usuario pueda seleccionarlos para el pedido
         List<Dish> dishes = dishRepository.findByRestaurantIdOrderByPrice(order.getRestaurant().getId());
         model.addAttribute("dishes", dishes);
