@@ -1,15 +1,13 @@
 package com.restaurantes.controller;
 
-import com.restaurantes.model.Dish;
-import com.restaurantes.model.Order;
-import com.restaurantes.model.OrderLine;
-import com.restaurantes.model.Restaurant;
+import com.restaurantes.model.*;
 import com.restaurantes.model.enums.OrderStatus;
 import com.restaurantes.repository.DishRepository;
 import com.restaurantes.repository.OrderLineRepository;
 import com.restaurantes.repository.OrderRepository;
 import com.restaurantes.repository.RestaurantRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -58,10 +56,10 @@ public class OrderController {
 
 
     @PostMapping("orders")
-    public String save(@ModelAttribute Order order) {
+    public String save(@ModelAttribute Order order, @AuthenticationPrincipal User user) {
         order.setStatus(OrderStatus.PENDING);
         order.setDate(LocalDateTime.now());
-        // TODO order.setUser(currentUser);
+        order.setUser(user);
         order.setTotalPrice(0d);
         orderRepository.save(order);
         return "redirect:/orders/" + order.getId();
