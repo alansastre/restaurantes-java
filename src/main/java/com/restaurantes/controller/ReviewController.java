@@ -1,11 +1,13 @@
 package com.restaurantes.controller;
 
 import com.restaurantes.model.Review;
+import com.restaurantes.model.User;
 import com.restaurantes.repository.DishRepository;
 import com.restaurantes.repository.RestaurantRepository;
 import com.restaurantes.repository.ReviewRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 
 import org.springframework.ui.Model;
@@ -89,8 +91,8 @@ public class ReviewController {
 
     // @PostMapping reviews
     @PostMapping("reviews")
-    public String saveReview(@ModelAttribute Review review) {
-        // TODO review.setUser(currentUser);
+    public String saveReview(@ModelAttribute Review review, @AuthenticationPrincipal User user) {
+        review.setUser(user);
         reviewRepository.save(review);
 
         if (review.getRestaurant() != null)

@@ -24,13 +24,16 @@ Para esto vamos a usar Spring Security, que es un framework de seguridad para ap
 ## Paso 2: crear entidad User y enum Role (OK)
 
 * enums/Role.java: ROLE_USER, ROLE_ADMIN
-* model/User.java: id, username, password, role
+* model/User.java: id, username, email, password, role
    * implements UserDetails de Spring Security
+
+* Opcionales: nif, phone, postalCode, bio, profilePictureUrl
 
 ## Paso 3: crear repositorio UserRepository (OK)
 
 * repository/UserRepository.java:
   * findByUsername(String username)
+  * findByEmail(String email)
   * boolean existsByUsername(String username)
   * boolean existsByEmail(String email)
 
@@ -86,7 +89,7 @@ Para esto vamos a usar Spring Security, que es un framework de seguridad para ap
 
 DataInitializer, clase en paquete config, que cree y guarde dos usuarios en base de datos.
 
-Más adelante usar esta clase para introducir datos de otras entidades y limpiar el Main
+Paso 8: crear dos usuarios demo (OK)Más adelante usar esta clase para introducir datos de otras entidades y limpiar el Main
 
 * Restaurantes, Platos, Reviews, Pedidos
 
@@ -108,7 +111,7 @@ Crear el 403.html
 
 En controller OrderController, al crear una orden, asignar el usuario autenticado a la orden.
 
-En controller ReviewController, al crear una review, asignar el usuario autenticado a la review.
+En controller ReviewController, al crear una review, asignar el usuario autenticado a la review. (OK)
 
 
 
