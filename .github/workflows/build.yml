@@ -1,0 +1,25 @@
+name: Build (manual)
+
+# Solo se ejecuta cuando lo lanzas manualmente desde la pestaña Actions de GitHub
+# o vía: gh workflow run build.yml
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Compilar
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Java 25 + cache Maven
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '25'
+          cache: maven
+
+      - name: Compilar (sin tests)
+        run: mvn -B clean compile
