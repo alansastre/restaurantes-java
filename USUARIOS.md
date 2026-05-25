@@ -122,14 +122,14 @@ order-list.html hay que ajustarlo para que:
 * si soy USER que muestre solo mis pedidos Order   (findByUserId)
 
 
-## Paso 12: Mostrar usuario en details
+## Paso 12: Mostrar usuario en details (1/2)
 
-Mostrar el nombre de los usuarios en las Review
+Mostrar el nombre de los usuarios en las Review (PENDIENTE)
 
-Mostrar el nombre del usuario en order-detail
+Mostrar el nombre del usuario en order-detail (OK)
 
 
-## Paso 8: opcional ViewSecurityAdvice.java
+## Paso 13: opcional ViewSecurityAdvice.java
 
 Esta clase proporciona métodos que se pueden usar en las vistas Thymeleaf para mostrar/ocultar partes de la vista dependiendo de si el usuario está autenticado o no, o si tiene un rol concreto.
 
@@ -139,3 +139,15 @@ Objetivo: `th:if="${isAuthenticated}` o `th:if=${isAdmin}`.
   * isAuthenticated() para usar en Thymeleaf y mostrar/ocultar partes de la vista dependiendo de si el usuario está autenticado o no
   * isAdmin()
   * currentUserName()
+
+
+## Paso 14: Panel de usuarios
+
+Un usuario admin podría crear / editar usuarios en la plataforma.
+
+* user-list.html
+* user-detail.html
+* user-form.html
+* UserController
+* UserService (OK)
+* UserRepository (OK)
