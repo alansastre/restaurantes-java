@@ -51,7 +51,89 @@
                 <div class="card-body">
                     <i class="fa-solid fa-star text-warning"></i>
                     <h3 class="card-title my-2" th:text="${userStats.countReviews()}"></h3>
+                    <!-- se puede mostrar tambien la nota media de sus reseñas AVG(r.rating) -->
                     <p class="card-text text-muted">Reseñas escritas</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-center shadow-sm">
+                <div class="card-body">
+                    <i class="fa-solid fa-ticket text-primary"></i>
+                    <h3 class="card-title my-2" th:text="${userStats.countOrders()}"></h3>
+                    <p class="card-text text-muted">Pedidos realizados</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-center shadow-sm">
+                <div class="card-body">
+                    <i class="fa-solid fa-euro text-primary"></i>
+                    <h3 class="card-title my-2">
+                        <span th:text="${#numbers.formatDecimal(userStats.moneySpent(), 1, 2)}"></span> €
+                    </h3>
+                    <p class="card-text text-muted">Total gastado</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <h2 class="mt-5">
+        <i class="fa-regular fa-comments text-primary me-2"></i> Reviews de este usuario
+    </h2>
+    <div th:if="${userStats.reviews().isEmpty()}" class="alert alert-light border">
+        <i class="fa-regular fa-face-smile me-1"></i>
+        Este fenómeno no ha escrito nada todavía.
+    </div>
+    <div class="row row-cols-1 row-cols-md-2 g-3" th:unless="${userStats.reviews().isEmpty()}">
+        <div class="col" th:each="review : ${userStats.reviews()}">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${review.title}">Título</h5>
+                    <p class="card-text" th:text="${review.description}">Descripción</p>
+                    <span class="badge bg-warning text-dark">
+                        <i class="fa-solid fa-star me-1"></i>
+                        <span th:text="${review.rating + ' / 5'}"></span>
+                    </span>
+                </div>
+                <div class="card-footer text-muted small bg-transparent">
+                    <i class="fa-regular fa-calendar me-1"></i>
+                    <span th:text="${review.creationDate}"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <h2 class="mt-5">
+        <i class="fa-solid fa-ticket text-primary me-2"></i> Pedidos de este usuario
+    </h2>
+    <div th:if="${userStats.orders().isEmpty()}" class="alert alert-light border">
+        <i class="fa-regular fa-face-smile me-1"></i>
+        Este fenómeno no ha comprado nada todavía, será que está pobre.
+    </div>
+    <div class="row row-cols-1 row-cols-md-2 g-3" th:unless="${userStats.orders().isEmpty()}">
+        <div class="col" th:each="order : ${userStats.orders()}">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <dl class="row mb-0">
+                        <dt class="col-sm-6">ID</dt>
+                        <dd class="col-sm-6" th:text="${order.id}"></dd>
+                        <dt class="col-sm-6">Estado</dt>
+                        <dd class="col-sm-6" th:text="${order.status}"></dd>
+                        <dt class="col-sm-6">Mesa</dt>
+                        <dd class="col-sm-6" th:text="${order.tableNumber}"></dd>
+                        <dt class="col-sm-6">Comensales</dt>
+                        <dd class="col-sm-6" th:text="${order.numPeople}"></dd>
+                        <dt class="col-sm-6">Precio total</dt>
+                        <dd class="col-sm-6" th:text="${order.totalPrice}"></dd>
+                    </dl>
+                </div>
+                <div class="card-footer text-muted small bg-transparent">
+                    <i class="fa-regular fa-calendar me-1"></i>
+                    <span th:text="${order.date}"></span>
                 </div>
             </div>
         </div>
