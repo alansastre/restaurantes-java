@@ -16,5 +16,7 @@ public interface ReviewRepository extends JpaRepository<Review, Long> {
     // rating >= 4 del restaurante 1 ordenados por más reciente primero
     // List<Review> findByRatingGreaterThanEqualAndRestaurant_IdOrderByCreationDateDesc(Integer rating, Long id);
 
+    long countByUser_Id(Long id);
+    List<Review> findByUser_Id(Long id);
 
 }

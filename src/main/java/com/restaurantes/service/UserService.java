@@ -1,8 +1,11 @@
 package com.restaurantes.service;
 
 import com.restaurantes.dto.RegisterForm;
+import com.restaurantes.dto.UserStatsDTO;
 import com.restaurantes.model.User;
 import com.restaurantes.model.enums.Role;
+import com.restaurantes.repository.OrderRepository;
+import com.restaurantes.repository.ReviewRepository;
 import com.restaurantes.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.jspecify.annotations.NonNull;
@@ -22,6 +25,8 @@ public class UserService implements UserDetailsService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final ReviewRepository reviewRepository;
+    private final OrderRepository orderRepository;
 
     // metodo para buscar el usuario en base de datos por su username
     @Override
@@ -80,5 +85,14 @@ public class UserService implements UserDetailsService {
                 .orElseThrow(() -> new IllegalArgumentException("Usuario no encontrado"));
     }
 
+    public UserStatsDTO findStatsById(Long id) {
+        return new UserStatsDTO(
+                reviewRepository.countByUser_Id(id),
+                reviewRepository.findByUser_Id(id),
+                orderRepository.countByUser_Id(id),
+                orderRepository.findByUser_IdOrderByDateDesc(id),
+                orderRepository.calculateTotalMoneySpentByUserId(id)
+        );
+    }
 
 }

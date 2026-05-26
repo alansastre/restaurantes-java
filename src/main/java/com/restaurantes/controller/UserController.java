@@ -20,10 +20,11 @@ public class UserController {
         return "users/user-list";
     }
 
-    // user detail
+    // user detail  http://localhost:8080/admin/users/1
     @GetMapping("admin/users/{id}")
     public String detail(Model model, @PathVariable Long id) {
-        model.addAttribute("user", userService.findById(id));
+        model.addAttribute("user", userService.findById(id)); // User
+        model.addAttribute("userStats", userService.findStatsById(id)); // UserStatsDTO
         return "users/user-detail";
     }
 
