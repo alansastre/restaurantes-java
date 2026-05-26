@@ -12,6 +12,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -63,5 +65,20 @@ public class UserService implements UserDetailsService {
         return userRepository.save(user); // guarda el usuario en base de datos
     }
 
-    // TODO metodo para crear usuario admin
+
+    public List<User> findAll() {
+        return userRepository.findAll();
+        // no hace falta porque no mostramos la password en thymeleaf y no queremos pisar la password
+//        return userRepository.findAll().stream().map(user -> {
+//            user.setPassword(null); // ocultar la contraseña al devolver el usuario
+//            return user;
+//        }).toList();
+    }
+
+    public User findById(Long id) {
+        return userRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Usuario no encontrado"));
+    }
+
+
 }

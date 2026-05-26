@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="~{layout/head :: head('Listado Usuarios')}"></head>
+    <body class="d-flex flex-column min-vh-100">
+        <nav th:replace="~{layout/navbar :: navbar}"></nav>
+        <main class="container flex-grow-1">
+            <h1 class="mb-3">Listado de usuarios</h1>
+
+            <a th:href="@{/admin/users/new}" class="btn btn-primary btn-sm">
+                <i class="fa-solid fa-user-plus"></i>
+                Crear usuario
+            </a>
+
+            <div class="table-responsive mt-3">
+                <table class="table table-hover align-middle table-bordered border-success">
+                    <thead class="table-dark">
+                    <tr>
+                        <th>Id</th>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Rol</th>
+                        <th>Acciones</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="user : ${users}">
+                        <td th:text="${user.id}"></td>
+                        <!-- TODO firstName, lastName, nif, avatar -->
+                        <td th:text="${user.username}"></td>
+                        <td th:text="${user.email}"></td>
+                        <td th:text="${user.role}"></td>
+                        <td>
+                            <a th:href="@{/admin/users/{id}(id=${user.id})}"
+                               class="btn btn-sm btn-outline-primary">
+                                <i class="fa-solid fa-eye me-1"></i> Ver
+                            </a>
+                            <a th:href="@{/admin/users/edit/{id}(id=${user.id})}"
+                               class="btn btn-sm btn-outline-success">
+                                <i class="fa-solid fa-user-pen"></i> Editar
+                            </a>
+                            <a th:href="@{/admin/users/deactivate/{id}(id=${user.id})}"
+                               class="btn btn-sm btn-outline-danger">
+                                <i class="fa-solid fa-trash me-1"></i> Desactivar
+                            </a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+        <footer th:replace="~{layout/footer :: footer}"></footer>
+        <script th:replace="~{layout/footer :: scripts}"></script>
+    </body>
+</html>

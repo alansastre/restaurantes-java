@@ -3,7 +3,27 @@
 Tareas:
 
 In progress:
-
+* Panel de usuarios: user-list, user-detail, user-form
+  * /admin/users
+  * UserRepository
+  * User: firstName, lastName
+  * UserService
+    * loadUserByUsername OK
+    * register OK
+    * nuevos: update, delete
+    * UserController
+      * list
+      * detail
+      * new
+      * edit
+      * delete
+    * user-list.html
+    * user-detail.html
+    * user-form.html
+    * navbar.html poner enlace a /admin/users para ROLE_ADMIN
+    * Datos en Data Initializer
+    * Avatar del usuario
+    * /profile que pueda cambiar nombre apellido y biografia
 
 Pendiente:
 
@@ -14,7 +34,7 @@ Pendiente:
 * Input tipo file en formularios para subir imagen
 * GitHub Actions (Integracion Continua)
 * Favoritos (Product, House, Movie)
-* Panel de usuarios: user-list, user-detail, user-form
+
 
 
 * Advice (Controller global)

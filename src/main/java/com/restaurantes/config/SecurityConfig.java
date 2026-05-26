@@ -54,6 +54,10 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.GET, "/reviews/*").permitAll()
 
                 .requestMatchers("/orders", "/orders/**").authenticated()
+
+                // panel de usuarios para admins
+                .requestMatchers("/admin/**").hasRole("ADMIN")
+
                 .anyRequest().authenticated()
         );
 
