@@ -114,8 +114,19 @@ public class UserService implements UserDetailsService {
         return userRepository.save(user);
     }
 
-    public User update(User user) {
-        return null;
+    public User update(User userForm) {
+        User userDB = findById(userForm.getId()); // primero sacamos el usuario de base de datos
+
+        userDB.setUsername(userForm.getUsername());
+        userDB.setEmail(userForm.getEmail());
+        userDB.setRole(userForm.getRole());
+
+        // si se ha introducido una nueva contraseña, la ciframos y actualizamos,
+        // sino dejamos la contraseña actual sin cambios
+        if(StringUtils.hasText(userForm.getPassword()))
+            userDB.setPassword(passwordEncoder.encode(userForm.getPassword()));
+
+        return userRepository.save(userDB); // guardamos el usuario actualizado en base de datos
     }
 
 }

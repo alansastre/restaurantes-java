@@ -11,6 +11,8 @@
                 Crear usuario
             </a>
 
+            <div th:if="${message}" class="alert alert-success mt-3" th:text="${message}"></div>
+
             <div class="table-responsive mt-3">
                 <table class="table table-hover align-middle table-bordered border-success">
                     <thead class="table-dark">

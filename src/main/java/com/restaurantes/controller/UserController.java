@@ -54,20 +54,21 @@ public class UserController {
 
     // PostMapping admin/users
     @PostMapping("admin/users")
-    public String save(
-        @ModelAttribute User user,
-       RedirectAttributes ra) {
-
-        if (user.getId() == null) {
-            userService.create(user);
-            ra.addFlashAttribute("message",
-                    "usuario creado");
-        } else {
-            userService.update(user);
-            ra.addFlashAttribute("message",
-                    "usuario actualizado");
+    public String save(@ModelAttribute User user, RedirectAttributes ra) {
+        try {
+            if (user.getId() == null) {
+                userService.create(user);
+                ra.addFlashAttribute("message", "usuario creado");
+            } else {
+                userService.update(user);
+                ra.addFlashAttribute("message", "usuario actualizado");
+            }
+            return "redirect:/admin/users";
+        } catch (Exception e) {
+            ra.addFlashAttribute("error", e.getMessage());
+            return user.getId() == null ?
+                    "redirect:/admin/users/new" : "redirect:/admin/users/edit/" + user.getId();
         }
-        return "redirect:/admin/users";
     }
 
 
