@@ -68,6 +68,7 @@ public class UserService implements UserDetailsService {
 //         user.setPassword(form.getPassword()); // texto plano sin cifrar  admin
         user.setPassword(passwordEncoder.encode(form.getPassword())); // password cifrada con bcrypt $2a$10$vVJ3lkY2o85Hl8Cf95/xrOF/Dsv3kEtjJTlwFyyElAE6WRglzTao2
         user.setRole(Role.ROLE_USER); // por defecto no asignamos rol de admin a usuarios nuevos
+        user.setActive(true);
         return userRepository.save(user); // guarda el usuario en base de datos
     }
 
@@ -134,6 +135,8 @@ public class UserService implements UserDetailsService {
         userDB.setUsername(userForm.getUsername());
         userDB.setEmail(userForm.getEmail());
         userDB.setRole(userForm.getRole());
+        // TODO un admin podría desactivarse a sí mismo, hay que impedirlo lanzando Illegal....
+        userDB.setActive(userForm.getActive());
 
         // si se ha introducido una nueva contraseña, la ciframos y actualizamos,
         // sino dejamos la contraseña actual sin cambios

@@ -40,6 +40,7 @@ public class DataInitializer implements ApplicationRunner {
                 .email("admin@gmail.com")
                 .password(passwordEncoder.encode("admin"))
                 .role(Role.ROLE_ADMIN)
+                .active(true)
                 .build());
 
     }

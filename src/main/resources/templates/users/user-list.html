@@ -21,6 +21,7 @@
                         <th>Username</th>
                         <th>Email</th>
                         <th>Rol</th>
+                        <th>Activo</th>
                         <th>Acciones</th>
                     </tr>
                     </thead>
@@ -31,6 +32,10 @@
                         <td th:text="${user.username}"></td>
                         <td th:text="${user.email}"></td>
                         <td th:text="${user.role}"></td>
+                        <td>
+                            <span class="badge text-bg-success" th:if="${user.active}">Sí</span>
+                            <span class="badge text-bg-danger" th:unless="${user.active}">No</span>
+                        </td>
                         <td>
                             <a th:href="@{/admin/users/{id}(id=${user.id})}"
                                class="btn btn-sm btn-outline-primary">

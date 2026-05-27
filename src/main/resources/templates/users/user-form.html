@@ -46,6 +46,11 @@
                 </option>
             </select>
         </div>
+        <div class="mb-3 form-check" th:if="${edit}">
+            <input type="checkbox" class="form-check-input" id="active" th:field="*{active}">
+            <label class="form-check-label" for="active">Activo</label>
+        </div>
+
         <button type="submit" class="btn btn-success">
             <i class="fa-solid fa-floppy-disk"></i> Guardar
         </button>
