@@ -14,25 +14,41 @@
 
     <form th:action="@{/admin/users}" th:object="${user}" method="post">
 
-        <input type="hidden" th:field="*{id}">
+        <div class="mb-3" th:if="${edit}">
+            <label class="form-label" for="id">ID</label>
+            <input type="number" class="form-control" id="id" th:field="*{id}" readonly/>
+        </div>
+
         <div class="mb-3">
+            <label for="username">Username</label>
             <input type="text" class="form-control" id="username"
                    placeholder="pepe666" required th:field="*{username}" min="3" maxlength="100" autofocus>
-            <label for="username">Username</label>
         </div>
         <div class="mb-3">
+            <label for="email">Email</label>
             <input type="email" class="form-control" id="email"
                    placeholder="pepe@gmail.com" required th:field="*{email}">
-            <label for="email">Email</label>
         </div>
         <div class="mb-3">
+            <label for="password">Contraseña</label>
             <input type="password" th:field="*{password}"
                    class="form-control" id="password"
-                   required minlength="4">
-            <label for="password">Contraseña</label>
+                   minlength="4" th:required="${!edit}"> <!-- creación te obliga a poner contraseña -->
         </div>
-
-
+        <div class="mb-3">
+            <label for="role" class="form-label">Rol (Permisos)</label>
+            <select class="form-select" id="role" th:field="*{role}">
+                <option
+                        th:each="role : ${roles}"
+                        th:value="${role}"
+                        th:text="${role.name()}">
+                </option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-success">
+            <i class="fa-solid fa-floppy-disk"></i> Guardar
+        </button>
+        <a th:href="@{/admin/users}" class="btn btn-secondary">Cancelar</a>
     </form>
 
 </main>
