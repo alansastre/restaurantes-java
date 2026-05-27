@@ -6,9 +6,8 @@ import com.restaurantes.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @AllArgsConstructor
 @Controller
@@ -30,6 +29,11 @@ public class UserController {
         return "users/user-detail";
     }
 
+    /*
+    Si queremos que user-form.html tenga passwordConfirm entonces es mejor usar aquí
+    un DTO por ejemplo UserFormDTO con los campos de User más passwordConfirm,
+    y en el metodo save() convertir ese DTO a User para guardarlo en la base de datos.
+     */
     @GetMapping("admin/users/new")
     public String newUser(Model model) {
         model.addAttribute("user", new User());
@@ -38,6 +42,33 @@ public class UserController {
         return "users/user-form";
     }
 
-    // @GetMapping("admin/users/edit/{id}")
+    @GetMapping("admin/users/edit/{id}")
+    public String editUser(Model model, @PathVariable Long id) {
+        User user = userService.findById(id);
+        user.setPassword(null); // no devolver esta password cifrada para evitar exponerla
+        model.addAttribute("user", user);
+        model.addAttribute("roles", Role.values());
+        model.addAttribute("edit", true);
+        return "users/user-form";
+    }
+
+    // PostMapping admin/users
+    @PostMapping("admin/users")
+    public String save(@ModelAttribute User user, RedirectAttributes redirectAttributes) {
+
+        // creacion
+        if (user.getId() == null) {
+
+        } else {
+        // edicion
+
+        }
+
+        return null;
+    }
+
+    // GetMapping profile
+
+    // PostMapping profile
 
 }
