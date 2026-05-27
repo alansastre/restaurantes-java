@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout/head :: head('Formulario usuario')}"></head>
+<body class="d-flex flex-column min-vh-100 bg-light">
+<nav th:replace="~{layout/navbar :: navbar}"></nav>
+<main class="container flex-grow-1 my-4">
+
+    <h1 class="mb-0">
+        <i class="fa-solid fa-user text-primary me-2"></i>
+        <span th:text="${edit} ? 'Editar usuario' : 'Crear usuario'"></span>
+    </h1>
+
+    <div th:if="${error}" class="alert alert-danger" th:text="${error}"></div>
+
+    <form th:action="@{/admin/users}" th:object="${user}" method="post">
+
+        <input type="hidden" th:field="*{id}">
+        <div class="mb-3">
+            <input type="text" class="form-control" id="username"
+                   placeholder="pepe666" required th:field="*{username}" min="3" maxlength="100" autofocus>
+            <label for="username">Username</label>
+        </div>
+        <div class="mb-3">
+            <input type="email" class="form-control" id="email"
+                   placeholder="pepe@gmail.com" required th:field="*{email}">
+            <label for="email">Email</label>
+        </div>
+        <div class="mb-3">
+            <input type="password" th:field="*{password}"
+                   class="form-control" id="password"
+                   required minlength="4">
+            <label for="password">Contraseña</label>
+        </div>
+
+
+    </form>
+
+</main>
+<footer th:replace="~{layout/footer :: footer}"></footer>
+<script th:replace="~{layout/footer :: scripts}"></script>
+</body>
+</html>

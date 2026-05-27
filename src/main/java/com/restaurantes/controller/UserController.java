@@ -1,5 +1,7 @@
 package com.restaurantes.controller;
 
+import com.restaurantes.model.User;
+import com.restaurantes.model.enums.Role;
 import com.restaurantes.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -28,6 +30,14 @@ public class UserController {
         return "users/user-detail";
     }
 
+    @GetMapping("admin/users/new")
+    public String newUser(Model model) {
+        model.addAttribute("user", new User());
+        model.addAttribute("roles", Role.values());
+        model.addAttribute("edit", false);
+        return "users/user-form";
+    }
 
-    // user form
+    // @GetMapping("admin/users/edit/{id}")
+
 }
