@@ -117,6 +117,20 @@ public class UserService implements UserDetailsService {
     public User update(User userForm) {
         User userDB = findById(userForm.getId()); // primero sacamos el usuario de base de datos
 
+        // Ver si username ocupado por otro usuario distinto a ese usuario userDB.getId()
+        // si username ocupado por otro usuario entonces throw new IllegalArgumentException
+        Optional<User> userOpt = userRepository.findByUsername(userForm.getUsername());
+        if (userOpt.isPresent() && !userOpt.get().getId().equals(userForm.getId()))
+            throw new IllegalArgumentException("El nombre de usuario ya existe");
+
+        // lo mismo para el email pero en estilo programación funcional
+        userRepository.findByEmail(userForm.getEmail())
+                .filter(user -> !user.getId().equals(userForm.getId()))
+                .ifPresent(user -> {
+                    throw new IllegalArgumentException("El email de usuario ya existe");
+                });
+
+
         userDB.setUsername(userForm.getUsername());
         userDB.setEmail(userForm.getEmail());
         userDB.setRole(userForm.getRole());
