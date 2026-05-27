@@ -54,18 +54,23 @@ public class UserController {
 
     // PostMapping admin/users
     @PostMapping("admin/users")
-    public String save(@ModelAttribute User user, RedirectAttributes redirectAttributes) {
+    public String save(
+        @ModelAttribute User user,
+       RedirectAttributes ra) {
 
-        // creacion
         if (user.getId() == null) {
-
+            userService.create(user);
+            ra.addFlashAttribute("message",
+                    "usuario creado");
         } else {
-        // edicion
-
+            userService.update(user);
+            ra.addFlashAttribute("message",
+                    "usuario actualizado");
         }
-
-        return null;
+        return "redirect:/admin/users";
     }
+
+
 
     // GetMapping profile
 

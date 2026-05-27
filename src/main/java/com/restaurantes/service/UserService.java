@@ -15,6 +15,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 import java.util.Optional;
@@ -93,6 +94,28 @@ public class UserService implements UserDetailsService {
                 orderRepository.findByUser_IdOrderByDateDesc(id),
                 orderRepository.calculateTotalMoneySpentByUserId(id)
         );
+    }
+
+
+    public User create(User user){
+        if (userRepository.existsByUsername(user.getUsername()))
+            throw new IllegalArgumentException("El nombre de usuario ya existe");
+
+        if (userRepository.existsByEmail(user.getEmail()))
+            throw new IllegalArgumentException("El correo electrónico ya existe");
+
+//        if (user.getPassword() == null || user.getPassword().isBlank())
+//            throw new IllegalArgumentException("La contraseña es obligatoria");
+
+        if (!StringUtils.hasText(user.getPassword()))
+            throw new IllegalArgumentException("Password no puede estar vacía");
+
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        return userRepository.save(user);
+    }
+
+    public User update(User user) {
+        return null;
     }
 
 }
