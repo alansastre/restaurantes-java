@@ -30,7 +30,9 @@ public class SecurityConfig {
                 auth -> auth
                 // ORDEN IMPORTANTE
                 .requestMatchers("/h2-console/**").permitAll()
-                .requestMatchers("/hola", "/adios", "/login", "/register", "/css/**", "/images/**", "/webjars/**").permitAll()
+                .requestMatchers("/hola", "/adios", "/login", "/register",
+                        "/uploads/**",
+                        "/css/**", "/images/**", "/webjars/**").permitAll()
 
                 .requestMatchers(HttpMethod.GET, "/restaurants").permitAll()
                 .requestMatchers(HttpMethod.POST, "/restaurants").hasRole("ADMIN")

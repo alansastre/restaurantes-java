@@ -148,9 +148,15 @@
                             </h5>
                         </div>
                         <div class="card-body text-center pb-2">
-                            <div class="rounded-circle bg-light d-inline-flex align-items-center justify-content-center mb-2"
+                            <div th:unless="${order.user.imageUrl}" class="rounded-circle bg-light d-inline-flex align-items-center justify-content-center mb-2"
                                  style="width: 64px; height: 64px;">
                                 <i class="fa-solid fa-user fa-2x text-primary"></i>
+                            </div>
+                            <div th:if="${order.user.imageUrl}" class="rounded-circle bg-light d-inline-flex align-items-center justify-content-center mb-2"
+                                 style="width: 64px; height: 64px;">
+                                <img th:if="${order.user.imageUrl != null}" th:src="${order.user.imageUrl}"
+                                     class="rounded-circle object-fit-cover"
+                                     width="64" height="64" alt="Foto perfil">
                             </div>
                             <h5 class="card-title mb-0" th:text="${order.user.username}"></h5>
                             <p class="text-muted small mb-0">

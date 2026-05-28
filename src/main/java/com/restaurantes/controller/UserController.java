@@ -18,7 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class UserController {
 
     private final FileService fileService;
-    private UserService userService;
+    private final UserService userService;
 
     @GetMapping("admin/users")
     public String list(Model model) {
@@ -65,11 +65,10 @@ public class UserController {
             @RequestParam("imageFile") MultipartFile imageFile
             ) {
         log.info("Guardando user {}", user.getUsername());
-        log.info("Imagen recibida {}", imageFile);
-        String url = fileService.store(imageFile);
-        if (url != null)
-            user.setImageUrl(url);
 
+        String imageUrl = fileService.store(imageFile);
+        if (imageUrl != null)
+            user.setImageUrl(imageUrl);
 
         try {
             if (user.getId() == null) {

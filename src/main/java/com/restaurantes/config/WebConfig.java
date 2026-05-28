@@ -8,6 +8,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+/*
+Para poder servir imágenes de la carpeta uploads
+ */
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
 
