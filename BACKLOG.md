@@ -1,39 +1,82 @@
 
 
-Tareas:
 
-In progress:
-* Panel de usuarios: user-list, user-detail, user-form
-  * /admin/users
-  * UserRepository
-  * User: firstName, lastName
-  * UserService
+
+
+Subir imágenes:
+
+* User, Restaurant, Dish: private String imageUrl;
+* service/FileStorageService.java
+* config/WebConfig.java
+* Actualizar en SecurityConfig añadir ruta /uploads/**
+* user-form.html, dish-form.html, restaurant-form.html añadir un input de tipo file
+* En los Controller agregar MultipartFile imageFile
+* Mostrar imagen en la aplicacion
+
+
+
+
+
+
+
+
+
+
+Pendiente:
+
+* Nuevos campos: firstName, lastName
+* Foto
+* @GetMapping /profile (PENDIENTE)
+
+
+
+
+
+
+Hecho:
+* UserService:
+* update (PENDIENTE)
+* UserController
+  * admin
+    * @GetMapping new /admin/users/new (PENDIENTE)
+    * @GetMapping edit /admin/users/edit/1 (PENDIENTE)
+    * @PostMapping /admin/users (PENDIENTE)
+* Panel de usuarios:
+  * UserRepository OK
+  * UserService OK
     * loadUserByUsername OK
     * register OK
-    * nuevos: update, delete
+    * findStatsById OK
+    * update (PENDIENTE)
     * UserController
-      * list
-      * detail
-      * new
-      * edit
-      * delete
-    * user-list.html
-    * user-detail.html
-    * user-form.html
-    * navbar.html poner enlace a /admin/users para ROLE_ADMIN
+      * list /admin/users OK
+      * detail /admin/users/1 OK
+      * new /admin/users/new (PENDIENTE)
+      * edit /admin/users/edit/1 (PENDIENTE)
+      * /profile (PENDIENTE)
+    * user-list.html OK
+    * user-detail.html OK
+    * user-form.html  (PENDIENTE)
+    * navbar.html poner enlace a /admin/users para ROLE_ADMIN OK
+    * navbar.html poner enlace en su nombre a /profile para todos
     * Datos en Data Initializer
     * Avatar del usuario
     * /profile que pueda cambiar nombre apellido y biografia
+    * User: firstName, lastName, active, bio, avatar
 
 Pendiente:
 
 * Home
-* Loggers @Slf4j de Lombok: log.info, log.warn, log.error
+* Loggers @Slf4j de Lombok: log.info, log.warn, log.error (OK)
 * Fixes en proyectos y tableros
 * config/DataInitializer.java datos demo y dejar main limpio
-* Input tipo file en formularios para subir imagen
-* GitHub Actions (Integracion Continua)
+* Input tipo file en formularios para subir imagen (90%)
+* GitHub Actions (Integracion Continua) (OK)
 * Favoritos (Product, House, Movie)
+  * User
+  * Favorite: @ManyToOne User, @ManyToOne Restaurant, @ManyToOne Dish, LocalDateTime
+  * Restaurant
+* Order: datos de pago y descuento
 
 
 
