@@ -4,11 +4,13 @@ import com.restaurantes.model.User;
 import com.restaurantes.model.enums.Role;
 import com.restaurantes.service.UserService;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+@Slf4j
 @AllArgsConstructor
 @Controller
 public class UserController {
@@ -55,16 +57,22 @@ public class UserController {
     // PostMapping admin/users
     @PostMapping("admin/users")
     public String save(@ModelAttribute User user, RedirectAttributes ra) {
+        log.info("Guardando user {}", user.getUsername());
+
         try {
             if (user.getId() == null) {
-                userService.create(user);
+                user = userService.create(user);
                 ra.addFlashAttribute("message", "usuario creado");
+                log.info("Usuario creado {}", user);
             } else {
-                userService.update(user);
+                user = userService.update(user);
                 ra.addFlashAttribute("message", "usuario actualizado");
+                log.info("Usuario actualizado {}", user);
             }
             return "redirect:/admin/users";
         } catch (Exception e) {
+            log.warn("Error al guardar user {}", user, e);
+
             ra.addFlashAttribute("error", e.getMessage());
             return user.getId() == null ?
                     "redirect:/admin/users/new" : "redirect:/admin/users/edit/" + user.getId();
