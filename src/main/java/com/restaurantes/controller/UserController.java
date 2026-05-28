@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Slf4j
@@ -56,8 +57,14 @@ public class UserController {
 
     // PostMapping admin/users
     @PostMapping("admin/users")
-    public String save(@ModelAttribute User user, RedirectAttributes ra) {
+    public String save(
+            @ModelAttribute User user,
+            RedirectAttributes ra,
+            @RequestParam("imageFile") MultipartFile imageFile
+            ) {
         log.info("Guardando user {}", user.getUsername());
+        log.info("Imagen recibida {}", imageFile);
+
 
         try {
             if (user.getId() == null) {
