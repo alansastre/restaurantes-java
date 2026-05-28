@@ -135,6 +135,7 @@ public class UserService implements UserDetailsService {
         userDB.setUsername(userForm.getUsername());
         userDB.setEmail(userForm.getEmail());
         userDB.setRole(userForm.getRole());
+        userDB.setImageUrl(userForm.getImageUrl());
         // TODO un admin podría desactivarse a sí mismo, hay que impedirlo lanzando Illegal....
         userDB.setActive(userForm.getActive());
 

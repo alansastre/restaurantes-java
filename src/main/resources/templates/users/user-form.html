@@ -53,10 +53,16 @@
 
         <div class="mb-3">
             <label for="imageFile" class="form-label">Imagen</label>
-            <input type="file" class="form-control"
-                   id="imageFile" name="imageFile" accept="image/*">
-            <img th:if="*{imageUrl}" th:src="@{*{imageUrl}}"
-                 class="mt-2 img-thumbnail" height="100" alt="user avatar">
+
+            <!-- conserva la imagen guardada al editar si no subes una nueva -->
+            <input type="hidden" th:field="*{imageUrl}">
+
+            <input type="file" class="form-control" id="imageFile" name="imageFile" accept="image/*">
+
+            <!-- EDITAR: muestra la guardada. ELEGIR archivo: el JS la sustituye -->
+            <img id="preview" alt="Previsualización" class="mt-2 rounded"
+                 style="max-height:150px; display:none"
+                 th:src="${user != null and user.imageUrl != null ? user.imageUrl : null}">
         </div>
 
         <button type="submit" class="btn btn-success">
@@ -68,5 +74,25 @@
 </main>
 <footer th:replace="~{layout/footer :: footer}"></footer>
 <script th:replace="~{layout/footer :: scripts}"></script>
+<script>
+    (function () {
+        const input = document.getElementById('imageFile');
+        const preview = document.getElementById('preview');
+
+        // MODO EDITAR: si ya hay imagen guardada, mostrarla al cargar
+        if (preview.getAttribute('src')) {
+            preview.style.display = 'block';
+        }
+
+        // AL ELEGIR ARCHIVO: previsualizar el nuevo (antes de subir)
+        input.addEventListener('change', function () {
+            const file = this.files[0];
+            if (file) {
+                preview.src = URL.createObjectURL(file);
+                preview.style.display = 'block';
+            }
+        });
+    })();
+</script>
 </body>
 </html>

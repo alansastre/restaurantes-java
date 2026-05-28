@@ -2,6 +2,7 @@ package com.restaurantes.controller;
 
 import com.restaurantes.model.User;
 import com.restaurantes.model.enums.Role;
+import com.restaurantes.service.FileService;
 import com.restaurantes.service.UserService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,6 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Controller
 public class UserController {
 
+    private final FileService fileService;
     private UserService userService;
 
     @GetMapping("admin/users")
@@ -64,6 +66,9 @@ public class UserController {
             ) {
         log.info("Guardando user {}", user.getUsername());
         log.info("Imagen recibida {}", imageFile);
+        String url = fileService.store(imageFile);
+        if (url != null)
+            user.setImageUrl(url);
 
 
         try {
