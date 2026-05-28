@@ -41,6 +41,7 @@ public class DataInitializer implements ApplicationRunner {
                 .password(passwordEncoder.encode("admin"))
                 .role(Role.ROLE_ADMIN)
                 .active(true)
+                .imageUrl("/uploads/ollama.png")
                 .build());
 
     }

@@ -6,6 +6,7 @@ import com.restaurantes.service.FileService;
 import com.restaurantes.service.UserService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -92,7 +93,12 @@ public class UserController {
 
 
 
-    // GetMapping profile
+    @GetMapping("profile")
+    public String profile(Model model, @AuthenticationPrincipal User user) {
+        model.addAttribute("user", userService.findById(user.getId())); // User
+        model.addAttribute("userStats", userService.findStatsById(user.getId())); // UserStatsDTO
+        return "users/user-detail";
+    }
 
     // PostMapping profile
 

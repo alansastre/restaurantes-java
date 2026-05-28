@@ -51,12 +51,18 @@
                 </a>
             </div>
 
-            <div sec:authorize="isAuthenticated()" class="d-flex justify-content-end">
+            <div sec:authorize="isAuthenticated()" class="d-flex align-items-center justify-content-end">
 
-                <span class="text-light me-3">
-                    <i class="fa-solid fa-user me-1"></i>
+                <a class="d-flex align-items-center text-light text-decoration-none me-3" th:href="@{/profile}">
+                    <img
+                        th:src="${#authentication.principal.imageUrl != null ?
+                        #authentication.principal.imageUrl : '/images/avatar.svg'}"
+                    alt="avatar" width="32" height="32"
+                    class="rounded-circle object-fit-cover me-2 border border-2 border-light bg-white">
+
                     <span sec:authentication="name"></span>
-                </span>
+
+                </a>
                 <form th:action="@{/logout}" method="post" class="d-inline">
                     <button class="btn btn-outline-light btn-sm ms-2">
                         <i class="fa-solid fa-sign-out"></i> Salir
