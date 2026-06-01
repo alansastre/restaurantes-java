@@ -16,6 +16,8 @@
                         Nombre
                     </h1>
 
+                    <div th:if="${message}" class="alert alert-success" th:text="${message}"></div>
+
                     <a sec:authorize="hasRole('ADMIN')" th:href="@{/restaurants/deactivate/{id}(id=${restaurant.id})}"
                        class="btn btn-warning btn-sm mt-2">
                         <i class="fa-solid fa-ban me-1"></i> Desactivar
@@ -29,6 +31,19 @@
                     <a sec:authorize="isAuthenticated()" class="btn btn-success" th:href="@{/orders/new(restaurantId=${restaurant.id})}">
                         <i class="fa-solid fa-hand-point-up"></i> Hacer pedido
                     </a>
+
+                    <!-- TODO botón añadir a favoritos toggle-->
+                    <form  sec:authorize="isAuthenticated()"
+                           th:action="@{/favorites/toggle}"
+                            method="post">
+                        <input type="hidden" name="type" th:value="RESTAURANT">
+                        <input type="hidden" name="targetId" th:value="${restaurant.id}">
+                        <input type="hidden" name="redirectUrl" th:value="@{/restaurants/{id}(id=${restaurant.id})}">
+                        <button class="btn btn-sm btn-danger" type="submit">
+                            <i class="fa-solid fa-heart"></i>
+                            Guardar favorito
+                        </button>
+                    </form>
 
                     <span class="badge bg-success me-1">
                         <i class="fa-solid fa-euro-sign me-1"></i>

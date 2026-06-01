@@ -1,6 +1,8 @@
 package com.restaurantes.service;
 
 import com.restaurantes.model.Favorite;
+import com.restaurantes.model.Restaurant;
+import com.restaurantes.model.User;
 import com.restaurantes.repository.DishRepository;
 import com.restaurantes.repository.FavoriteRepository;
 import com.restaurantes.repository.RestaurantRepository;
@@ -8,6 +10,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -23,5 +26,23 @@ public class FavoriteService {
 
     public List<Favorite> findFavoriteDishes(Long userId) {
         return favoriteRepository.findByUser_IdAndDishIsNotNull(userId);
+    }
+
+
+    public boolean toggleRestaurant(User user, Long restaurantId) {
+
+        Optional<Favorite> existing = favoriteRepository
+                .findByUser_IdAndRestaurantId(user.getId(), restaurantId);
+
+        // Opción 1: es que ya existe y lo quitamos de favorito:
+        if (existing.isPresent()) {
+            favoriteRepository.delete(existing.get());
+            return false;
+        }
+
+        // Opción 2: no existe y lo creamos como favorito
+        Restaurant restaurant = restaurantRepository.findById(restaurantId).orElseThrow();
+        favoriteRepository.save(Favorite.builder().restaurant(restaurant).user(user).build());
+        return true;
     }
 }
