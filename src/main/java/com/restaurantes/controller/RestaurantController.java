@@ -55,10 +55,10 @@ public class RestaurantController {
         model.addAttribute("restaurants", restaurants);
         model.addAttribute("numRestaurants", restaurants.size());
         model.addAttribute("title", "Lista de restaurantes");
-        if(user != null) {
-            model.addAttribute("favoriteRestaurantIds",
-                    favoriteService.findRestaurantIdsByUserId(user.getId()));
-        }
+//        if(user != null) {
+//            model.addAttribute("favoriteRestaurantIds",
+//                    favoriteService.findRestaurantIdsByUserId(user.getId()));
+//        }
         return "restaurants/restaurant-list"; // vista
     }
 
@@ -72,10 +72,10 @@ public class RestaurantController {
             model.addAttribute("dishes", platos);
             List<Review> reviews = reviewRepository.findByRestaurant_IdOrderByCreationDateDesc(restaurant.getId());
             model.addAttribute("reviews", reviews);
-            if(user != null) {
-                model.addAttribute("favoriteRestaurantIds",
-                        favoriteService.findRestaurantIdsByUserId(user.getId()));
-            }
+//            if(user != null) {
+//                model.addAttribute("favoriteRestaurantIds",
+//                        favoriteService.findRestaurantIdsByUserId(user.getId()));
+//            }
             return "restaurants/restaurant-detail";
         }
         return "redirect:/restaurants";
