@@ -3,14 +3,14 @@
 
 Un usuario quiere marcar como favorito un restaurante o un plato y poder visualizarlos en su perfil.
 
-* model/Favorite.java
+* model/Favorite.java (OK)
   * id
   * createdAt
   * User user
   * Restaurant restaurant
   * Dish dish
 
-* repository/FavoriteRepository.java
+* repository/FavoriteRepository.java (50 %)
   * findByUser_IdAndRestaurantId
   * findByUser_IdAndDishId
 

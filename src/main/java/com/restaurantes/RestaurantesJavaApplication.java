@@ -125,15 +125,15 @@ public class RestaurantesJavaApplication {
 
 
 
-        // deleteById borrar una fila indicando su id, 1, 2, 3
-        Long idABorrar = 1L;
-        restaurantRepository.deleteById(idABorrar); // hard coded
-        System.out.println("restaurante con id " + idABorrar + " existe : " + restaurantRepository.existsById(idABorrar));
-        // restaurantRepository.deleteById(rest.getId());
-        // delete, borra pasando el objeto
-        restaurantRepository.delete(r2); // le pasamos un objeto restaurante
-        // restaurantRepository.deleteByName("R1"); // requiere metodo personalizado en el repositorio
-
+//        // deleteById borrar una fila indicando su id, 1, 2, 3
+//        Long idABorrar = 1L;
+//        restaurantRepository.deleteById(idABorrar); // hard coded
+//        System.out.println("restaurante con id " + idABorrar + " existe : " + restaurantRepository.existsById(idABorrar));
+//        // restaurantRepository.deleteById(rest.getId());
+//        // delete, borra pasando el objeto
+//        restaurantRepository.delete(r2); // le pasamos un objeto restaurante
+//        // restaurantRepository.deleteByName("R1"); // requiere metodo personalizado en el repositorio
+//
 
 
 

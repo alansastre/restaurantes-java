@@ -1,5 +1,6 @@
 package com.restaurantes.dto;
 
+import com.restaurantes.model.Favorite;
 import com.restaurantes.model.Order;
 import com.restaurantes.model.Review;
 
@@ -14,5 +15,7 @@ public record UserStatsDTO(
         List<Review> reviews,
         long countOrders,
         List<Order> orders,
-        double moneySpent
+        double moneySpent,
+        List<Favorite> favoriteRestaurants,
+        List<Favorite> favoriteDishes
 ) { }

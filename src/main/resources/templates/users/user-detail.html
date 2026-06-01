@@ -144,6 +144,56 @@
         </div>
     </div>
 
+    <h2 class="mt-5">
+        <i class="fa-solid fa-heart text-danger me-2"></i> Restaurantes favoritos
+    </h2>
+    <div th:if="${userStats.favoriteRestaurants().isEmpty()}" class="alert alert-light border">
+        <i class="fa-regular fa-heart me-1"></i>
+        Este usuario aún no ha marcado restaurantes favoritos.
+    </div>
+    <div class="row row-cols-1 row-cols-md-3 g-3" th:unless="${userStats.favoriteRestaurants().isEmpty()}">
+        <div class="col" th:each="fav : ${userStats.favoriteRestaurants()}">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <i class="fa-solid fa-store text-primary me-2"></i>
+                        <a th:href="@{/restaurants/{id}(id=${fav.restaurant.id})}"
+                           th:text="${fav.restaurant.name}">Restaurante</a>
+                    </h5>
+                    <small class="text-muted">
+                        Marcado el
+                        <span th:text="${#temporals.format(fav.createdAt, 'dd/MM/yyyy')}"></span>
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h2 class="mt-5">
+        <i class="fa-solid fa-heart text-danger me-2"></i> Platos favoritos
+    </h2>
+    <div th:if="${userStats.favoriteDishes().isEmpty()}" class="alert alert-light border">
+        <i class="fa-regular fa-heart me-1"></i>
+        Este usuario aún no ha marcado platos favoritos.
+    </div>
+    <div class="row row-cols-1 row-cols-md-3 g-3" th:unless="${userStats.favoriteDishes().isEmpty()}">
+        <div class="col" th:each="fav : ${userStats.favoriteDishes()}">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <i class="fa-solid fa-utensils text-primary me-2"></i>
+                        <a th:href="@{/dishes/{id}(id=${fav.dish.id})}"
+                           th:text="${fav.dish.name}">Plato</a>
+                    </h5>
+                    <small class="text-muted">
+                        Marcado el
+                        <span th:text="${#temporals.format(fav.createdAt, 'dd/MM/yyyy')}"></span>
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </main>
 
 <footer th:replace="~{layout/footer :: footer}"></footer>

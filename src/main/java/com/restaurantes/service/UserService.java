@@ -4,6 +4,7 @@ import com.restaurantes.dto.RegisterForm;
 import com.restaurantes.dto.UserStatsDTO;
 import com.restaurantes.model.User;
 import com.restaurantes.model.enums.Role;
+import com.restaurantes.repository.FavoriteRepository;
 import com.restaurantes.repository.OrderRepository;
 import com.restaurantes.repository.ReviewRepository;
 import com.restaurantes.repository.UserRepository;
@@ -28,6 +29,7 @@ public class UserService implements UserDetailsService {
     private final PasswordEncoder passwordEncoder;
     private final ReviewRepository reviewRepository;
     private final OrderRepository orderRepository;
+    private final FavoriteService favoriteService;
 
     // metodo para buscar el usuario en base de datos por su username
     @Override
@@ -93,7 +95,9 @@ public class UserService implements UserDetailsService {
                 reviewRepository.findByUser_Id(id),
                 orderRepository.countByUser_Id(id),
                 orderRepository.findByUser_IdOrderByDateDesc(id),
-                orderRepository.calculateTotalMoneySpentByUserId(id)
+                orderRepository.calculateTotalMoneySpentByUserId(id),
+                favoriteService.findFavoriteRestaurants(id),
+                favoriteService.findFavoriteDishes(id)
         );
     }
 
