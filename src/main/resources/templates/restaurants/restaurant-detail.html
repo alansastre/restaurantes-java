@@ -32,16 +32,21 @@
                         <i class="fa-solid fa-hand-point-up"></i> Hacer pedido
                     </a>
 
-                    <!-- TODO botón añadir a favoritos toggle-->
                     <form  sec:authorize="isAuthenticated()"
                            th:action="@{/favorites/toggle}"
                             method="post">
                         <input type="hidden" name="type" th:value="RESTAURANT">
                         <input type="hidden" name="targetId" th:value="${restaurant.id}">
                         <input type="hidden" name="redirectUrl" th:value="@{/restaurants/{id}(id=${restaurant.id})}">
-                        <button class="btn btn-sm btn-danger" type="submit">
-                            <i class="fa-solid fa-heart"></i>
+
+                        <button class="btn btn-sm" type="submit"
+                            th:classappend="${favoriteRestaurantIds.contains(restaurant.id)} ?
+                                'btn-danger' : 'btn-outline-danger'">
+
+                            <i th:class="${favoriteRestaurantIds.contains(restaurant.id)} ?
+                                        'fa-solid fa-heart' : 'fa-regular fa-heart'"></i>
                             Guardar favorito
+
                         </button>
                     </form>
 
