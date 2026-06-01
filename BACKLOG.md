@@ -77,11 +77,12 @@ Pendiente:
   * Favorite: @ManyToOne User, @ManyToOne Restaurant, @ManyToOne Dish, LocalDateTime
   * Restaurant
 * Order: datos de pago y descuento
-
+* Controlador API REST @RestController y probarlo con OpenAPI Swagger / Postman
+* Presentaciones: estructura. miercoles 10/06
+* GitHub: ramas (branches) y Pull Request
 
 
 * Advice (Controller global)
-* Controlador API REST @RestController y probarlo con OpenAPI Swagger / Postman
 * spring validation para formularios para validar datos de entrada
 
 
