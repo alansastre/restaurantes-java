@@ -11,22 +11,24 @@ Un usuario quiere marcar como favorito un restaurante o un plato y poder visuali
   * Dish dish
 
 * repository/FavoriteRepository.java (50 %)
-  * findByUser_IdAndRestaurantId
+  * findByUser_IdAndRestaurantIsNotNull (OK)
+  * findByUser_IdAndDishIsNotNull (OK)
+  * findByUser_IdAndRestaurantId (OK)
   * findByUser_IdAndDishId
 
 * service/FavoriteService.java
-  * toggleRestaurant
+  * toggleRestaurant (OK)
   * toggleDish
-  * findFavoriteRestaurants
-  * findFavoriteDishes
+  * findFavoriteRestaurants (OK)
+  * findFavoriteDishes (OK)
 
 * controller/FavoriteController.java
-  * toggle
+  * toggle (OK)
 
 * fragments/favorite-button.html
 * Editar:
   * restaurants/restaurant-list.html añadir botón favorito
-  * restaurants/restaurant-detail.html añadir botón favorito
+  * restaurants/restaurant-detail.html añadir botón favorito (OK)
   * dishes/dish-list.html añadir botón favorito
   * dishes/dish-detail.html añadir botón favorito
 

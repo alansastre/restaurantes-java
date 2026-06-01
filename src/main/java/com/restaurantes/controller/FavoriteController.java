@@ -29,11 +29,9 @@ public class FavoriteController {
         boolean favorited;
         if(type.equalsIgnoreCase("restaurant")) {
             favorited = favoriteService.toggleRestaurant(user, targetId);
-        }
-//        else if(type.equalsIgnoreCase("dish")) {
-//            favorited = favoriteService.toggleDish(user, targetId);
-//        }
-        else {
+        } else if(type.equalsIgnoreCase("dish")) {
+            favorited = favoriteService.toggleDish(user, targetId);
+        } else {
             return  "redirect:" + redirectUrl;
         }
 

@@ -1,5 +1,6 @@
 package com.restaurantes.service;
 
+import com.restaurantes.model.Dish;
 import com.restaurantes.model.Favorite;
 import com.restaurantes.model.Restaurant;
 import com.restaurantes.model.User;
@@ -43,6 +44,18 @@ public class FavoriteService {
         // Opción 2: no existe y lo creamos como favorito
         Restaurant restaurant = restaurantRepository.findById(restaurantId).orElseThrow();
         favoriteRepository.save(Favorite.builder().restaurant(restaurant).user(user).build());
+        return true;
+    }
+
+    public boolean toggleDish(User user, Long dishId) {
+        Optional<Favorite> existing = favoriteRepository.findByUser_IdAndDishId(user.getId(), dishId);
+        if (existing.isPresent()) {
+            favoriteRepository.delete(existing.get());
+            return false;
+        }
+
+        Dish dish = dishRepository.findById(dishId).orElseThrow();
+        favoriteRepository.save(Favorite.builder().dish(dish).user(user).build());
         return true;
     }
 }

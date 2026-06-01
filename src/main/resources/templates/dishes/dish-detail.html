@@ -13,6 +13,20 @@
         <div class="card-body">
             <h1 class="card-title mb-3" th:text="'Plato ' + ${dish.id}">Plato</h1>
 
+            <div th:if="${message}" class="alert alert-success" th:text="${message}"></div>
+
+            <form  sec:authorize="isAuthenticated()"
+                   th:action="@{/favorites/toggle}"
+                   method="post">
+                <input type="hidden" name="type" th:value="DISH">
+                <input type="hidden" name="targetId" th:value="${dish.id}">
+                <input type="hidden" name="redirectUrl" th:value="@{/dishes/{id}(id=${dish.id})}">
+                <button class="btn btn-sm btn-danger" type="submit">
+                    <i class="fa-solid fa-heart"></i>
+                    Guardar favorito
+                </button>
+            </form>
+
             <dl class="row mb-0">
                 <dt class="col-sm-3"><i class="fa-solid fa-tag me-1"></i> Nombre</dt>
                 <dd class="col-sm-9" th:text="${dish.name}"></dd>

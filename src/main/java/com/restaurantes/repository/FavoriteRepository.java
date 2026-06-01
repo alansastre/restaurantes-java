@@ -12,5 +12,7 @@ public interface FavoriteRepository extends JpaRepository<Favorite, Long> {
     List<Favorite> findByUser_IdAndDishIsNotNull(Long id);
 
     Optional<Favorite> findByUser_IdAndRestaurantId(Long userId, Long restaurantId);
+    Optional<Favorite> findByUser_IdAndDishId(Long userId, Long dishId);
 
+    // TODO Query para ids
 }
