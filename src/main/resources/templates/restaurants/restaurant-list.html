@@ -89,6 +89,27 @@
                        class="btn btn-primary btn-sm w-100">
                         <i class="fa-regular fa-eye me-1"></i> Ver
                     </a>
+
+                    <form sec:authorize="isAuthenticated()"
+                           th:action="@{/favorites/toggle}"
+                           method="post">
+                        <input type="hidden" name="type" th:value="RESTAURANT">
+                        <input type="hidden" name="targetId" th:value="${restaurant.id}">
+                        <input type="hidden" name="redirectUrl" th:value="@{/restaurants/{id}(id=${restaurant.id})}">
+
+                        <button class="btn btn-sm w-100" type="submit"
+                                th:classappend="${favoriteRestaurantIds.contains(restaurant.id)} ?
+                                'btn-danger' : 'btn-outline-danger'">
+
+                            <i th:class="${favoriteRestaurantIds.contains(restaurant.id)} ?
+                                        'fa-solid fa-heart' : 'fa-regular fa-heart'"></i>
+
+                            <span th:if="${favoriteRestaurantIds.contains(restaurant.id)}">Quitar favorito</span>
+                            <span th:unless="${favoriteRestaurantIds.contains(restaurant.id)}">Añadir favorito</span>
+
+                        </button>
+                    </form>
+
                     <!-- Botón Desactivar restaurante que cambia Active a false y hace redirect a list -->
                     <a sec:authorize="hasRole('ADMIN')" th:href="@{/restaurants/deactivate/{id}(id=${restaurant.id})}"
                        class="btn btn-warning btn-sm w-100 mt-2">

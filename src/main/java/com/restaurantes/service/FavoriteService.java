@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 @AllArgsConstructor
@@ -27,6 +28,10 @@ public class FavoriteService {
 
     public List<Favorite> findFavoriteDishes(Long userId) {
         return favoriteRepository.findByUser_IdAndDishIsNotNull(userId);
+    }
+
+    public Set<Long> findRestaurantIdsByUserId(Long userId) {
+        return favoriteRepository.findRestaurantIdsByUserId(userId);
     }
 
 

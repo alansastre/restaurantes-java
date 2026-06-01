@@ -3,11 +3,14 @@ package com.restaurantes.controller;
 import com.restaurantes.model.Dish;
 import com.restaurantes.model.Restaurant;
 import com.restaurantes.model.Review;
+import com.restaurantes.model.User;
 import com.restaurantes.model.enums.FoodType;
 import com.restaurantes.repository.DishRepository;
 import com.restaurantes.repository.RestaurantRepository;
 import com.restaurantes.repository.ReviewRepository;
+import com.restaurantes.service.FavoriteService;
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -24,6 +27,7 @@ public class RestaurantController {
     private final RestaurantRepository restaurantRepository;
     private final DishRepository dishRepository;
     private final ReviewRepository reviewRepository;
+    private final FavoriteService favoriteService;
 
 //    // http://localhost:8080/restaurants
 //    @GetMapping("restaurants") // controlador
@@ -44,46 +48,36 @@ public class RestaurantController {
             Model model,
             @RequestParam(required = false) FoodType foodType,
             @RequestParam(required = false) Double price,
-            @RequestParam(required = false) String title
+            @RequestParam(required = false) String title,
+            @AuthenticationPrincipal User user
     ) {
         List<Restaurant> restaurants = restaurantRepository.findActiveFiltering(foodType, price, title);
         model.addAttribute("restaurants", restaurants);
         model.addAttribute("numRestaurants", restaurants.size());
         model.addAttribute("title", "Lista de restaurantes");
+        if(user != null) {
+            model.addAttribute("favoriteRestaurantIds",
+                    favoriteService.findRestaurantIdsByUserId(user.getId()));
+        }
         return "restaurants/restaurant-list"; // vista
     }
 
-    // nuevo metodo para traer un solo restaurante por su id
     @GetMapping("restaurants/{id}")
-    public String restaurantDetail(@PathVariable Long id, Model model) {
-
-
-        // buscar restaurante por su id: findById
-//        Optional<Restaurant> restaurantOptional = restaurantRepository.findById(id);
+    public String restaurantDetail(@PathVariable Long id, Model model, @AuthenticationPrincipal User user) {
         Optional<Restaurant> restaurantOptional = restaurantRepository.findByIdAndActiveTrue(id);
         if (restaurantOptional.isPresent()) {
-
-
-            // El restaurante sí existe
             Restaurant restaurant = restaurantOptional.get();
             model.addAttribute("restaurant", restaurant);
-            // opcional:
-            // cargar los platos (Dish) de este restaurant en el model
             List<Dish> platos = dishRepository.findByRestaurantIdOrderByPrice(restaurant.getId());
             model.addAttribute("dishes", platos);
-
-            // reviews
-            //List<Review> reviews = reviewRepository.findAll();
             List<Review> reviews = reviewRepository.findByRestaurant_IdOrderByCreationDateDesc(restaurant.getId());
-            model.addAttribute("reviews", reviews); // accesibles desde HTML
-
+            model.addAttribute("reviews", reviews);
+            if(user != null) {
+                model.addAttribute("favoriteRestaurantIds",
+                        favoriteService.findRestaurantIdsByUserId(user.getId()));
+            }
             return "restaurants/restaurant-detail";
-
         }
-
-        // El restaurante NO existe
-        // CUIDADO no apunta a HTML
-        // APUNTA al Controller
         return "redirect:/restaurants";
     }
 
