@@ -72,14 +72,19 @@ Pendiente:
 * config/DataInitializer.java datos demo y dejar main limpio
 * Input tipo file en formularios para subir imagen (90%)
 * GitHub Actions (Integracion Continua) (OK)
-* Favoritos (Product, House, Movie)
+* Favoritos (Product, House, Movie) (80 %)
   * User
   * Favorite: @ManyToOne User, @ManyToOne Restaurant, @ManyToOne Dish, LocalDateTime
   * Restaurant
-* Order: datos de pago y descuento
+* order-detail: datos de pago y descuento (PENDIENTE)
+  * cardOwner
+  * cardNumber
+  * cardExpirationDate
+  * cardCode
 * Controlador API REST @RestController y probarlo con OpenAPI Swagger / Postman
 * Presentaciones: estructura. miercoles 10/06
 * GitHub: ramas (branches) y Pull Request
+* Base de datos MySQL
 
 
 * Advice (Controller global)
