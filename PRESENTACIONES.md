@@ -8,6 +8,7 @@ Diapos con Google Slides o Canvas.
 
 * logo y nombre
 * equipo
+* contexto objetivo proyecto
 * DEMO
   * anónimo
   * user

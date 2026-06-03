@@ -9,11 +9,13 @@ import com.restaurantes.repository.DishRepository;
 import com.restaurantes.repository.RestaurantRepository;
 import com.restaurantes.repository.ReviewRepository;
 import com.restaurantes.service.FavoriteService;
+import com.restaurantes.service.FileService;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Optional;
@@ -28,6 +30,7 @@ public class RestaurantController {
     private final DishRepository dishRepository;
     private final ReviewRepository reviewRepository;
     private final FavoriteService favoriteService;
+    private final FileService fileService;
 
 //    // http://localhost:8080/restaurants
 //    @GetMapping("restaurants") // controlador
@@ -113,9 +116,15 @@ public class RestaurantController {
 
 
     @PostMapping("restaurants")
-    public String createRestaurant(@ModelAttribute Restaurant restaurant) {
+    public String createRestaurant(
+        @ModelAttribute Restaurant restaurant,
+        @RequestParam("imageFile") MultipartFile imageFile
+    ) {
 
-        System.out.println("RESTAURANTE RECIBIDO: " + restaurant);
+        String imageUrl = fileService.store(imageFile);
+        if (imageUrl != null)
+            restaurant.setImageUrl(imageUrl);
+
         restaurantRepository.save(restaurant);
         return "redirect:/restaurants/" + restaurant.getId();
     }

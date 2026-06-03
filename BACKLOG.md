@@ -1,5 +1,27 @@
 
 
+Pendiente:
+
+
+* Input tipo file en formularios para subir imagen (Falta dish-form, restaurant-form) (90%)
+
+* config/DataInitializer.java datos demo y dejar main limpio
+* Controlador API REST @RestController y probarlo con OpenAPI Swagger / Postman
+* GitHub: ramas (branches) y Pull Request
+* Base de datos MySQL
+* Revisión proyectos
+* Test de servicio, Test controller
+* Presentaciones:
+  * Grupo 2: lunes 15/06
+  * Grupo 1 y 3: jueves 11/06
+
+
+
+
+
+
+
+
 
 
 
@@ -69,22 +91,20 @@ Pendiente:
 * Home
 * Loggers @Slf4j de Lombok: log.info, log.warn, log.error (OK)
 * Fixes en proyectos y tableros
-* config/DataInitializer.java datos demo y dejar main limpio
-* Input tipo file en formularios para subir imagen (90%)
+
+
 * GitHub Actions (Integracion Continua) (OK)
 * Favoritos (Product, House, Movie) (80 %)
   * User
   * Favorite: @ManyToOne User, @ManyToOne Restaurant, @ManyToOne Dish, LocalDateTime
   * Restaurant
-* order-detail: datos de pago y descuento (PENDIENTE)
+* order-detail: datos de pago y descuento (OK)
   * cardOwner
   * cardNumber
   * cardExpirationDate
   * cardCode
-* Controlador API REST @RestController y probarlo con OpenAPI Swagger / Postman
-* Presentaciones: estructura. miercoles 10/06
-* GitHub: ramas (branches) y Pull Request
-* Base de datos MySQL
+
+
 
 
 * Advice (Controller global)

@@ -52,6 +52,8 @@ public class Restaurant { // clase
     @Enumerated(EnumType.STRING)
     private FoodType foodType;
 
+    private String imageUrl;
+
     public FoodType getFoodType() {
         return foodType;
     }
@@ -142,6 +144,14 @@ public class Restaurant { // clase
 
     public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     // Próximas tareas:

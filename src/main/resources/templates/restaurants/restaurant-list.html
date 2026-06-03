@@ -72,6 +72,9 @@
         <div class="col" th:each="restaurant : ${restaurants}">
             <div class="card card-restaurant h-100 shadow-sm">
 
+                <img th:if="${restaurant.imageUrl}" th:src="${restaurant.imageUrl}"
+                class="card-img-top object-fit-cover" style="height: 100px;" alt="foto restaurant">
+
                 <form sec:authorize="isAuthenticated()"
                       th:action="@{/favorites/toggle}"
                       method="post" class="position-absolute top-0 end-0 m-2" style="z-index:2;">

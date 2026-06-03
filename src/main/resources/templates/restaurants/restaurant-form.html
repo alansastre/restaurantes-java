@@ -13,8 +13,10 @@
                 <i class="fa-solid fa-utensils text-primary me-2"></i>Formulario restaurante
             </h1>
 
-            <!-- TODO formulario para crear o editar un restaurante -->
-            <form th:action="@{/restaurants}" method="post" th:object="${restaurant}">
+
+            <form th:action="@{/restaurants}" method="post"
+                  th:object="${restaurant}"
+                  enctype="multipart/form-data">
 
                 <input type="hidden" th:field="*{id}">
 
@@ -65,6 +67,15 @@
                     <label class="form-check-label" for="active">Restaurante activo</label>
                 </div>
 
+                <div class="mb-3">
+                    <label for="imageFile" class="form-label">Imagen</label>
+                    <input type="hidden" th:field="*{imageUrl}">
+                    <input type="file" class="form-control" id="imageFile" name="imageFile" accept="image/*">
+                    <img id="preview" alt="Previsualización" class="mt-2 rounded"
+                         style="max-height:150px; display:none"
+                         th:src="${restaurant != null and restaurant.imageUrl != null ? restaurant.imageUrl : null}">
+                </div>
+
                 <button type="submit" class="btn btn-success">
                     <i class="fa-solid fa-floppy-disk"></i> Guardar
                 </button>
@@ -78,6 +89,6 @@
 
         <footer th:replace="~{layout/footer :: footer}"></footer>
         <script th:replace="~{layout/footer :: scripts}"></script>
-
+        <script th:src="@{/js/img-preview.js}"></script>
     </body>
 </html>

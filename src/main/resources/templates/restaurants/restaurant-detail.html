@@ -22,6 +22,9 @@
                     </span>
             </div>
 
+            <img th:if="${restaurant.imageUrl}" th:src="${restaurant.imageUrl}"
+            class="rounded-circle float-end" style="max-height: 90px;" alt="foto restaurant">
+
             <div th:if="${message}" class="alert alert-success" th:text="${message}"></div>
 
             <!-- 2. badges informativos -->
