@@ -39,6 +39,8 @@ public class Dish {
     @ManyToOne
     private Restaurant restaurant;
 
+    private String imageUrl;
+
     // constructor
     public Dish() {}
     public Dish(Long id, String name, String description, Double price, DishType dishType, Restaurant restaurant) {
@@ -98,6 +100,14 @@ public class Dish {
 
     public void setRestaurant(Restaurant restaurant) {
         this.restaurant = restaurant;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     // tostring
