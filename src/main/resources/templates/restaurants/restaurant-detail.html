@@ -9,64 +9,74 @@
 
         <main class="container flex-grow-1">
 
-            <!-- Cabecera del restaurante -->
+            <!-- 1. Cabecera del restaurante -->
             <div class="d-flex justify-content-between align-items-start mb-3">
-                <div>
-                    <h1 class="mb-2" th:text="${restaurant.name}">
+                    <h1 class="mb-0" th:text="${restaurant.name}">
                         Nombre
                     </h1>
-
-                    <div th:if="${message}" class="alert alert-success" th:text="${message}"></div>
-
-                    <a sec:authorize="hasRole('ADMIN')" th:href="@{/restaurants/deactivate/{id}(id=${restaurant.id})}"
-                       class="btn btn-warning btn-sm mt-2">
-                        <i class="fa-solid fa-ban me-1"></i> Desactivar
-                    </a>
-
-                    <a sec:authorize="hasRole('ADMIN')" th:href="@{/restaurants/edit/{id}(id=${restaurant.id})}"
-                       class="btn btn-success btn-sm mt-2">
-                        <i class="fa-solid fa-pencil me-1"></i> Editar
-                    </a>
-
-                    <a sec:authorize="isAuthenticated()" class="btn btn-success" th:href="@{/orders/new(restaurantId=${restaurant.id})}">
-                        <i class="fa-solid fa-hand-point-up"></i> Hacer pedido
-                    </a>
-
-                    <form  sec:authorize="isAuthenticated()"
-                           th:action="@{/favorites/toggle}"
-                            method="post">
-                        <input type="hidden" name="type" th:value="RESTAURANT">
-                        <input type="hidden" name="targetId" th:value="${restaurant.id}">
-                        <input type="hidden" name="redirectUrl" th:value="@{/restaurants/{id}(id=${restaurant.id})}">
-
-                        <button class="btn btn-sm" type="submit"
-                            th:classappend="${favoriteRestaurantIds.contains(restaurant.id)} ?
-                                'btn-danger' : 'btn-outline-danger'">
-
-                            <i th:class="${favoriteRestaurantIds.contains(restaurant.id)} ?
-                                        'fa-solid fa-heart' : 'fa-regular fa-heart'"></i>
-                            Guardar favorito
-
-                        </button>
-                    </form>
-
-                    <span class="badge bg-success me-1">
-                        <i class="fa-solid fa-euro-sign me-1"></i>
-                        <span th:text="${restaurant.averagePrice != null ? restaurant.averagePrice + ' €' : 'Sin precio'}"></span>
+                    <span th:if="${restaurant.active}" class="badge bg-success fs-6">
+                        <i class="fa-solid fa-door-open me-1"></i> Abierto
                     </span>
-                    <span class="badge bg-info text-dark me-1"
-                          th:if="${restaurant.numberEmployees != null}"
-                          th:text="${restaurant.numberEmployees + ' empleados'}"></span>
-                    <span class="badge bg-secondary me-1"
-                          th:unless="${restaurant.numberEmployees != null}">Sin empleados</span>
-                </div>
+                    <span th:unless="${restaurant.active}" class="badge bg-danger fs-6">
+                        <i class="fa-solid fa-door-closed me-1"></i> Cerrado
+                    </span>
+            </div>
 
-                <span th:if="${restaurant.active}" class="badge bg-success fs-6">
-                    <i class="fa-solid fa-door-open me-1"></i> Abierto
+            <div th:if="${message}" class="alert alert-success" th:text="${message}"></div>
+
+            <!-- 2. badges informativos -->
+            <div class="mb-3">
+                <span class="badge text-bg-light me-1">
+                        <i class="fa-solid fa-euro-sign me-1"></i>
+                        <span th:text="${restaurant.averagePrice != null ? restaurant.averagePrice : 'Sin precio'}"></span>
                 </span>
-                <span th:unless="${restaurant.active}" class="badge bg-danger fs-6">
-                    <i class="fa-solid fa-door-closed me-1"></i> Cerrado
+                <span class="badge text-bg-light me-1"
+                      th:if="${restaurant.numberEmployees != null}"
+                      th:text="${restaurant.numberEmployees + ' empleados'}"></span>
+                <span class="badge text-bg-light me-1"
+                      th:unless="${restaurant.numberEmployees != null}">Sin empleados</span>
+                <span class="badge text-bg-light me-1">
+                        <span th:text="${restaurant.foodType != null ? restaurant.foodType : 'Todo tipo'}"></span>
                 </span>
+                <span class="badge text-bg-light me-1">
+                        <span th:text="${restaurant.startDate != null ? restaurant.startDate : 'Proximamente'}"></span>
+                </span>
+            </div>
+
+            <!-- 3. Barra de acciones -->
+            <div class="d-flex flex-wrap gap-2 align-items-center mb-4">
+
+                <a sec:authorize="isAuthenticated()" class="btn btn-success btn-sm" th:href="@{/orders/new(restaurantId=${restaurant.id})}">
+                    <i class="fa-solid fa-hand-point-up me-1"></i> Hacer pedido
+                </a>
+
+                <a sec:authorize="hasRole('ADMIN')" th:href="@{/restaurants/edit/{id}(id=${restaurant.id})}"
+                   class="btn btn-success btn-sm">
+                    <i class="fa-solid fa-pencil me-1"></i> Editar
+                </a>
+
+                <a sec:authorize="hasRole('ADMIN')" th:href="@{/restaurants/deactivate/{id}(id=${restaurant.id})}"
+                   class="btn btn-warning btn-sm">
+                    <i class="fa-solid fa-ban me-1"></i> Desactivar
+                </a>
+
+                <form sec:authorize="isAuthenticated()"
+                      th:action="@{/favorites/toggle}"
+                      method="post" class="d-inline">
+                    <input type="hidden" name="type" th:value="RESTAURANT">
+                    <input type="hidden" name="targetId" th:value="${restaurant.id}">
+                    <input type="hidden" name="redirectUrl" th:value="@{/restaurants/{id}(id=${restaurant.id})}">
+                    <button class="btn btn-light btn-sm rounded-circle
+                                        shadow-sm p-2 d-inline-flex align-content-center justify-content-center"
+                            type="submit"
+                            th:title="${favoriteRestaurantIds.contains(restaurant.id)} ?
+                                'Quitar de favoritos' : 'Añadir a favoritos'">
+                        <i class="fa-heart text-danger fs-5"
+                           th:classappend="${favoriteRestaurantIds.contains(restaurant.id)} ?
+                                        'fa-solid' : 'fa-regular'"></i>
+                    </button>
+                </form>
+
             </div>
 
             <hr>
