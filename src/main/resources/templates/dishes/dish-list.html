@@ -34,7 +34,26 @@
                  th:unless="${#lists.isEmpty(dishes)}">
                 <div class="col" th:each="dish : ${dishes}">
                     <div class="card h-100 shadow-sm border-0">
-                        <div class="card-header bg-white d-flex justify-content-between align-items-center">
+
+                        <form sec:authorize="isAuthenticated()"
+                              th:action="@{/favorites/toggle}"
+                              method="post" class="position-absolute top-0 end-0 m-2" style="z-index:2;">
+                            <input type="hidden" name="type" th:value="DISH">
+                            <input type="hidden" name="targetId" th:value="${dish.id}">
+                            <input type="hidden" name="redirectUrl" th:value="@{/dishes}">
+                            <button class="btn btn-light btn-sm rounded-circle
+                                        shadow-sm p-2 d-inline-flex align-content-center justify-content-center"
+                                    type="submit"
+                                    th:title="${favoriteDishIds.contains(dish.id)} ?
+                                'Quitar de favoritos' : 'Añadir a favoritos'">
+                                <i class="fa-heart text-danger fs-7"
+                                   th:classappend="${favoriteDishIds.contains(dish.id)} ?
+                                        'fa-solid' : 'fa-regular'"></i>
+                            </button>
+                        </form>
+
+
+                        <div class="card-header bg-white pe-5 py-2">
                             <span th:switch="${dish.dishType}">
                                 <span class="badge bg-success" th:case="${T(com.restaurantes.model.enums.DishType).STARTER}">
                                     <i class="fa-solid fa-leaf me-1"></i>Entrantes
@@ -47,15 +66,17 @@
                                 </span>
                                 <span class="badge bg-secondary" th:case="*">Sin tipo</span>
                             </span>
-                            <span class="fw-bold text-success">
-                                <span th:if="${dish.price != null}"
-                                      th:text="|${#numbers.formatDecimal(dish.price, 1, 2)} €|">0,00 €</span>
-                                <span th:unless="${dish.price != null}" class="text-muted small">Sin precio</span>
-                            </span>
                         </div>
 
                         <div class="card-body">
-                            <h5 class="card-title mb-2" th:text="${dish.name}">Nombre</h5>
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <h5 class="card-title mb-2" th:text="${dish.name}">Nombre</h5>
+                                <span class="fw-bold text-success">
+                                    <span th:if="${dish.price != null}"
+                                          th:text="|${#numbers.formatDecimal(dish.price, 1, 2)} €|">0,00 €</span>
+                                    <span th:unless="${dish.price != null}" class="text-muted small">Sin precio</span>
+                                </span>
+                            </div>
                             <p class="card-text text-muted small mb-0"
                                th:text="${dish.description != null ? dish.description : 'Sin descripción'}">
                                 Descripción
