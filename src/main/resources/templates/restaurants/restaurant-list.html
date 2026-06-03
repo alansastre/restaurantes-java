@@ -71,6 +71,24 @@
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3">
         <div class="col" th:each="restaurant : ${restaurants}">
             <div class="card card-restaurant h-100 shadow-sm">
+
+                <form sec:authorize="isAuthenticated()"
+                      th:action="@{/favorites/toggle}"
+                      method="post" class="position-absolute top-0 end-0 m-2" style="z-index:2;">
+                    <input type="hidden" name="type" th:value="RESTAURANT">
+                    <input type="hidden" name="targetId" th:value="${restaurant.id}">
+                    <input type="hidden" name="redirectUrl" th:value="@{/restaurants}">
+                    <button class="btn btn-light btn-sm rounded-circle
+                                        shadow-sm p-2 d-inline-flex align-content-center justify-content-center"
+                            type="submit"
+                            th:title="${favoriteRestaurantIds.contains(restaurant.id)} ?
+                                'Quitar de favoritos' : 'Añadir a favoritos'">
+                        <i class="fa-heart text-danger fs-5"
+                           th:classappend="${favoriteRestaurantIds.contains(restaurant.id)} ?
+                                        'fa-solid' : 'fa-regular'"></i>
+                    </button>
+                </form>
+
                 <div class="card-body">
                     <h5 class="card-title">
                         <i class="fa-solid fa-store text-primary me-2"></i>
@@ -89,26 +107,6 @@
                        class="btn btn-primary btn-sm w-100">
                         <i class="fa-regular fa-eye me-1"></i> Ver
                     </a>
-
-                    <form sec:authorize="isAuthenticated()"
-                           th:action="@{/favorites/toggle}"
-                           method="post">
-                        <input type="hidden" name="type" th:value="RESTAURANT">
-                        <input type="hidden" name="targetId" th:value="${restaurant.id}">
-                        <input type="hidden" name="redirectUrl" th:value="@{/restaurants/{id}(id=${restaurant.id})}">
-
-                        <button class="btn btn-sm w-100" type="submit"
-                                th:classappend="${favoriteRestaurantIds.contains(restaurant.id)} ?
-                                'btn-danger' : 'btn-outline-danger'">
-
-                            <i th:class="${favoriteRestaurantIds.contains(restaurant.id)} ?
-                                        'fa-solid fa-heart' : 'fa-regular fa-heart'"></i>
-
-                            <span th:if="${favoriteRestaurantIds.contains(restaurant.id)}">Quitar favorito</span>
-                            <span th:unless="${favoriteRestaurantIds.contains(restaurant.id)}">Añadir favorito</span>
-
-                        </button>
-                    </form>
 
                     <!-- Botón Desactivar restaurante que cambia Active a false y hace redirect a list -->
                     <a sec:authorize="hasRole('ADMIN')" th:href="@{/restaurants/deactivate/{id}(id=${restaurant.id})}"

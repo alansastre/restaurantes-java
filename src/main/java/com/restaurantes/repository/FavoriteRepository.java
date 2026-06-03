@@ -24,4 +24,11 @@ public interface FavoriteRepository extends JpaRepository<Favorite, Long> {
         and f.restaurant IS NOT NULL
     """)
     Set<Long> findRestaurantIdsByUserId(@Param("userId") Long userId);
+
+    @Query("""
+    select f.dish.id from Favorite f
+        where f.user.id = :userId
+        and f.dish IS NOT NULL
+    """)
+    Set<Long> findDishIdsByUserId(@Param("userId") Long userId);
 }

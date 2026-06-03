@@ -27,4 +27,12 @@ public class GlobalModelAttributes {
         }
         return Set.of();
     }
+
+    @ModelAttribute("favoriteDishIds")
+    public Set<Long> getFavoriteDishIds(@AuthenticationPrincipal User user) {
+        if(user != null) {
+            return favoriteService.findDishIdsByUserId(user.getId());
+        }
+        return Set.of();
+    }
 }

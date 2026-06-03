@@ -34,6 +34,10 @@ public class FavoriteService {
         return favoriteRepository.findRestaurantIdsByUserId(userId);
     }
 
+    public Set<Long> findDishIdsByUserId(Long userId) {
+        return favoriteRepository.findDishIdsByUserId(userId);
+    }
+
 
     public boolean toggleRestaurant(User user, Long restaurantId) {
 
