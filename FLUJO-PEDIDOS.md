@@ -47,3 +47,23 @@ Como cliente quiero poder iniciar un pedido sobre un restaurante, debo poder añ
     * recalculate price
     * save 
     *  "redirect:/orders/" + order.getId();
+
+
+## Añadir pago simulado
+
+No vamos a utilizar una integración con una pasarela de pago real, ya que por ejemplo integrar Stripe implica darse de alta, obtener keys, tener productos en stripe con precios, hacer compra, webhook. 
+
+
+* Nuevos atributos en Order (pedido) (OK)
+  * String cardOwner;
+  * String cardNumber;
+  * String cardExpirationDate;
+  * String cardSecretCode; (este crítico mejor no guardarlo)
+
+* OrderController
+   * @PostMapping orders/{id}/finish
+
+* HTML seccion de pago order-detail.html
+  *  donde la propina añadir los nuevos campos
+
+* Datos del pago mostrar los datos ofuscados el número tarjeta

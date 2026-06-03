@@ -23,6 +23,13 @@ public class Order {
     private Integer numPeople;
     @Enumerated(EnumType.STRING)
     private OrderStatus status = OrderStatus.PENDING;
+
+    // pago
+    // private PaymentMethod method; // CASH, CARD
+    private String cardOwner; // titular
+    private String cardNumber; // XXXXYYYYZZZZWWWW
+    private String cardExpirationDate; // MM-YY
+
     @ManyToOne
     private Restaurant restaurant;
 
@@ -125,6 +132,30 @@ public class Order {
 
     public void setUserSuggestions(String userSuggestions) {
         this.userSuggestions = userSuggestions;
+    }
+
+    public String getCardOwner() {
+        return cardOwner;
+    }
+
+    public void setCardOwner(String cardOwner) {
+        this.cardOwner = cardOwner;
+    }
+
+    public String getCardNumber() {
+        return cardNumber;
+    }
+
+    public void setCardNumber(String cardNumber) {
+        this.cardNumber = cardNumber;
+    }
+
+    public String getCardExpirationDate() {
+        return cardExpirationDate;
+    }
+
+    public void setCardExpirationDate(String cardExpirationDate) {
+        this.cardExpirationDate = cardExpirationDate;
     }
 
     @Override

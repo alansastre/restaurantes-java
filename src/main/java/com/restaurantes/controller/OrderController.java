@@ -12,6 +12,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -113,9 +114,39 @@ public class OrderController {
     }
 
     // Si en la finalización se envían datos sensibles de pago mejor que sea PostMapping
-    @GetMapping("orders/{id}/finish")
-    public String finish(@PathVariable Long id, @RequestParam(required = false) Double tip) {
+    @PostMapping("orders/{id}/finish")
+    public String finish(
+            @PathVariable Long id,
+            @RequestParam(required = false) Double tip,
+            @RequestParam(required = false) String cardOwner,
+            @RequestParam(required = false) String cardNumber,
+            @RequestParam(required = false) String cardExpirationDate,
+            @RequestParam(required = false) String cardSecretCode,
+            RedirectAttributes redirectAttributes
+    ) {
         Order order =  orderRepository.findById(id).orElseThrow();
+        // 1111 2222 3333 4444 -> 1111222233334444
+        String number = cardNumber == null ? "" : cardNumber.replace("\\s", "");
+        if (!number.matches("\\d{16}")) {
+            redirectAttributes.addFlashAttribute("error", "Invalid card number");
+            return "redirect:/orders/" + id;
+        }
+        // TODO verificar que no esté caducada
+        if(cardExpirationDate == null || !cardExpirationDate.matches("\\d{2}/\\d{2}")) {
+            redirectAttributes.addFlashAttribute("error", "La caducidad debe tener formato MM/YY");
+            return "redirect:/orders/" + id;
+        }
+        if(cardSecretCode == null ||  !cardSecretCode.matches("\\d{3}")) {
+            redirectAttributes.addFlashAttribute("error", "Invalid card secret code");
+            return "redirect:/orders/" + id;
+        }
+        if(cardOwner == null || cardOwner.isBlank()) {
+            redirectAttributes.addFlashAttribute("error", "Card owner is required");
+            return "redirect:/orders/" + id;
+        }
+        order.setCardNumber(cardNumber);
+        order.setCardOwner(cardOwner);
+        order.setCardExpirationDate(cardExpirationDate);
         order.setStatus(OrderStatus.FINISHED);
         order.setTotalPrice(orderLineRepository.calculateTotalPrice(order.getId()));
         // iva, service charge, terrace
@@ -126,6 +157,7 @@ public class OrderController {
         }
 
         orderRepository.save(order);
+        redirectAttributes.addFlashAttribute("message", "Pedido finalizado correctamente");
         return "redirect:/orders/" + id;
     }
 
