@@ -67,8 +67,10 @@ public class DishController {
     }
 
     @PostMapping("dishes")
-    public String saveDish(@ModelAttribute Dish dish,
-                           @RequestParam("imageFile") MultipartFile imageFile){
+    public String saveDish(
+            @ModelAttribute Dish dish,
+            @RequestParam("imageFile") MultipartFile imageFile
+    ){
 
         String imageUrl = fileService.store(imageFile);
         if (imageUrl != null)

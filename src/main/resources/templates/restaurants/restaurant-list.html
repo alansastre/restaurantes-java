@@ -73,7 +73,11 @@
             <div class="card card-restaurant h-100 shadow-sm">
 
                 <img th:if="${restaurant.imageUrl}" th:src="${restaurant.imageUrl}"
-                class="card-img-top object-fit-cover" style="height: 100px;" alt="foto restaurant">
+                class="card-img-top object-fit-cover" style="height: 70px;" alt="foto restaurant">
+                <img th:unless="${restaurant.imageUrl}"
+                     th:src="@{/uploads/restaurant-placeholder.png}"
+                     class="card-img-top object-fit-cover"
+                     style="height:70px;" alt="Imagen del restaurante">
 
                 <form sec:authorize="isAuthenticated()"
                       th:action="@{/favorites/toggle}"

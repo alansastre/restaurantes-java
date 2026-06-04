@@ -7,7 +7,8 @@
             <h1 class="mb-0">
                 <i class="fa-solid fa-utensils text-primary me-2"></i>Formulario plato
             </h1>
-            <form th:action="@{/dishes}" method="post" th:object="${dish}">
+            <form th:action="@{/dishes}" method="post"
+                  th:object="${dish}" enctype="multipart/form-data">
                 <input type="hidden" th:field="*{id}">
 
                 <!-- campos de Dish -->
@@ -52,6 +53,15 @@
                     </select>
                 </div>
 
+                <div class="mb-3">
+                    <label for="imageFile" class="form-label">Imagen</label>
+                    <input type="hidden" th:field="*{imageUrl}">
+                    <input type="file" class="form-control" id="imageFile" name="imageFile" accept="image/*">
+                    <img id="preview" alt="Previsualización" class="mt-2 rounded"
+                         style="max-height:150px; display:none"
+                         th:src="${dish != null and dish.imageUrl != null ? dish.imageUrl : null}">
+                </div>
+
                 <button type="submit" class="btn btn-success">
                     <i class="fa-solid fa-floppy-disk"></i> Guardar
                 </button>
@@ -60,25 +70,6 @@
         </main>
         <footer th:replace="~{layout/footer :: footer}"></footer>
         <script th:replace="~{layout/footer :: scripts}"></script>
-        <script>
-            (function () {
-                const input = document.getElementById('imageFile');
-                const preview = document.getElementById('preview');
-
-                // MODO EDITAR: si ya hay imagen guardada, mostrarla al cargar
-                if (preview.getAttribute('src')) {
-                    preview.style.display = 'block';
-                }
-
-                // AL ELEGIR ARCHIVO: previsualizar el nuevo (antes de subir)
-                input.addEventListener('change', function () {
-                    const file = this.files[0];
-                    if (file) {
-                        preview.src = URL.createObjectURL(file);
-                        preview.style.display = 'block';
-                    }
-                });
-            })();
-        </script>
+        <script th:src="@{/js/img-preview.js}"></script>
     </body>
 </html>

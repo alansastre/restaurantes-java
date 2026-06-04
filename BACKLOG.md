@@ -3,7 +3,7 @@
 Pendiente:
 
 
-* spring-validation
+* spring-validation (OK)
   * dependencia spring-boot-starter-validation en pom.xl
   * Te ahorra tener que validar manualmente con if en controller
   * anotaciones en atributos:
@@ -15,7 +15,7 @@ Pendiente:
 * Input tipo file en formularios para subir imagen (Falta dish-form, restaurant-form) (90%)
 
 * config/DataInitializer.java datos demo y dejar main limpio
-* Controlador API REST @RestController y probarlo con OpenAPI Swagger / Postman
+
 * GitHub: ramas (branches) y Pull Request
 * Base de datos MySQL
 * Revisión proyectos
@@ -24,8 +24,7 @@ Pendiente:
   * Grupo 2: lunes 15/06
   * Grupo 1 y 3: jueves 11/06
 
-
-
+* Controlador API REST @RestController y probarlo con OpenAPI Swagger / Postman
 
 
 

@@ -35,6 +35,15 @@
                 <div class="col" th:each="dish : ${dishes}">
                     <div class="card h-100 shadow-sm border-0">
 
+                        <img th:if="${dish.imageUrl}"
+                             th:src="${dish.imageUrl}"
+                             class="card-img-top object-fit-cover"
+                             style="height:70px;" alt="Imagen del plato">
+                        <img th:unless="${dish.imageUrl}"
+                            th:src="@{/uploads/dish-placeholder.png}"
+                             class="card-img-top object-fit-cover"
+                             style="height:70px;" alt="Imagen del plato">
+
                         <form sec:authorize="isAuthenticated()"
                               th:action="@{/favorites/toggle}"
                               method="post" class="position-absolute top-0 end-0 m-2" style="z-index:2;">
