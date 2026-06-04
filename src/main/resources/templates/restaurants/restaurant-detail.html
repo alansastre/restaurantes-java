@@ -49,7 +49,7 @@
             <!-- 3. Barra de acciones -->
             <div class="d-flex flex-wrap gap-2 align-items-center mb-4">
 
-                <a sec:authorize="isAuthenticated()" class="btn btn-success btn-sm" th:href="@{/orders/new(restaurantId=${restaurant.id})}">
+                <a class="btn btn-success btn-sm" th:href="@{/orders/new(restaurantId=${restaurant.id})}">
                     <i class="fa-solid fa-hand-point-up me-1"></i> Hacer pedido
                 </a>
 
