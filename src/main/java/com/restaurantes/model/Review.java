@@ -1,6 +1,7 @@
 package com.restaurantes.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -21,11 +22,18 @@ public class Review {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "El título es obligatorio")
+    @Size(max = 255, message = "El título no puede tener más de 255 caracteres")
     private String title;
 
+    @NotBlank(message = "La descripción es obligatoria")
+    @Size(max = 1000, message = "La descripción no puede tener más de 1000 caracteres")
     @Column(length = 1000)
     private String description;
 
+    @NotNull(message = "La valoración es obligatoria")
+    @Min(value = 1, message = "La valoración mínima es 1")
+    @Max(value = 5, message = "La valoración máxima es 5")
     private Integer rating;
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)

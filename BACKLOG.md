@@ -3,6 +3,15 @@
 Pendiente:
 
 
+* spring-validation
+  * dependencia spring-boot-starter-validation en pom.xl
+  * Te ahorra tener que validar manualmente con if en controller
+  * anotaciones en atributos:
+    * @NotBlank
+    * @Size
+    * @PositiveOrZero
+    * @Positive
+
 * Input tipo file en formularios para subir imagen (Falta dish-form, restaurant-form) (90%)
 
 * config/DataInitializer.java datos demo y dejar main limpio

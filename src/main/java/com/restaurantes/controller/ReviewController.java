@@ -5,12 +5,14 @@ import com.restaurantes.model.User;
 import com.restaurantes.repository.DishRepository;
 import com.restaurantes.repository.RestaurantRepository;
 import com.restaurantes.repository.ReviewRepository;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -89,9 +91,18 @@ public class ReviewController {
     }
 
 
-    // @PostMapping reviews
+    // @PostMapping reviews con Spring Validation @Valid
     @PostMapping("reviews")
-    public String saveReview(@ModelAttribute Review review, @AuthenticationPrincipal User user) {
+    public String saveReview(
+            @Valid @ModelAttribute Review review,
+            BindingResult bindingResult,
+            @AuthenticationPrincipal User user) {
+
+
+        if (bindingResult.hasErrors()) {
+            return "reviews/review-form";
+        }
+
         review.setUser(user);
         reviewRepository.save(review);
 

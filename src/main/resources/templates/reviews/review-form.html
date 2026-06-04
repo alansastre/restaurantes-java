@@ -34,18 +34,29 @@
                 <div class="mb-3">
                     <label for="title" class="form-label">Título</label>
                     <input id="title" type="text" class="form-control"
-                           th:field="*{title}" required maxlength="255">
+                       th:field="*{title}"
+                    th:classappend="${#fields.hasErrors('title')} ? 'is-invalid'">
+                    <div class="invalid-feedback" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></div>
                 </div>
+
                 <div class="mb-3">
                     <label for="description" class="form-label">Descripción</label>
                     <textarea id="description" class="form-control" rows="4"
-                     th:field="*{description}" required maxlength="1000"></textarea>
+                     th:field="*{description}"
+                  th:classappend="${#fields.hasErrors('description')} ? 'is-invalid'"></textarea>
+                    <div class="invalid-feedback" th:if="${#fields.hasErrors('description')}"
+                         th:errors="*{description}"></div>
                 </div>
+
                 <div class="mb-3">
                     <label for="rating" class="form-label">Puntuación (de 1 a 5)</label>
                     <input type="number" id="rating" class="form-control"
-                    th:field="*{rating}" min="1" max="5" required>
+                    th:field="*{rating}"
+                   th:classappend="${#fields.hasErrors('rating')} ? 'is-invalid'">
+                    <div class="invalid-feedback" th:if="${#fields.hasErrors('rating')}"
+                         th:errors="*{rating}"></div>
                 </div>
+
                 <button type="submit" class="btn btn-success">
                     <i class="fa-solid fa-floppy-disk"></i>Enviar
                 </button>
