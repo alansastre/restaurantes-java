@@ -12,21 +12,29 @@ Pendiente:
     * @PositiveOrZero
     * @Positive
 
-* Input tipo file en formularios para subir imagen (Falta dish-form, restaurant-form) (90%)
+* Input tipo file en formularios para subir imagen (Falta dish-form, restaurant-form) (OK)
 
 * config/DataInitializer.java datos demo y dejar main limpio
 
-* GitHub: ramas (branches) y Pull Request
+* GitHub: ramas (branches) y Pull Request (visto ya un ejemplo)
 * Base de datos MySQL
 * Revisión proyectos
 * Test de servicio, Test controller
-* Presentaciones:
+* Ensayos:
   * Grupo 2: lunes 15/06
   * Grupo 1 y 3: jueves 11/06
 
 * Controlador API REST @RestController y probarlo con OpenAPI Swagger / Postman
 
+* README para proyectos
+* Home
+* Redirección global tras login poder volver a donde estabamos en lugar de perder progreso (OK)
 
+* Que un User solo pueda editar/borrar sus propias reviews, comprobar si le pertenecen primero o es admin.
+
+* @PostMapping /profile poder actualizar tu propio perfil, no desactivarse.
+
+* Botón de copiar a clipboard el id o token o lo que quiera (OK)
 
 
 
@@ -96,7 +104,7 @@ Hecho:
 
 Pendiente:
 
-* Home
+
 * Loggers @Slf4j de Lombok: log.info, log.warn, log.error (OK)
 * Fixes en proyectos y tableros
 
