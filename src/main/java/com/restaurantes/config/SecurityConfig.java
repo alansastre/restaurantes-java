@@ -65,7 +65,7 @@ public class SecurityConfig {
 
         http.formLogin(form ->
                 form.loginPage("/login")
-                .defaultSuccessUrl("/restaurants", true)
+                .defaultSuccessUrl("/restaurants")
                 .permitAll()
         );
 
