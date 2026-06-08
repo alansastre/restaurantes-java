@@ -52,7 +52,7 @@ public class RestaurantRestController {
         return ResponseEntity.created(URI.create("/api/v1/restaurants/" + saved.getId())).body(saved);
     }
 
-    // actualizar restaurante
+    // actualizar restaurante: actualización completa, si un campo se manda null también se guarda como null o default
     @PutMapping("{id}")
     public ResponseEntity<Restaurant> update(@PathVariable Long id, @RequestBody Restaurant restaurant) {
         Restaurant existing = restaurantRepository.findById(id).orElseThrow(
@@ -69,4 +69,25 @@ public class RestaurantRestController {
 
         return ResponseEntity.ok(restaurantRepository.save(existing));
     }
+
+    // actualizar restaurante: actualización parcial, si viene a null no se toca
+    // la diferencia es que PUT setea todos los campos, y PATCH solo los que llegaron no nulos
+    @PatchMapping("{id}")
+    public ResponseEntity<Restaurant> updatePartial(@PathVariable Long id, @RequestBody Restaurant restaurant) {
+        Restaurant existing = restaurantRepository.findById(id).orElseThrow(
+                () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Restaurant " + id + " not found")
+        );
+        if(restaurant.getName() != null) existing.setName(restaurant.getName());
+        if(restaurant.getAveragePrice() != null) existing.setAveragePrice(restaurant.getAveragePrice());
+        if(restaurant.getNumberEmployees() != null) existing.setNumberEmployees(restaurant.getNumberEmployees());
+        if(restaurant.getFoodType() != null) existing.setFoodType(restaurant.getFoodType());
+        if(restaurant.getImageUrl() != null) existing.setImageUrl(restaurant.getImageUrl());
+
+        return ResponseEntity.ok(restaurantRepository.save(existing));
+    }
+
+
+
+
+
 }
