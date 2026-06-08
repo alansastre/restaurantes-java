@@ -11,8 +11,10 @@ Pendiente:
     * @Size
     * @PositiveOrZero
     * @Positive
+  * Agregar @Valid en los @ModelAttribute @PostMapping de controladores y BindingResult
+  * En el HTML mostrar error por cada campo que falle la validación `#fields.hasErrors('rating')`
 
-* Input tipo file en formularios para subir imagen (Falta dish-form, restaurant-form) (OK)
+* Input tipo file en formularios para subir imagen (OK)
 
 * config/DataInitializer.java datos demo y dejar main limpio
 
@@ -26,7 +28,7 @@ Pendiente:
 
 * Controlador API REST @RestController y probarlo con OpenAPI Swagger / Postman
 
-* README para proyectos
+* README para proyectos (OK)
 * Home
 * Redirección global tras login poder volver a donde estabamos en lugar de perder progreso (OK)
 
