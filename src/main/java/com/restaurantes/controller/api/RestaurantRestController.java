@@ -4,12 +4,11 @@ import com.restaurantes.model.Restaurant;
 import com.restaurantes.repository.RestaurantRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.net.URI;
 import java.util.List;
 
 // http://localhost:8080/swagger-ui/index.html
@@ -27,8 +26,29 @@ public class RestaurantRestController {
     @GetMapping("{id}")
     public Restaurant findOne(@PathVariable Long id) {
         return restaurantRepository.findById(id).orElseThrow(
-                () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Restaurant" + id + " not found")
+                () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Restaurant " + id + " not found")
         );
     }
-    // @PostMapping Restaurant restaurant
+    // solo para crear nuevos restaurantes:
+//    @PostMapping
+//    public Restaurant save(@RequestBody Restaurant restaurant) {
+//        restaurant.setId(null);
+//        return restaurantRepository.save(restaurant);
+//    }
+//    @PostMapping
+//    public ResponseEntity<Restaurant> save(@RequestBody Restaurant restaurant) {
+//        restaurant.setId(null);
+//        Restaurant saved = restaurantRepository.save(restaurant);
+////        return ResponseEntity.status(HttpStatus.CREATED).body(saved);
+//        return ResponseEntity.created(URI.create("/api/v1/restaurants/" + saved.getId())).body(saved);
+//    }
+    @PostMapping
+    public ResponseEntity<Restaurant> save(@RequestBody Restaurant restaurant) {
+        if (restaurant.getId() != null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Restaurant ID must be null");
+        }
+        Restaurant saved = restaurantRepository.save(restaurant);
+    //        return ResponseEntity.status(HttpStatus.CREATED).body(saved);
+        return ResponseEntity.created(URI.create("/api/v1/restaurants/" + saved.getId())).body(saved);
+    }
 }
