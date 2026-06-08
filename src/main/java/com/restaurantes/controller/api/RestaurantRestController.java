@@ -94,11 +94,11 @@ public class RestaurantRestController {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Restaurant " + id + " not found");
 
         // hard delete: intenta borrar el restaurante completamente, pero fallará si hay asociaciones:
-        try {
-            restaurantRepository.deleteById(id);
-        } catch (Exception e) {
-            throw new ResponseStatusException(HttpStatus.CONFLICT, "Restaurant can't be deleted because it has relationships");
-        }
+//        try {
+        restaurantRepository.deleteById(id);
+//        } catch (Exception e) {
+//            throw new ResponseStatusException(HttpStatus.CONFLICT, "Restaurant can't be deleted because it has relationships");
+//        }
 
         // soft delete: solo desactivarlo
         // findById  setActive false   save
