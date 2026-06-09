@@ -49,6 +49,28 @@ public class DishRestController {
         return ResponseEntity.created(URI.create("/api/v1/dishes/" + saved.getId())).body(saved);
     }
 
+    @PutMapping("dishes/{id}")
+    public ResponseEntity<Dish> update(
+            @PathVariable Long id,
+            @RequestBody Dish dish
+    ) {
+        Dish existing = dishRepository.findById(id).orElseThrow(
+                () -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND, "Dish " + id + " not found")
+        );
+        existing.setName(dish.getName());
+        existing.setPrice(dish.getPrice());
+        existing.setImageUrl(dish.getImageUrl());
+        existing.setDescription(dish.getDescription());
+        existing.setDishType(dish.getDishType());
+
+        existing.setRestaurant(resolveRestaurant(dish)); // asociación
+
+        return ResponseEntity.ok(dishRepository.save(existing));
+    }
+
+
+
     private Restaurant resolveRestaurant(Dish dish) {
         if (dish.getRestaurant() == null || dish.getRestaurant().getId() == null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Restaurant ID can not be null");
