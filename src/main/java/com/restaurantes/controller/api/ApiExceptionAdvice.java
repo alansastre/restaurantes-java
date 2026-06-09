@@ -18,7 +18,7 @@ public class ApiExceptionAdvice {
 // traducir excepciones técnicas que dan 500 a un status correcto
 // y mensaje amigable
 //    @ExceptionHandler(value = {DataIntegrityViolationException.class})
-    @ExceptionHandler(value = {Exception.class})
+    @ExceptionHandler(value = {DataIntegrityViolationException.class})
     public ResponseEntity<Map<String, Object>> handleError(Exception ex, HttpServletRequest request) {
 
         Map<String, Object> response = new HashMap<>();

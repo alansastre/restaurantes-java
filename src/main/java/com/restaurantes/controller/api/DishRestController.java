@@ -1,17 +1,17 @@
 package com.restaurantes.controller.api;
 
 import com.restaurantes.model.Dish;
+import com.restaurantes.model.Restaurant;
 import com.restaurantes.repository.DishRepository;
 import com.restaurantes.repository.RestaurantRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -37,6 +37,21 @@ public class DishRestController {
     @GetMapping("restaurants/{id}/dishes")
     public List<Dish> findAllByRestaurant(@PathVariable Long id) {
         return dishRepository.findByRestaurantIdOrderByPrice(id);
+    }
+
+    @PostMapping("dishes")
+    public ResponseEntity<Dish> create(@RequestBody Dish dish) {
+        if (dish.getId() != null || dish.getRestaurant() == null || dish.getRestaurant().getId() == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Dish ID must be null");
+        }
+        Restaurant restaurant = restaurantRepository.findById(dish.getRestaurant().getId()).orElseThrow(
+                () -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND,  String.format("Restaurant with id %d not found", dish.getRestaurant().getId())
+                )
+        );
+        dish.setRestaurant(restaurant);
+        Dish saved = dishRepository.save(dish);
+        return ResponseEntity.created(URI.create("/api/v1/dishes/" + saved.getId())).body(saved);
     }
 
 
