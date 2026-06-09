@@ -95,6 +95,7 @@ public class DishRestController {
         if(!dishRepository.existsById(id))
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Dish " + id + " not found");
 
+        // si se quiere borrar completamente cuando hay asociaciones, primero hay que desasociar OrderLine y Review
         dishRepository.deleteById(id);
     }
 

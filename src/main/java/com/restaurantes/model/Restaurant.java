@@ -1,6 +1,7 @@
 package com.restaurantes.model;
 
 import com.restaurantes.model.enums.FoodType;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -23,15 +24,19 @@ DELETE FROM restaurant WHERE id = 1;
  */
 @Entity
 @Table(name = "restaurantes")
+@Schema(description = "Restaurantes de especialidad")
 public class Restaurant { // clase
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Schema(description = "Id autogenerado", example = "1", accessMode = Schema.AccessMode.READ_ONLY)
     private Long id;
 
     @Column(unique = true)
+    @Schema(description = "nombre único no puede duplicarse", example = "La Taberna de Pepe")
     private String name;
 
+    @Schema(description = "Precio medio", example = "25")
     private Double averagePrice;
 
    @Column(columnDefinition = "BOOLEAN DEFAULT true")
