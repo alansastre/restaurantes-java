@@ -89,6 +89,16 @@ public class DishRestController {
     }
 
 
+    @DeleteMapping("dishes/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT) // 204
+    public void delete(@PathVariable Long id) {
+        if(!dishRepository.existsById(id))
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Dish " + id + " not found");
+
+        dishRepository.deleteById(id);
+    }
+
+
     private Restaurant resolveRestaurant(Dish dish) {
         if (dish.getRestaurant() == null || dish.getRestaurant().getId() == null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Restaurant ID can not be null");
