@@ -2,6 +2,12 @@ package com.restaurantes.controller.api;
 
 import com.restaurantes.model.Restaurant;
 import com.restaurantes.repository.RestaurantRepository;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,16 +21,28 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/restaurants")
 @AllArgsConstructor
+@Tag(name = "Restaurantes", description = "CRUD de entidad Restaurant")
 public class RestaurantRestController {
 
     private RestaurantRepository restaurantRepository;
 
+    @Operation(
+            summary = "Ver todos los restaurantes",
+            description = "Trae todos los restaurantes, filtrados por active true en el futuro")
     @GetMapping
     public List<Restaurant> findAll() {
         return restaurantRepository.findAll();
     }
+
+    @Operation(summary = "Obtener plato por id")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "encontrado"),
+            @ApiResponse(responseCode = "404", description = "no existe", content = @Content),
+    })
     @GetMapping("{id}")
-    public Restaurant findOne(@PathVariable Long id) {
+    public Restaurant findOne(
+            @Parameter(description = "id clave primaria en Long no null", example = "1")
+            @PathVariable Long id) {
         return restaurantRepository.findById(id).orElseThrow(
                 () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Restaurant " + id + " not found")
         );

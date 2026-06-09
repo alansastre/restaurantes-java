@@ -23,7 +23,7 @@ public class ApiExceptionAdvice {
 
         Map<String, Object> response = new HashMap<>();
         response.put("message", "Ocurrió un error.");
-        response.put("status", HttpStatus.BAD_REQUEST.value());
+        response.put("status", HttpStatus.CONFLICT.value()); // 409
         response.put("timestamp", LocalDateTime.now());
         response.put("path", request.getRequestURI());
 
