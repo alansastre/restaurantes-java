@@ -41,19 +41,25 @@ public class DishRestController {
 
     @PostMapping("dishes")
     public ResponseEntity<Dish> create(@RequestBody Dish dish) {
-        if (dish.getId() != null || dish.getRestaurant() == null || dish.getRestaurant().getId() == null) {
+        if (dish.getId() != null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Dish ID must be null");
         }
-        Restaurant restaurant = restaurantRepository.findById(dish.getRestaurant().getId()).orElseThrow(
-                () -> new ResponseStatusException(
-                        HttpStatus.NOT_FOUND,  String.format("Restaurant with id %d not found", dish.getRestaurant().getId())
-                )
-        );
-        dish.setRestaurant(restaurant);
+        dish.setRestaurant(resolveRestaurant(dish));
         Dish saved = dishRepository.save(dish);
         return ResponseEntity.created(URI.create("/api/v1/dishes/" + saved.getId())).body(saved);
     }
 
+    private Restaurant resolveRestaurant(Dish dish) {
+        if (dish.getRestaurant() == null || dish.getRestaurant().getId() == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Restaurant ID can not be null");
+        }
+        return restaurantRepository.findById(dish.getRestaurant().getId()).orElseThrow(
+                () -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND,  String.format("Restaurant with id %d not found",
+                        dish.getRestaurant().getId())
+                )
+        );
+    }
 
 
 
