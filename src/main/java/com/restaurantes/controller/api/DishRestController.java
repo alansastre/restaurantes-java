@@ -69,6 +69,24 @@ public class DishRestController {
         return ResponseEntity.ok(dishRepository.save(existing));
     }
 
+    @PatchMapping("dishes/{id}")
+    public ResponseEntity<Dish> updatePartial(
+            @PathVariable Long id,
+            @RequestBody Dish dish
+    ) {
+        Dish existing = dishRepository.findById(id).orElseThrow(
+                () -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND, "Dish " + id + " not found")
+        );
+        if (dish.getName() != null) existing.setName(dish.getName());
+        if (dish.getPrice() != null) existing.setPrice(dish.getPrice());
+        if (dish.getImageUrl() != null) existing.setImageUrl(dish.getImageUrl());
+        if (dish.getDescription() != null) existing.setDescription(dish.getDescription());
+        if (dish.getDishType() != null) existing.setDishType(dish.getDishType());
+        if (dish.getRestaurant() != null && dish.getRestaurant().getId() != null) existing.setRestaurant(resolveRestaurant(dish)); // asociación
+
+        return ResponseEntity.ok(dishRepository.save(existing));
+    }
 
 
     private Restaurant resolveRestaurant(Dish dish) {
