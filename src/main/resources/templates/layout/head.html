@@ -9,5 +9,16 @@
     <link rel="stylesheet" th:href="@{/webjars/font-awesome/7.2.0/css/all.min.css}">
     <link rel="stylesheet" th:href="@{/css/app.css}">
 
+    <!-- Color modes Bootstrap 5.3: aplica el tema guardado antes de pintar (evita parpadeo) -->
+    <script>
+        (() => {
+            const guardado = localStorage.getItem('theme');
+            const tema = guardado
+                ? guardado
+                : (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+            document.documentElement.setAttribute('data-bs-theme', tema);
+        })();
+    </script>
+
 </head>
 </html>

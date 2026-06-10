@@ -3,7 +3,7 @@
 
     <head th:replace="~{layout/head :: head('Detalle Pedido')}"></head>
 
-    <body class="d-flex flex-column min-vh-100 bg-light">
+    <body class="d-flex flex-column min-vh-100 bg-body-tertiary">
 
         <nav th:replace="~{layout/navbar :: navbar}"></nav>
 
@@ -152,11 +152,11 @@
                             </h5>
                         </div>
                         <div class="card-body text-center pb-2">
-                            <div th:unless="${order.user.imageUrl}" class="rounded-circle bg-light d-inline-flex align-items-center justify-content-center mb-2"
+                            <div th:unless="${order.user.imageUrl}" class="rounded-circle bg-body-tertiary d-inline-flex align-items-center justify-content-center mb-2"
                                  style="width: 64px; height: 64px;">
                                 <i class="fa-solid fa-user fa-2x text-primary"></i>
                             </div>
-                            <div th:if="${order.user.imageUrl}" class="rounded-circle bg-light d-inline-flex align-items-center justify-content-center mb-2"
+                            <div th:if="${order.user.imageUrl}" class="rounded-circle bg-body-tertiary d-inline-flex align-items-center justify-content-center mb-2"
                                  style="width: 64px; height: 64px;">
                                 <img th:if="${order.user.imageUrl != null}" th:src="${order.user.imageUrl}"
                                      class="rounded-circle object-fit-cover"
@@ -275,7 +275,7 @@
                 </div>
 
                 <!-- Totales -->
-                <div class="card-footer bg-white">
+                <div class="card-footer bg-body-tertiary">
                     <div class="row justify-content-end">
                         <div class="col-md-5 col-lg-4">
                             <dl class="row mb-0">

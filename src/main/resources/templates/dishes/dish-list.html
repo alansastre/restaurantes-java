@@ -4,7 +4,7 @@
 
     <head th:replace="~{layout/head :: head('Listado Platos')}"></head>
 
-    <body class="d-flex flex-column min-vh-100 bg-light">
+    <body class="d-flex flex-column min-vh-100 bg-body-tertiary">
 
         <nav th:replace="~{layout/navbar :: navbar}"></nav>
 
@@ -62,7 +62,7 @@
                         </form>
 
 
-                        <div class="card-header bg-white pe-5 py-2">
+                        <div class="card-header bg-body-tertiary pe-5 py-2">
                             <span th:switch="${dish.dishType}">
                                 <span class="badge bg-success" th:case="${T(com.restaurantes.model.enums.DishType).STARTER}">
                                     <i class="fa-solid fa-leaf me-1"></i>Entrantes
@@ -92,7 +92,7 @@
                             </p>
                         </div>
 
-                        <div class="card-footer bg-white d-flex justify-content-between align-items-center">
+                        <div class="card-footer bg-body-tertiary d-flex justify-content-between align-items-center">
                             <small class="text-muted text-truncate me-2" th:if="${dish.restaurant != null}">
                                 <i class="fa-solid fa-store text-danger me-1"></i>
                                 <a th:href="@{/restaurants/{id}(id=${dish.restaurant.id})}"

@@ -8,7 +8,8 @@
 body {
     font-family: 'Roboto', system-ui, -apple-system, sans-serif;
     font-weight: 400;
-    background-color: #f8f9fa;
+    /* Variable theme-aware de Bootstrap 5.3: #f8f9fa en claro, gris oscuro en oscuro */
+    background-color: var(--bs-tertiary-bg);
 }
 
 h1, h2, h3, .navbar-brand {
