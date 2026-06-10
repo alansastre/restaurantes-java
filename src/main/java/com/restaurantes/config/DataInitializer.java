@@ -64,7 +64,7 @@ public class DataInitializer implements ApplicationRunner {
         restaurant.setAveragePrice(20d);
         restaurant.setNumberEmployees(2);
         restaurant.setFoodType(FoodType.SPANISH);
-        restaurant.setImageUrl("/uploads/restaurant1.png");
+        restaurant.setImageUrl("/uploads/restaurant-placeholder.png");
         restaurantRepository.save(restaurant);
 
         Dish dish = new Dish();

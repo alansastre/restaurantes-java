@@ -21,6 +21,9 @@ USER spring
 # Copia el jar ejecutable que genera Spring Boot
 COPY --from=build --chown=spring:spring /app/target/*.jar app.jar
 
+# Imágenes semilla / placeholders que la app espera en /app/uploads
+COPY --chown=spring:spring uploads ./uploads
+
 ENV JAVA_OPTS=""
 EXPOSE 8080
 
