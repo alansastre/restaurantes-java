@@ -26,7 +26,7 @@ Pendiente:
   * Grupo 2: lunes 15/06
   * Grupo 1 y 3: jueves 11/06
 
-* Controlador API REST @RestController y probarlo con OpenAPI Swagger / Postman
+* Controlador API REST @RestController y probarlo con OpenAPI Swagger / Postman (OK)
   * controller/api/RestaurantRestController.java (OK)
   * controller/api/DishRestController.java
   * controller/api/ApiExceptionAdvice.java (gestion global errores personalizada)
