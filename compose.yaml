@@ -1,0 +1,32 @@
+# PostgreSQL 18 para el perfil "prod" de restaurantes-java.
+#
+# Uso:
+#   docker compose up -d          # levanta la base de datos
+#   docker compose down           # la para (conserva los datos en el volumen)
+#   docker compose down -v        # la para y BORRA los datos
+#
+# Luego arranca la app contra esta BD:
+#   ./mvnw spring-boot:run -Dspring-boot.run.profiles=prod
+services:
+  postgres:
+    image: postgres:18
+    container_name: restaurantes-postgres
+    environment:
+      POSTGRES_DB: restaurantes
+      POSTGRES_USER: restaurantes
+      POSTGRES_PASSWORD: restaurantes
+    ports:
+      - "5432:5432"
+    volumes:
+      # PostgreSQL 18 cambio la ubicacion de los datos: ahora viven en
+      # /var/lib/postgresql/18/docker, por eso el volumen se monta en
+      # /var/lib/postgresql (en versiones previas era /var/lib/postgresql/data).
+      - restaurantes-pgdata:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U restaurantes -d restaurantes"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  restaurantes-pgdata:
