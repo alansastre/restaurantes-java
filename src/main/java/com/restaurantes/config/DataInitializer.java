@@ -104,9 +104,9 @@ public class DataInitializer implements ApplicationRunner {
         // ===== Resenas ===== (title, description y rating 1-5 son obligatorios)
         reviewRepository.saveAll(List.of(
                 Review.builder().title("Espectacular").description("Comida casera de diez, repetire seguro").rating(5).restaurant(taberna).user(user).build(),
-                Review.builder().title("Correcto").description("Bien de precio, raciones algo justas").rating(3).restaurant(taberna).build(),
+                Review.builder().title("Correcto").description("Bien de precio, raciones algo justas").rating(3).restaurant(taberna).user(admin).build(),
                 Review.builder().title("El mejor ramen").description("El caldo esta increible, muy recomendable").rating(5).restaurant(sakura).user(user).build(),
-                Review.builder().title("Postre top").description("La tarta de queso estaba buenisima").rating(4).dish(tarta).user(user).build()
+                Review.builder().title("Postre top").description("La tarta de queso estaba buenisima").rating(4).dish(tarta).user(admin).build()
         ));
 
         // ===== Un pedido con sus lineas =====

@@ -52,7 +52,7 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.GET, "/reviews").permitAll()
                 .requestMatchers(HttpMethod.POST, "/reviews").authenticated()
                 .requestMatchers(HttpMethod.GET, "/reviews/new").authenticated()
-                .requestMatchers(HttpMethod.GET, "/reviews/edit/*").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.GET, "/reviews/edit/*").authenticated()
                 .requestMatchers(HttpMethod.GET, "/reviews/disable/*").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.GET, "/reviews/delete/*").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.GET, "/reviews/*").permitAll()

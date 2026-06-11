@@ -2,6 +2,7 @@ package com.restaurantes.controller;
 
 import com.restaurantes.model.Review;
 import com.restaurantes.model.User;
+import com.restaurantes.model.enums.Role;
 import com.restaurantes.repository.DishRepository;
 import com.restaurantes.repository.RestaurantRepository;
 import com.restaurantes.repository.ReviewRepository;
@@ -85,9 +86,17 @@ public class ReviewController {
 
     // Get Mapping reviews / edit / {id}
     @GetMapping("reviews/edit/{id}")
-    public String editReview(Model model, @PathVariable Long id) {
-        model.addAttribute("review", reviewRepository.findById(id).orElseThrow());
-        return "reviews/review-form";
+    public String editReview(Model model, @PathVariable Long id, @AuthenticationPrincipal User user) {
+
+        Review review = reviewRepository.findById(id).orElseThrow();
+
+        // check ownership https://stackoverflow.com/questions/56871229/spring-security-ownership-based-access
+        if (user.getRole() == Role.ROLE_ADMIN || review.getUser().getId() == user.getId() ) {
+            model.addAttribute("review", review);
+            return "reviews/review-form";
+        }
+
+        return "redirect:/reviews";
     }
 
 
