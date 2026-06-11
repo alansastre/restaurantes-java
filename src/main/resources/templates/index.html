@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="~{layout/head :: head('Inicio · FoodDevs')}"></head>
+<body class="d-flex flex-column min-vh-100">
+
+<nav th:replace="~{layout/navbar :: navbar}"></nav>
+
+<style>
+    /* ===== Estilos propios de la home — marca FoodDevs (verde + negro) ===== */
+    :root {
+        --fd-green: #198754;        /* verde de marca (afín al btn-success que ya usáis) */
+        --fd-green-dark: #146c43;   /* hover/active */
+    }
+    .home-hero {
+        /* hero claro en menta, para que logo2.png (fondo verde claro) blende */
+        background-image: linear-gradient(135deg, #e9f9ef 0%, #c4ecd4 100%);
+    }
+    /* Botón con el verde de marca (variables de botón de Bootstrap 5.3) */
+    .btn-brand {
+        --bs-btn-color: #fff;
+        --bs-btn-bg: var(--fd-green);
+        --bs-btn-border-color: var(--fd-green);
+        --bs-btn-hover-color: #fff;
+        --bs-btn-hover-bg: var(--fd-green-dark);
+        --bs-btn-hover-border-color: var(--fd-green-dark);
+        --bs-btn-active-bg: var(--fd-green-dark);
+        --bs-btn-active-border-color: var(--fd-green-dark);
+        --bs-btn-focus-shadow-rgb: 25, 135, 84;
+    }
+    .text-brand { color: var(--fd-green) !important; }
+    .home-icon {
+        width: 3.25rem; height: 3.25rem;
+        display: inline-flex; align-items: center; justify-content: center;
+        border-radius: 50%;
+        color: var(--fd-green);
+        background-color: rgba(25, 135, 84, .12);
+    }
+    .home-feature { transition: transform .15s ease-in-out, box-shadow .15s ease-in-out; }
+    .home-feature:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 .5rem 1.25rem rgba(0, 0, 0, .15);
+    }
+    .home-step {
+        width: 2.75rem; height: 2.75rem; line-height: 2.75rem;
+        border-radius: 50%; display: inline-block;
+        background-color: var(--fd-green);
+        color: #fff; font-weight: 700; font-size: 1.25rem;
+    }
+</style>
+
+<main class="flex-grow-1">
+
+    <!-- ===================== HERO (tarjeta clara en menta, sin hueco con el navbar) ===================== -->
+    <div class="container">
+        <section class="home-hero text-dark rounded-4 shadow overflow-hidden p-4 p-md-5">
+            <div class="row align-items-center g-4">
+
+                <div class="col-lg-7 text-center text-lg-start">
+                    <span class="badge rounded-pill px-3 py-2 mb-3 text-brand"
+                          style="background-color: rgba(25, 135, 84, .15);">
+                        <i class="fa-solid fa-lemon me-1"></i> Pide · Disfruta · Reseña
+                    </span>
+                    <h1 class="display-4 fw-bold mb-3">
+                        Tu próxima comida empieza <span class="text-brand">aquí</span>
+                    </h1>
+                    <p class="fs-5 mb-4 text-dark opacity-75">
+                        Explora restaurantes, monta tu pedido plato a plato y comparte tu opinión.
+                        Todo en un mismo sitio.
+                    </p>
+
+                    <!-- Invitado -->
+                    <div sec:authorize="!isAuthenticated()"
+                         class="d-flex flex-wrap gap-2 justify-content-center justify-content-lg-start">
+                        <a th:href="@{/restaurants}" class="btn btn-brand btn-lg px-4">
+                            <i class="fa-solid fa-store me-1"></i> Ver restaurantes
+                        </a>
+                        <a th:href="@{/register}" class="btn btn-outline-dark btn-lg px-4">
+                            <i class="fa-solid fa-circle-user me-1"></i> Crear cuenta
+                        </a>
+                    </div>
+
+                    <!-- Autenticado -->
+                    <div sec:authorize="isAuthenticated()"
+                         class="d-flex flex-wrap gap-2 justify-content-center justify-content-lg-start">
+                        <a th:href="@{/restaurants}" class="btn btn-brand btn-lg px-4">
+                            <i class="fa-solid fa-store me-1"></i> Ver restaurantes
+                        </a>
+                        <a th:href="@{/orders}" class="btn btn-outline-dark btn-lg px-4">
+                            <i class="fa-solid fa-ticket me-1"></i> Mis pedidos
+                        </a>
+                    </div>
+                    <p sec:authorize="isAuthenticated()" class="mt-3 mb-0 text-dark opacity-75">
+                        <i class="fa-solid fa-hand-sparkles me-1 text-brand"></i>
+                        ¡Hola de nuevo,
+                        <span class="fw-semibold" sec:authentication="name">usuario</span>!
+                    </p>
+                </div>
+
+                <div class="col-lg-5 text-center">
+                    <img th:src="@{/images/logo2.png}" alt="FoodDevs"
+                         class="img-fluid rounded-4 shadow-sm" style="max-height: 150px;">
+                </div>
+
+            </div>
+
+            <!-- Tira de valor dentro del propio hero -->
+            <div class="row align-items-center pt-4 mt-4 g-3"
+                 style="border-top: 1px solid rgba(0, 0, 0, .12);">
+                <div class="col-12 col-sm-4 d-flex align-items-center justify-content-center gap-2">
+                    <i class="fa-solid fa-store text-brand fs-5"></i>
+                    <span class="small fw-semibold text-dark opacity-75">Restaurantes variados</span>
+                </div>
+                <div class="col-12 col-sm-4 d-flex align-items-center justify-content-center gap-2">
+                    <i class="fa-solid fa-bowl-food text-brand fs-5"></i>
+                    <span class="small fw-semibold text-dark opacity-75">Pedidos al instante</span>
+                </div>
+                <div class="col-12 col-sm-4 d-flex align-items-center justify-content-center gap-2">
+                    <i class="fa-solid fa-star text-brand fs-5"></i>
+                    <span class="small fw-semibold text-dark opacity-75">Reseñas reales</span>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- ===================== SECCIONES ===================== -->
+    <section class="container py-5">
+        <div class="text-center mb-5">
+            <h2 class="fw-bold mb-1">Todo lo que puedes hacer</h2>
+            <p class="text-muted mb-0">Explora las secciones de la plataforma</p>
+        </div>
+
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+
+            <!-- Restaurantes -->
+            <div class="col">
+                <div class="card home-feature h-100 border-0 shadow-sm position-relative">
+                    <div class="card-body p-4">
+                        <span class="home-icon mb-3"><i class="fa-solid fa-store fs-4"></i></span>
+                        <h5 class="card-title fw-bold">Restaurantes</h5>
+                        <p class="card-text text-muted mb-3">
+                            Filtra por tipo de comida, precio o nombre y encuentra tu sitio.
+                        </p>
+                        <a th:href="@{/restaurants}"
+                           class="stretched-link text-brand text-decoration-none fw-semibold">
+                            Explorar <i class="fa-solid fa-arrow-right ms-1 small"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Platos -->
+            <div class="col">
+                <div class="card home-feature h-100 border-0 shadow-sm position-relative">
+                    <div class="card-body p-4">
+                        <span class="home-icon mb-3"><i class="fa-solid fa-bowl-food fs-4"></i></span>
+                        <h5 class="card-title fw-bold">Platos</h5>
+                        <p class="card-text text-muted mb-3">
+                            Hojea las cartas y descubre los platos mejor valorados.
+                        </p>
+                        <a th:href="@{/dishes}"
+                           class="stretched-link text-brand text-decoration-none fw-semibold">
+                            Ver platos <i class="fa-solid fa-arrow-right ms-1 small"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reseñas -->
+            <div class="col">
+                <div class="card home-feature h-100 border-0 shadow-sm position-relative">
+                    <div class="card-body p-4">
+                        <span class="home-icon mb-3"><i class="fa-solid fa-star fs-4"></i></span>
+                        <h5 class="card-title fw-bold">Reseñas</h5>
+                        <p class="card-text text-muted mb-3">
+                            Lee opiniones de otros comensales antes de decidir.
+                        </p>
+                        <a th:href="@{/reviews}"
+                           class="stretched-link text-brand text-decoration-none fw-semibold">
+                            Leer reseñas <i class="fa-solid fa-arrow-right ms-1 small"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pedidos (usuario autenticado) -->
+            <div class="col" sec:authorize="isAuthenticated()">
+                <div class="card home-feature h-100 border-0 shadow-sm position-relative">
+                    <div class="card-body p-4">
+                        <span class="home-icon mb-3"><i class="fa-solid fa-ticket fs-4"></i></span>
+                        <h5 class="card-title fw-bold">Mis pedidos</h5>
+                        <p class="card-text text-muted mb-3">
+                            Consulta el historial y el estado de tus pedidos.
+                        </p>
+                        <a th:href="@{/orders}"
+                           class="stretched-link text-brand text-decoration-none fw-semibold">
+                            Ir a pedidos <i class="fa-solid fa-arrow-right ms-1 small"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pedidos (invitado → invita a entrar) -->
+            <div class="col" sec:authorize="!isAuthenticated()">
+                <div class="card home-feature h-100 border-0 shadow-sm position-relative">
+                    <div class="card-body p-4">
+                        <span class="home-icon mb-3"><i class="fa-solid fa-ticket fs-4"></i></span>
+                        <h5 class="card-title fw-bold">Haz tu pedido</h5>
+                        <p class="card-text text-muted mb-3">
+                            Entra en tu cuenta para crear pedidos y guardar tu historial.
+                        </p>
+                        <a th:href="@{/login}"
+                           class="stretched-link text-brand text-decoration-none fw-semibold">
+                            Entrar para pedir <i class="fa-solid fa-arrow-right ms-1 small"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Usuarios (solo ADMIN) -->
+            <div class="col" sec:authorize="hasRole('ADMIN')">
+                <div class="card home-feature h-100 border-0 shadow-sm position-relative">
+                    <div class="card-body p-4">
+                        <span class="home-icon mb-3"><i class="fa-solid fa-users fs-4"></i></span>
+                        <h5 class="card-title fw-bold">Usuarios</h5>
+                        <p class="card-text text-muted mb-3">
+                            Panel de administración para gestionar las cuentas.
+                        </p>
+                        <a th:href="@{/admin/users}"
+                           class="stretched-link text-brand text-decoration-none fw-semibold">
+                            Gestionar <i class="fa-solid fa-arrow-right ms-1 small"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ===================== CÓMO FUNCIONA ===================== -->
+    <section class="container pb-5">
+        <div class="bg-body rounded-4 shadow-sm p-4 p-md-5">
+            <div class="text-center mb-5">
+                <h2 class="fw-bold mb-1">¿Cómo funciona?</h2>
+                <p class="text-muted mb-0">En tres pasos</p>
+            </div>
+            <div class="row g-4 text-center">
+                <div class="col-md-4">
+                    <span class="home-step mb-3">1</span>
+                    <h6 class="fw-bold">Elige restaurante</h6>
+                    <p class="text-muted small mb-0">
+                        Busca por tipo de comida o precio y entra en su ficha.
+                    </p>
+                </div>
+                <div class="col-md-4">
+                    <span class="home-step mb-3">2</span>
+                    <h6 class="fw-bold">Monta tu pedido</h6>
+                    <p class="text-muted small mb-0">
+                        Añade platos, ajusta cantidades y revisa el total.
+                    </p>
+                </div>
+                <div class="col-md-4">
+                    <span class="home-step mb-3">3</span>
+                    <h6 class="fw-bold">Deja tu reseña</h6>
+                    <p class="text-muted small mb-0">
+                        Cuenta tu experiencia y ayuda a la comunidad.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== CTA FINAL (solo invitados) ===================== -->
+    <section sec:authorize="!isAuthenticated()" class="container pb-5">
+        <div class="home-hero text-dark rounded-4 shadow overflow-hidden p-4 p-md-5 text-center">
+            <h2 class="fw-bold mb-2">¿Listo para tu próximo pedido?</h2>
+            <p class="text-dark opacity-75 mb-4">Crea tu cuenta gratis y empieza a pedir en minutos.</p>
+            <a th:href="@{/register}" class="btn btn-brand btn-lg px-4 me-2 mb-2">
+                <i class="fa-solid fa-circle-user me-1"></i> Crear cuenta
+            </a>
+            <a th:href="@{/login}" class="btn btn-outline-dark btn-lg px-4 mb-2">
+                <i class="fa-solid fa-sign-in me-1"></i> Entrar
+            </a>
+        </div>
+    </section>
+
+</main>
+
+<footer th:replace="~{layout/footer :: footer}"></footer>
+<script th:replace="~{layout/footer :: scripts}"></script>
+
+</body>
+</html>
