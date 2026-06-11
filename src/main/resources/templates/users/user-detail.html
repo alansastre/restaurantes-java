@@ -37,12 +37,27 @@
             <a th:href="@{/admin/users}" class="btn btn-sm btn-outline-secondary">
                 <i class="fa-solid fa-arrow-left me-1"></i> Volver
             </a>
-            <a th:href="@{/admin/users/edit/{id}(id=${user.id})}" class="btn btn-sm btn-outline-success">
+            <!-- ES MI perfil → edito mi perfil -->
+            <a sec:authorize="isAuthenticated()"
+               th:if="${#authentication.principal.id == user.id}"
+               th:href="@{/profile/edit}" class="btn btn-sm btn-outline-success">
+                <i class="fa-solid fa-user-pen me-1"></i> Editar mi perfil
+            </a>
+
+            <!-- Soy admin viendo a OTRA persona -->
+            <a sec:authorize="hasRole('ADMIN')"
+               th:if="${#authentication.principal.id != user.id}"
+               th:href="@{/admin/users/edit/{id}(id=${user.id})}" class="btn btn-sm btn-outline-success">
                 <i class="fa-solid fa-user-pen me-1"></i> Editar
             </a>
-            <a th:href="@{/admin/users/deactivate/{id}(id=${user.id})}" class="btn btn-sm btn-outline-danger">
+
+            <!-- Desactivar: solo admin y NUNCA a sí mismo -->
+            <a sec:authorize="hasRole('ADMIN')"
+               th:if="${#authentication.principal.id != user.id}"
+               th:href="@{/admin/users/deactivate/{id}(id=${user.id})}" class="btn btn-sm btn-outline-danger">
                 <i class="fa-solid fa-trash me-1"></i> Desactivar
             </a>
+
         </div>
 
     </div>

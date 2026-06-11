@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout/head :: head('Mi perfil')}"></head>
+<body class="d-flex flex-column min-vh-100 bg-body-tertiary">
+<nav th:replace="~{layout/navbar :: navbar}"></nav>
+<main class="container flex-grow-1 my-4">
+
+    <h1 class="mb-3">
+        <i class="fa-solid fa-user-pen text-primary me-2"></i>Editar mi perfil
+    </h1>
+
+    <div th:if="${error}" class="alert alert-danger" th:text="${error}"></div>
+
+    <!-- OJO: sin id, sin role, sin active. El servidor los toma de @AuthenticationPrincipal -->
+    <form th:action="@{/profile}" th:object="${user}" method="post" enctype="multipart/form-data">
+
+        <div class="mb-3">
+            <label for="username">Username</label>
+            <input type="text" class="form-control" id="username"
+                   required th:field="*{username}" minlength="3" maxlength="100" autofocus>
+        </div>
+
+        <div class="mb-3">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" id="email" required th:field="*{email}">
+        </div>
+
+        <div class="mb-3">
+            <label for="password">Contraseña</label>
+            <input type="password" th:field="*{password}" class="form-control" id="password" minlength="4">
+            <small class="text-muted">Deja este campo vacío para conservar la misma contraseña.</small>
+        </div>
+
+        <div class="mb-3">
+            <label for="imageFile" class="form-label">Imagen</label>
+            <!-- conserva la imagen guardada si no subes una nueva -->
+            <input type="hidden" th:field="*{imageUrl}">
+            <input type="file" class="form-control" id="imageFile" name="imageFile" accept="image/*">
+            <img id="preview" alt="Previsualización" class="mt-2 rounded"
+                 style="max-height:150px; display:none"
+                 th:src="${user != null and user.imageUrl != null ? user.imageUrl : null}">
+        </div>
+
+        <button type="submit" class="btn btn-success">
+            <i class="fa-solid fa-floppy-disk"></i> Guardar
+        </button>
+        <a th:href="@{/profile}" class="btn btn-secondary">Cancelar</a>
+    </form>
+
+</main>
+<footer th:replace="~{layout/footer :: footer}"></footer>
+<script th:replace="~{layout/footer :: scripts}"></script>
+<script th:src="@{/js/img-preview.js}"></script>
+</body>
+</html>
