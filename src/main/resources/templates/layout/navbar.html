@@ -42,6 +42,9 @@
                 </li>
             </ul>
 
+            <span th:if="${env}" th:text="${env}" class="badge bg-success mx-2"></span>
+
+
             <!-- Toggle tema claro/oscuro (Bootstrap color modes) -->
             <button id="themeToggle" type="button"
                     class="btn btn-outline-light btn-sm me-3"
@@ -64,6 +67,7 @@
 <!--            -->
 <!--            ${lessonsView}-->
             <div sec:authorize="isAuthenticated()" class="d-flex align-items-center justify-content-end">
+
 
                 <a class="d-flex align-items-center text-light text-decoration-none me-3" th:href="@{/profile}">
                     <img
