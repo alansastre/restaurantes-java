@@ -19,7 +19,7 @@ Pendiente:
 * config/DataInitializer.java datos demo y dejar main limpio
 
 * GitHub: ramas (branches) y Pull Request (visto ya un ejemplo)
-* Base de datos MySQL
+* Base de datos PostgreSQL (OK)
 * Revisión proyectos
 * Test de servicio, Test controller
 * Ensayos:
@@ -37,12 +37,12 @@ Pendiente:
     * path
 
 * README para proyectos (OK)
-* Home
+* Home (OK) index.html
 * Redirección global tras login poder volver a donde estabamos en lugar de perder progreso (OK)
 
-* Que un User solo pueda editar/borrar sus propias reviews, comprobar si le pertenecen primero o es admin.
+* Que un User solo pueda editar/borrar sus propias reviews, comprobar si le pertenecen primero o es admin. (OK)
 
-* @PostMapping /profile poder actualizar tu propio perfil, no desactivarse.
+* @PostMapping /profile poder actualizar tu propio perfil, no desactivarse. (OK)
 
 * Botón de copiar a clipboard el id o token o lo que quiera (OK)
 
