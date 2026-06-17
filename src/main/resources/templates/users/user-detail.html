@@ -34,7 +34,7 @@
             </dl>
         </div>
         <div class="card-footer text-end">
-            <a th:href="@{/admin/users}" class="btn btn-sm btn-outline-secondary">
+            <a sec:authorize="hasRole('ADMIN')" th:href="@{/admin/users}" class="btn btn-sm btn-outline-secondary">
                 <i class="fa-solid fa-arrow-left me-1"></i> Volver
             </a>
             <!-- ES MI perfil → edito mi perfil -->
