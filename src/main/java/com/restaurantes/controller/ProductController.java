@@ -18,4 +18,10 @@ public class ProductController {
         model.addAttribute("product", productService.findById(id));
         return "products/product-detail";
     }
+
+    @GetMapping("products")
+    public String findAll(Model model) {
+        model.addAttribute("products", productService.findAll());
+        return "products/product-list";
+    }
 }

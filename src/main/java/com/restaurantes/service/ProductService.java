@@ -2,8 +2,11 @@ package com.restaurantes.service;
 
 import com.restaurantes.dto.ProductDTO;
 import lombok.AllArgsConstructor;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
+
+import java.util.List;
 
 // Cliente HTTP que trae los datos de una API REST externa de Productos
 @Service
@@ -16,15 +19,18 @@ public class ProductService {
     }
 
     public ProductDTO findById(long id) {
-
-        ProductDTO product = restClient
+        return restClient
                 .get()
                 .uri("/products/{id}", id)
                 .retrieve()
                 .body(ProductDTO.class);
+    }
 
-        System.out.println(product);
-
-        return product;
+    public List<ProductDTO> findAll() {
+        return restClient
+                .get()
+                .uri("/products")
+                .retrieve()
+                .body(new ParameterizedTypeReference<>(){});
     }
 }
