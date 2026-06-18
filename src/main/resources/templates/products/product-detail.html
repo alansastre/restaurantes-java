@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{layout/head :: head('Detalle Producto')}"></head>
+<body class="d-flex flex-column min-vh-100">
+
+<nav th:replace="~{layout/navbar :: navbar}"></nav>
+
+<main class="container flex-grow-1">
+
+    <!-- Migas de pan / volver -->
+    <a class="btn btn-sm btn-outline-secondary mb-3" th:href="@{/}">
+        <i class="fa-solid fa-arrow-left me-1"></i> Volver al inicio
+    </a>
+
+    <!-- Tarjeta del producto traído de fakestoreapi.com -->
+    <div class="card shadow-sm">
+        <div class="row g-0">
+
+            <!-- Imagen -->
+            <div class="col-md-5 d-flex align-items-center justify-content-center bg-white rounded-start p-4">
+                <img th:if="${product.image()}" th:src="${product.image()}"
+                     th:alt="${product.title()}"
+                     class="img-fluid object-fit-contain" style="max-height: 320px;">
+                <span th:unless="${product.image()}" class="text-muted">
+                    <i class="fa-regular fa-image fa-2x"></i>
+                </span>
+            </div>
+
+            <!-- Datos -->
+            <div class="col-md-7">
+                <div class="card-body">
+
+                    <span class="badge bg-secondary text-uppercase mb-2"
+                          th:text="${product.category()}">categoría</span>
+
+                    <h1 class="card-title h3" th:text="${product.title()}">Título del producto</h1>
+
+                    <!-- Valoración (RatingDTO) -->
+                    <div class="mb-3" th:if="${product.rating() != null}">
+                        <span class="text-warning"
+                              th:with="redondeo=${T(java.lang.Math).round(product.rating().rate())}">
+                            <i th:each="estrella : ${#numbers.sequence(1, 5)}"
+                               class="fa-star"
+                               th:classappend="${estrella <= redondeo} ? 'fa-solid' : 'fa-regular'"></i>
+                        </span>
+                        <span class="fw-semibold ms-1"
+                              th:text="${product.rating().rate()} + ' / 5'">3.9 / 5</span>
+                        <span class="text-muted small"
+                              th:text="'(' + ${product.rating().count()} + ' valoraciones)'">(120 valoraciones)</span>
+                    </div>
+                    <div class="mb-3 text-muted small" th:unless="${product.rating() != null}">
+                        <i class="fa-regular fa-star me-1"></i> Sin valoraciones
+                    </div>
+
+                    <!-- Precio -->
+                    <p class="fs-2 fw-bold text-success mb-3"
+                       th:text="${product.price() != null ? product.price() + ' €' : 'Sin precio'}">0.0 €</p>
+
+                    <!-- Descripción -->
+                    <h2 class="h6 text-muted">
+                        <i class="fa-regular fa-pen-to-square me-1"></i> Descripción
+                    </h2>
+                    <p class="card-text" th:text="${product.description()}">Descripción del producto.</p>
+
+                </div>
+
+                <div class="card-footer bg-transparent text-muted small">
+                    <i class="fa-solid fa-cloud-arrow-down text-primary me-1"></i>
+                    Producto <span class="fw-semibold" th:text="'#' + ${product.id()}">#1</span>
+                    obtenido en vivo desde
+                    <code>fakestoreapi.com</code> con <code>RestClient</code>.
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</main>
+
+<footer th:replace="~{layout/footer :: footer}"></footer>
+<script th:replace="~{layout/footer :: scripts}"></script>
+
+</body>
+</html>

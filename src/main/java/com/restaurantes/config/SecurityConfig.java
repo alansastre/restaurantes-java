@@ -57,6 +57,10 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.GET, "/reviews/delete/*").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.GET, "/reviews/*").permitAll()
 
+                .requestMatchers(HttpMethod.GET, "/products").permitAll()
+                .requestMatchers(HttpMethod.POST, "/products").authenticated()
+                .requestMatchers(HttpMethod.GET, "/products/*").permitAll()
+
                 .requestMatchers("/orders", "/orders/**").authenticated()
 
                 // panel de usuarios para admins
